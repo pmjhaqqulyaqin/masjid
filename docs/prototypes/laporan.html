@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Laporan Keuangan - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .bento-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e1e3e0",
+                        "background": "#f8faf6",
+                        "surface-variant": "#e1e3e0",
+                        "inverse-on-surface": "#eff1ee",
+                        "tertiary-fixed-dim": "#ffb68e",
+                        "secondary-container": "#d3e3dc",
+                        "mint-fresh": "#D1FAE5",
+                        "secondary": "#52625c",
+                        "on-surface-variant": "#404944",
+                        "on-surface": "#191c1b",
+                        "on-secondary-fixed": "#101e1a",
+                        "surface-dim": "#d8dbd7",
+                        "secondary-fixed": "#d5e6df",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "text-primary": "#1F2937",
+                        "error": "#ba1a1a",
+                        "tertiary": "#502000",
+                        "tertiary-container": "#733100",
+                        "emerald-deep": "#064E3B",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002117",
+                        "on-secondary-container": "#566660",
+                        "surface-bright": "#f8faf6",
+                        "tertiary-fixed": "#ffdbca",
+                        "amber-soft": "#FDE68A",
+                        "on-tertiary-fixed": "#331200",
+                        "on-primary-container": "#80bea6",
+                        "secondary-fixed-dim": "#bacac3",
+                        "primary": "#003527",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "gold-spiritual": "#D97706",
+                        "outline": "#707974",
+                        "outline-variant": "#bfc9c3",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e7e9e5",
+                        "surface-container": "#eceeeb",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#0b513d",
+                        "surface": "#f8faf6",
+                        "on-background": "#191c1b",
+                        "on-secondary-fixed-variant": "#3b4a44",
+                        "primary-fixed": "#b0f0d6",
+                        "inverse-surface": "#2e312f",
+                        "primary-fixed-dim": "#95d3ba",
+                        "surface-container-low": "#f2f4f1",
+                        "on-tertiary-container": "#ff985a",
+                        "inverse-primary": "#95d3ba",
+                        "surface-tint": "#2b6954",
+                        "surface-white": "#FFFFFF",
+                        "primary-container": "#064e3b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "1rem",
+                        "gutter-md": "1rem",
+                        "stack-lg": "2rem",
+                        "container-margin": "1.25rem",
+                        "stack-sm": "0.5rem",
+                        "section-padding": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Libre Caslon Text"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "prayer-time-display": ["Inter"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">location_on</span>
+<h1 class="font-display-lg text-headline-lg-mobile text-emerald-deep">Masjid Haqqul Yaqin</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-mint-fresh transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+</header>
+<!-- Marquee Announcement -->
+<div class="mt-16 w-full bg-emerald-deep text-white py-2 overflow-hidden sticky top-16 z-40">
+<div class="animate-marquee inline-block font-label-lg text-label-lg px-4">
+            Teks berjalan dikelola melalui Tampilan &gt; Sesuaikan &gt; WP Masjid: Pengaturan &gt; Pengaturan Layout. Mari salurkan infaq terbaik Anda untuk pembangunan Masjid At-Taqwa.
+        </div>
+</div>
+<main class="px-container-margin mt-stack-lg">
+<!-- Hero Balance Section (Asymmetric) -->
+<section class="relative mb-stack-lg">
+<div class="bg-emerald-deep rounded-xl p-6 text-white overflow-hidden relative shadow-lg">
+<!-- Abstract Geometric Decoration -->
+<div class="absolute -right-10 -top-10 w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>
+<div class="absolute right-4 bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div class="relative z-10">
+<span class="inline-block bg-white/20 px-3 py-1 rounded-full font-label-sm text-label-sm mb-2">SALDO</span>
+<h2 class="font-display-lg text-white mb-6">Rp 5.826.000,-</h2>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 bg-amber-soft text-tertiary font-label-lg text-label-lg px-6 py-3 rounded-full hover:shadow-md active:scale-95 transition-all">
+<span class="material-symbols-outlined">download</span>
+                            Download Laporan (PDF)
+                        </button>
+<button class="flex items-center gap-2 bg-white/10 text-white font-label-lg text-label-lg px-6 py-3 rounded-full border border-white/20 hover:bg-white/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Stats & Chart -->
+<section class="grid grid-cols-2 gap-4 mb-stack-lg">
+<!-- Arus Kas Chart -->
+<div class="col-span-2 md:col-span-1 bg-surface-white rounded-xl p-5 shadow-[0_4px_20px_rgba(6,78,59,0.05)] bento-card">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-md text-primary">Arus Kas Bulanan</h3>
+<span class="text-on-surface-variant font-label-sm">Oktober 2024</span>
+</div>
+<div class="h-32 flex items-end justify-between gap-2 px-2">
+<div class="w-full bg-mint-fresh rounded-t-lg relative group h-[40%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-white text-[10px] px-1 rounded">2.1M</div>
+</div>
+<div class="w-full bg-emerald-deep rounded-t-lg relative group h-[85%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-white text-[10px] px-1 rounded">4.5M</div>
+</div>
+<div class="w-full bg-mint-fresh rounded-t-lg relative group h-[60%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-white text-[10px] px-1 rounded">3.2M</div>
+</div>
+<div class="w-full bg-emerald-deep rounded-t-lg relative group h-[95%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-white text-[10px] px-1 rounded">5.8M</div>
+</div>
+<div class="w-full bg-mint-fresh rounded-t-lg relative group h-[50%]">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-inverse-surface text-white text-[10px] px-1 rounded">2.8M</div>
+</div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-outline font-label-sm">
+<span>Jun</span><span>Jul</span><span>Agu</span><span>Sep</span><span>Okt</span>
+</div>
+</div>
+<!-- Total Infaq Today -->
+<div class="bg-surface-white rounded-xl p-5 shadow-[0_4px_20px_rgba(6,78,59,0.05)] bento-card border-l-4 border-emerald-deep">
+<span class="text-on-surface-variant font-label-sm block mb-1">Infaq Hari Ini</span>
+<span class="font-headline-md text-emerald-deep block">Rp 450k</span>
+<div class="mt-2 text-[10px] text-emerald-deep font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                </div>
+</div>
+<!-- Total Expenditure -->
+<div class="bg-surface-white rounded-xl p-5 shadow-[0_4px_20px_rgba(6,78,59,0.05)] bento-card border-l-4 border-error">
+<span class="text-on-surface-variant font-label-sm block mb-1">Pengeluaran</span>
+<span class="font-headline-md text-error block">Rp 2.1M</span>
+<div class="mt-2 text-[10px] text-error font-bold flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> -5%
+                </div>
+</div>
+</section>
+<!-- Transaction History -->
+<section class="mb-stack-lg">
+<div class="flex justify-between items-center mb-4 px-1">
+<h3 class="font-headline-md text-primary">Riwayat Transaksi</h3>
+<a class="text-emerald-deep font-label-lg text-label-lg" href="#">Lihat Semua</a>
+</div>
+<div class="space-y-3">
+<!-- Row 1 -->
+<div class="bg-surface-white p-4 rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Bisyaroh Ust, Syihabudin</p>
+<p class="text-[12px] text-outline">04 Okt 2024 • Muslimah</p>
+</div>
+</div>
+<span class="font-headline-md text-error text-sm">-Rp 250k</span>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface-white p-4 rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-mint-fresh flex items-center justify-center text-emerald-deep">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Saldo Awal Bulan</p>
+<p class="text-[12px] text-outline">01 Okt 2024 • Bank BSI</p>
+</div>
+</div>
+<span class="font-headline-md text-emerald-deep text-sm">+Rp 6.8M</span>
+</div>
+<!-- Row 3 -->
+<div class="bg-surface-white p-4 rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Operasional TPQ</p>
+<p class="text-[12px] text-outline">03 Okt 2024 • Kebutuhan</p>
+</div>
+</div>
+<span class="font-headline-md text-error text-sm">-Rp 200k</span>
+</div>
+</div>
+</section>
+<!-- Donasi Section (Premium Glassmorphism Card) -->
+<section class="mb-stack-lg">
+<div class="bg-amber-soft/20 border border-amber-soft/50 rounded-2xl p-6 relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
+<div class="flex-1">
+<h3 class="font-headline-md text-tertiary mb-2">Mari Ber-Infaq</h3>
+<p class="text-body-sm text-tertiary/80 mb-4">Penyaluran dana transparan untuk kemaslahatan umat. Salurkan infaq Anda melalui rekening resmi masjid.</p>
+<div class="flex gap-2">
+<div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-amber-soft flex items-center gap-3">
+<img class="w-8 h-8 object-contain" data-alt="BSI Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYPlr2VVFpzJwM_I6-wCfA-PXjnJodEXbecllTjRXqhDu-TLhd3UiSP4Uv7eYPPjjgGRvXpuiQ4YZ49vSSCf2xlgjO-vWHfldOAQ9W84srQRtLKGzbBXwtYFhSn1-_VPzk234gYQIfHb6ilMV-5xDRuk943zcB2kIli_h6ZO371EN5bQeH5vnOqjngmTZNtLGOxjrMhhT8oMscmgoE4W-ne0JUe7VX4NCf0TkiZBrQ-1pXjr8eOv8RL0Q3kTgfi54Uog22MPnCzA"/>
+<div>
+<p class="text-[10px] font-bold text-tertiary">Bank BSI</p>
+<p class="text-label-lg font-bold text-on-surface">4678904578</p>
+</div>
+</div>
+</div>
+</div>
+<div class="w-32 h-32 bg-white rounded-xl p-2 border-2 border-amber-soft flex items-center justify-center shadow-lg">
+<img class="w-full h-full object-contain" data-alt="QR Code" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl_bKGKxJrvb4S1d4Z1JwSY8V9r-bGt1vA4Br2G8fYBiE3fe-YDNZor8ntMWJC4pf0k14EfgUHBccWxgUm9O3iB9f7v5CTvgoCblcNEquczkosY0w550T6cXMCrItiepRy1e6It15gnRfwAeF69NmrT0MWNRUMX1_pei05EHuyL36crkXN1kuyLbPheyC3g-ZXdje445Q5pF-IwwQ3ElmxThRiLZIWNvbpkPWLDRAJzXV6dzRtUk1fFWczvjrncn0VSVRSnkATvA"/>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface/90 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.05)] rounded-t-xl">
+<a href="index.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-emerald-deep transition-colors group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a href="kajian.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-emerald-deep transition-colors group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">calendar_month</span>
+<span class="font-label-sm text-label-sm">Kajian</span>
+</a>
+<div class="relative -top-6">
+<a href="infaq.html" class="w-14 h-14 bg-emerald-deep text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 duration-200">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</a>
+</div>
+<a href="laporan.html" class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 duration-200">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-label-sm text-label-sm">Laporan</span>
+</a>
+<a href="layanan.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:text-emerald-deep transition-colors group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">apps</span>
+<span class="font-label-sm text-label-sm">Layanan</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('shadow-xl');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('shadow-xl');
+            });
+        });
+    </script>
+</body></html>

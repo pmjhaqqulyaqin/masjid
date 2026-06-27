@@ -1,0 +1,91 @@
+# Implementation Plan: Tahap Engineering (API & Database Integration)
+
+Migrasi seluruh file HTML statis ke dalam komponen UI React telah berhasil diselesaikan. Langkah kita selanjutnya adalah membangun pondasi *Backend* dan mengintegrasikannya dengan *Frontend*. 
+
+## Arsitektur yang Akan Dibangun
+- **Database**: PostgreSQL (berjalan di Docker) yang dikelola dengan Drizzle ORM.
+- **Backend**: Express.js (Node.js) + Better Auth (untuk autentikasi).
+- **Frontend**: React + Vite + TanStack Query (untuk state management dan data fetching) + Axios.
+
+## User Review Required
+
+> [!IMPORTANT]
+> Mohon baca rancangan skema database dan *endpoints* di bawah ini. Jika ada fitur atau entitas spesifik tambahan yang perlu diakomodasi (misalnya jenis laporan keuangan khusus, atau status pendaftaran kajian), silakan beri tahu sebelum saya mulai mengeksekusinya.
+
+## Open Questions
+
+1. **Autentikasi (Better Auth)**: Apakah kita akan mengaktifkan *social login* (Google/Facebook) untuk Jamaah nantinya, atau cukup pendaftaran dengan Email + Password standar?
+2. **Data Seeding**: Apakah Anda ingin saya membuatkan *script* otomatis untuk mengisi database dengan data *dummy* awal (misal: jadwal shalat hari ini, saldo keuangan awal, beberapa user admin) agar UI langsung terlihat hidup?
+
+## Proposed Changes
+
+---
+
+### 1. Database Schema & ORM (Backend - Drizzle)
+Membuat skema database untuk setiap entitas utama aplikasi masjid.
+
+#### [NEW] `backend/src/db/schema.ts`
+- **Users Table**: `id`, `name`, `email`, `role` (admin/staff/jamaah), `passwordHash`.
+- **Donations Table**: `id`, `userId`, `amount`, `type` (zakat/infaq/sedekah), `status`, `createdAt`.
+- **Kajian Table**: `id`, `title`, `speaker`, `date`, `time`, `location`, `description`, `thumbnailUrl`.
+- **Finance Table**: `id`, `amount`, `type` (income/expense), `category`, `description`, `date`.
+- **Ibadah (Jadwal Shalat/Jumat)**: `id`, `date`, `khatib`, `imam`, `muadzin`, `fajr`, `dhuhr`, `asr`, `maghrib`, `isha`.
+- **Services (Layanan)**: `id`, `userId`, `type` (mualaf/jenazah/fasilitas), `status` (pending/approved/rejected), `details`.
+
+#### [MODIFY] `backend/src/db/index.ts`
+- Konfigurasi koneksi ke PostgreSQL lokal menggunakan Pool `pg` dan Drizzle.
+
+---
+
+### 2. Backend API Routes (Express)
+Membangun *endpoints* RESTful untuk dikonsumsi frontend.
+
+#### [NEW] `backend/src/routes/auth.routes.ts`
+- Setup rute otentikasi Better Auth (`/api/auth/*`).
+#### [NEW] `backend/src/routes/donations.routes.ts`
+- `GET /api/donations`, `POST /api/donations`
+#### [NEW] `backend/src/routes/kajian.routes.ts`
+- `GET /api/kajian`, `POST /api/kajian`, `PUT /api/kajian/:id`, `DELETE /api/kajian/:id`
+#### [NEW] `backend/src/routes/finance.routes.ts`
+- `GET /api/finance`, `GET /api/finance/summary`, `POST /api/finance`
+#### [NEW] `backend/src/routes/ibadah.routes.ts`
+- `GET /api/ibadah/jadwal`, `POST /api/ibadah/petugas`
+#### [NEW] `backend/src/routes/services.routes.ts`
+- `GET /api/services`, `POST /api/services`
+#### [MODIFY] `backend/src/index.ts`
+- Registrasi semua rute API di server Express.
+
+---
+
+### 3. Frontend Data Fetching (TanStack Query)
+Menyiapkan *hooks* untuk memanggil API dari komponen React.
+
+#### [NEW] `frontend/src/lib/api.ts`
+- Konfigurasi *instance* `axios` dengan base URL (`http://localhost:3000/api`) dan interceptor untuk *credentials*.
+#### [NEW] `frontend/src/hooks/useDonations.ts`
+- `useQuery` untuk mengambil daftar donasi, `useMutation` untuk *create* donasi.
+#### [NEW] `frontend/src/hooks/useKajian.ts`
+- `useQuery` untuk jadwal kajian, `useMutation` untuk admin CRUD kajian.
+#### [NEW] `frontend/src/hooks/useFinance.ts`
+- `useQuery` untuk saldo & transaksi.
+#### [NEW] `frontend/src/hooks/useAuth.ts`
+- Hook untuk manajemen sesi Better Auth di *client side*.
+
+---
+
+### 4. Wiring & State Management (Frontend Pages)
+Mengganti *dummy data* statis di halaman-halaman yang sudah dibuat dengan data yang ditarik dari *backend*.
+
+#### [MODIFY] `frontend/src/pages/*`
+- Mengimplementasikan pemanggilan *custom hooks* (seperti `useKajian`, `useFinance`) pada `Kajian.tsx`, `AdminKajian.tsx`, `AdminFinance.tsx`, `AdminDonations.tsx`, dll.
+
+## Verification Plan
+
+### Automated Tests
+- Menjalankan `npm run db:push` atau migrasi untuk memastikan Drizzle mencetak skema ke Postgres tanpa error.
+- Menguji API secara manual menggunakan request dasar (via curl atau interface internal) untuk memverifikasi respons CRUD 200 OK.
+
+### Manual Verification
+- Menjalankan aplikasi frontend dan backend secara lokal.
+- Menginput donasi/kajian baru dari dashboard admin dan memverifikasi bahwa perubahan tersebut tampil secara *real-time* (atau ter-refetch) di halaman jamaah.
+- Memverifikasi login/logout dengan Better Auth berfungsi dengan baik dan sesi dipertahankan.

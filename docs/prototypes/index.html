@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masjid Haqqul Yaqin - Digital Ecosystem</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e1e3e0",
+                        "background": "#f8faf6",
+                        "surface-variant": "#e1e3e0",
+                        "inverse-on-surface": "#eff1ee",
+                        "tertiary-fixed-dim": "#ffb68e",
+                        "secondary-container": "#d3e3dc",
+                        "mint-fresh": "#D1FAE5",
+                        "secondary": "#52625c",
+                        "on-surface-variant": "#404944",
+                        "on-surface": "#191c1b",
+                        "on-secondary-fixed": "#101e1a",
+                        "surface-dim": "#d8dbd7",
+                        "secondary-fixed": "#d5e6df",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "text-primary": "#1F2937",
+                        "error": "#ba1a1a",
+                        "tertiary": "#502000",
+                        "tertiary-container": "#733100",
+                        "emerald-deep": "#064E3B",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002117",
+                        "on-secondary-container": "#566660",
+                        "surface-bright": "#f8faf6",
+                        "tertiary-fixed": "#ffdbca",
+                        "amber-soft": "#FDE68A",
+                        "on-tertiary-fixed": "#331200",
+                        "on-primary-container": "#80bea6",
+                        "secondary-fixed-dim": "#bacac3",
+                        "primary": "#003527",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "gold-spiritual": "#D97706",
+                        "outline": "#707974",
+                        "outline-variant": "#bfc9c3",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e7e9e5",
+                        "surface-container": "#eceeeb",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#0b513d",
+                        "surface": "#f8faf6",
+                        "on-background": "#191c1b",
+                        "on-secondary-fixed-variant": "#3b4a44",
+                        "primary-fixed": "#b0f0d6",
+                        "inverse-surface": "#2e312f",
+                        "primary-fixed-dim": "#95d3ba",
+                        "surface-container-low": "#f2f4f1",
+                        "on-tertiary-container": "#ff985a",
+                        "inverse-primary": "#95d3ba",
+                        "surface-tint": "#2b6954",
+                        "surface-white": "#FFFFFF",
+                        "primary-container": "#064e3b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "1rem",
+                        "gutter-md": "1rem",
+                        "stack-lg": "2rem",
+                        "container-margin": "1.25rem",
+                        "stack-sm": "0.5rem",
+                        "section-padding": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Libre Caslon Text"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "prayer-time-display": ["Inter"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Libre Caslon Text"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .prayer-active {
+            box-shadow: 0 4px 20px rgba(6, 78, 59, 0.1);
+            border-left: 4px solid #D97706;
+        }
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        body {
+            background-color: #f8faf6;
+            color: #191c1b;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(248, 250, 246, 0.9);
+            backdrop-filter: blur(12px);
+        }
+        .bento-card {
+            background: #ffffff;
+            box-shadow: 0px 4px 20px rgba(6, 78, 59, 0.05);
+            transition: transform 0.2s ease;
+        }
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="pb-24">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm dark:shadow-none">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-deep">location_on</span>
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-emerald-deep leading-tight">Masjid Haqqul Yaqin</h1>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Jl. Lintas Lampung Barat</span>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-mint-fresh transition-colors">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</header>
+<!-- Marquee Announcement -->
+<div class="mt-16 w-full bg-emerald-deep py-2 marquee-container overflow-hidden">
+<div class="marquee-content text-white font-label-lg text-label-lg px-4">
+            Teks berjalan dikelola melalui Tampilan &gt; Sesuaikan &gt; WP Masjid: Pengaturan &gt; Pengaturan Layout • Infaq Pembangunan Tahap II sedang dibuka • Kajian rutin Sabtu malam bersama Ustadz Ridwan.
+        </div>
+</div>
+<main class="px-container-margin pt-stack-md space-y-stack-lg">
+<!-- Hero Section -->
+<section class="relative w-full aspect-[2/1] rounded-xl overflow-hidden shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Visual" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 to-transparent flex flex-col justify-end p-gutter-md">
+<span class="text-white/80 font-label-sm text-label-sm">Sabtu, 27 Juni 2026</span>
+<h2 class="text-white font-display-lg text-display-lg leading-tight">Selamat Datang di Baitullah</h2>
+</div>
+</section>
+<!-- Prayer Times Widget -->
+<section class="space-y-stack-sm">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-emerald-deep">Jadwal Salat</h3>
+<span class="text-gold-spiritual font-label-lg text-label-lg animate-pulse">15 menit menuju Ashar</span>
+<a class="text-label-sm text-emerald-deep font-semibold hover:underline ml-2" href="#">Lihat Jadwal Lengkap</a></div>
+<div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar">
+<div class="flex-shrink-0 w-28 p-4 rounded-xl bg-white bento-card text-center">
+<span class="font-label-sm text-on-surface-variant block mb-1">Subuh</span>
+<span class="font-prayer-time-display text-prayer-time-display text-primary">05:47</span>
+</div>
+<div class="flex-shrink-0 w-28 p-4 rounded-xl bg-white bento-card text-center">
+<span class="font-label-sm text-on-surface-variant block mb-1">Dzuhur</span>
+<span class="font-prayer-time-display text-prayer-time-display text-primary">13:05</span>
+</div>
+<div class="flex-shrink-0 w-28 p-4 rounded-xl bg-mint-fresh prayer-active text-center">
+<span class="font-label-sm text-emerald-deep font-bold block mb-1">Ashar</span>
+<span class="font-prayer-time-display text-prayer-time-display text-emerald-deep">16:28</span>
+</div>
+<div class="flex-shrink-0 w-28 p-4 rounded-xl bg-white bento-card text-center">
+<span class="font-label-sm text-on-surface-variant block mb-1">Maghrib</span>
+<span class="font-prayer-time-display text-prayer-time-display text-primary">19:00</span>
+</div>
+<div class="flex-shrink-0 w-28 p-4 rounded-xl bg-white bento-card text-center">
+<span class="font-label-sm text-on-surface-variant block mb-1">Isya</span>
+<span class="font-prayer-time-display text-prayer-time-display text-primary">20:15</span>
+</div>
+</div>
+</section>
+<!-- Infaq & Financial -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+<!-- Saldo Card -->
+<div class="p-6 rounded-2xl bg-gradient-to-br from-emerald-deep to-primary text-white shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16"></div>
+<span class="font-label-lg text-label-lg text-white/70 tracking-widest uppercase mb-2 block">SALDO SAAT INI</span>
+<div class="text-[32px] font-bold mb-6">Rp 5.826.000,-</div>
+<div class="flex gap-3">
+<button class="flex-1 bg-gold-spiritual hover:bg-amber-600 text-white font-label-lg py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">payments</span>
+                        Mari Ber-Infaq
+                    </button>
+<button class="px-4 py-3 bg-white/10 hover:bg-white/20 rounded-xl transition-all border border-white/20">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</div>
+</div>
+<!-- Quick Agenda -->
+<div class="space-y-stack-sm">
+<h3 class="font-headline-md text-headline-md text-emerald-deep px-1">Agenda Terdekat</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl bento-card">
+<div class="w-12 h-12 flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="text-xs font-bold leading-none">24</span>
+<span class="text-[10px] uppercase">Apr</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md font-semibold line-clamp-1">Halal Bihalal Warga Wonosari</h4>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 08:00 - Selesai
+                            </span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl bento-card">
+<div class="w-12 h-12 flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="text-xs font-bold leading-none">15</span>
+<span class="text-[10px] uppercase">Mar</span>
+</div>
+<div class="flex-1">
+<h4 class="font-body-md text-body-md font-semibold line-clamp-1">Kerja Bakti Idul Fitri</h4>
+<span class="text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 07:30 - Selesai
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Announcement -->
+<section class="p-6 bg-surface-white rounded-2xl border border-outline-variant/30 shadow-sm space-y-4">
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 bg-mint-fresh text-emerald-deep text-[10px] font-bold rounded-full uppercase tracking-wider">Pengumuman</span>
+<span class="text-label-sm text-on-surface-variant">Kamis, 2 Mar 2023</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Pelaksaaan Pengajian Ibu-Ibu Jumat Pagi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed line-clamp-3">
+                Di setiap sudut perkampungan, saat matahari mulai naik atau menjelang sore, masjid-masjid tidak hanya ramai oleh jamaah laki-laki. Di sana, terdengar lantunan ayat suci...
+            </p>
+<a class="inline-flex items-center text-emerald-deep font-label-lg text-label-lg group" href="#">
+                Baca Selengkapnya
+                <span class="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</a>
+</section>
+<!-- Petugas Harian Grid -->
+<section class="space-y-stack-sm">
+<h3 class="font-headline-md text-headline-md text-emerald-deep">Petugas Harian</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-emerald-deep rounded-xl text-white flex flex-col relative overflow-hidden">
+<span class="text-[10px] font-bold uppercase opacity-60 mb-2">Imam Subuh</span>
+<span class="font-label-lg text-label-lg">Imam Samsudin</span>
+<div class="mt-4 pt-2 border-t border-white/10">
+<span class="text-[10px] uppercase opacity-60">Muadzin</span>
+<div class="font-body-sm text-body-sm">Hidayat</div>
+</div>
+<span class="material-symbols-outlined absolute -right-2 -bottom-2 text-6xl opacity-10">person</span>
+</div>
+<div class="p-4 bg-mint-fresh rounded-xl text-emerald-deep flex flex-col relative overflow-hidden">
+<span class="text-[10px] font-bold uppercase opacity-60 mb-2">Imam Maghrib</span>
+<span class="font-label-lg text-label-lg">Ahmad Solihun</span>
+<div class="mt-4 pt-2 border-t border-emerald-deep/10">
+<span class="text-[10px] uppercase opacity-60">Muadzin</span>
+<div class="font-body-sm text-body-sm">Khaerudin</div>
+</div>
+<span class="material-symbols-outlined absolute -right-2 -bottom-2 text-6xl opacity-10" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</section>
+<!-- Latest Articles / Tausiyah -->
+<section class="space-y-stack-sm">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-emerald-deep">Tausiyah Terbaru</h3>
+<button class="text-label-sm text-on-surface-variant font-semibold">Lihat Semua</button>
+<a class="text-label-sm text-emerald-deep font-semibold hover:underline ml-2" href="#">Lihat Jadwal Lengkap</a></div>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex gap-4 p-3 bg-white rounded-2xl bento-card">
+<div class="w-24 h-24 rounded-xl bg-surface-container overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Visual" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_tausiyah_1_320x240.webp.png"/>
+</div>
+<div class="flex flex-col justify-center py-1">
+<span class="text-[10px] text-on-surface-variant mb-1 uppercase tracking-wider">Oleh: Ustadz Bashir</span>
+<h4 class="font-body-md text-body-md font-bold leading-tight line-clamp-2">Tuntunan Lengkap Berpuasa Ramadhan</h4>
+<span class="mt-2 text-[10px] text-on-surface-variant/60">2 Mar 2023</span>
+</div>
+</div>
+</div>
+</section><section class="space-y-stack-sm">
+<h3 class="font-headline-md text-headline-md text-emerald-deep">Petugas Jumat Pekan Ini</h3>
+<div class="p-5 bg-white rounded-2xl bento-card border border-outline-variant/30">
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase text-on-surface-variant/60">Khatib</span>
+<span class="font-label-lg text-label-lg text-primary">KH. Ahmad Dahlan</span>
+</div>
+<span class="material-symbols-outlined text-emerald-deep opacity-20">record_voice_over</span>
+</div>
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase text-on-surface-variant/60">Imam</span>
+<span class="font-label-lg text-label-lg text-primary">Ust. H. Sulaiman</span>
+</div>
+<span class="material-symbols-outlined text-emerald-deep opacity-20">person</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase text-on-surface-variant/60">Muadzin</span>
+<span class="font-label-lg text-label-lg text-primary">Bpk. M. Yusuf</span>
+</div>
+<span class="material-symbols-outlined text-emerald-deep opacity-20">campaign</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Masjid Info Section (Asymmetric) -->
+<section class="grid grid-cols-5 gap-4">
+<div class="col-span-3 p-5 bg-surface-container-low rounded-3xl space-y-3">
+<h4 class="font-headline-md text-headline-md text-primary">Informasi Masjid</h4>
+<div class="space-y-2">
+<div class="flex justify-between text-label-sm border-b border-outline-variant pb-1">
+<span>Luas Area</span>
+<span class="font-bold">300 m2</span>
+</div>
+<div class="flex justify-between text-label-sm border-b border-outline-variant pb-1">
+<span>Luas Bangunan</span>
+<span class="font-bold">120 m2</span>
+</div>
+<div class="flex justify-between text-label-sm">
+<span>Tahun Berdiri</span>
+<span class="font-bold">1990</span>
+</div>
+</div>
+</div>
+<div class="col-span-2 bg-emerald-deep rounded-3xl flex flex-col items-center justify-center text-white p-4">
+<span class="material-symbols-outlined text-4xl mb-2">account_balance</span>
+<span class="text-center text-[10px] uppercase font-bold tracking-widest leading-tight">Status Properti</span>
+<span class="text-xl font-bold">WAKAF</span>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.05)] rounded-t-xl">
+<a href="index.html" class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-container text-on-secondary-container dark:text-secondary-container rounded-full px-4 py-1 scale-90 duration-200 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a href="kajian.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep dark:hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm">Kajian</span>
+</a>
+<a href="infaq.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep dark:hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Infaq</span>
+</a>
+<a href="laporan.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep dark:hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-sm text-label-sm">Laporan</span>
+</a>
+<a href="layanan.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep dark:hover:text-primary-fixed cursor-pointer">
+<span class="material-symbols-outlined">apps</span>
+<span class="font-label-sm text-label-sm">Layanan</span>
+</a>
+</nav>
+<!-- FAB for Quick Actions (Zakat/Infaq) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-gold-spiritual text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95 z-40">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</button>
+<script>
+        // Simple scroll effect for Header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+
+        // Countdown micro-interaction simulation
+        let minutes = 15;
+        const countdownEl = document.querySelector('.animate-pulse');
+        setInterval(() => {
+            // Simplified logic for demo
+            if (Math.random() > 0.99) {
+                minutes--;
+                if(minutes < 0) minutes = 59;
+                countdownEl.innerText = `${minutes} menit menuju Ashar`;
+            }
+        }, 1000);
+    </script>
+</body></html>

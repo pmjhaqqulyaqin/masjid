@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Service Requests - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Caslon+Text:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#0b513d",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "amber-soft": "#FDE68A",
+                    "on-secondary-container": "#566660",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#d5e6df",
+                    "on-tertiary-fixed": "#331200",
+                    "surface-dim": "#d8dbd7",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#101e1a",
+                    "surface-variant": "#e1e3e0",
+                    "error-container": "#ffdad6",
+                    "surface": "#f8faf6",
+                    "tertiary-fixed": "#ffdbca",
+                    "inverse-primary": "#95d3ba",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-highest": "#e1e3e0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8faf6",
+                    "surface-container-low": "#f2f4f1",
+                    "outline-variant": "#bfc9c3",
+                    "tertiary-fixed-dim": "#ffb68e",
+                    "inverse-on-surface": "#eff1ee",
+                    "primary-fixed-dim": "#95d3ba",
+                    "surface-container-high": "#e7e9e5",
+                    "outline": "#707974",
+                    "emerald-deep": "#064E3B",
+                    "on-secondary-fixed-variant": "#3b4a44",
+                    "primary-fixed": "#b0f0d6",
+                    "tertiary": "#502000",
+                    "surface-tint": "#2b6954",
+                    "surface-container": "#eceeeb",
+                    "primary-container": "#064e3b",
+                    "on-tertiary-container": "#ff985a",
+                    "text-primary": "#1F2937",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "inverse-surface": "#2e312f",
+                    "background": "#f8faf6",
+                    "secondary": "#52625c",
+                    "tertiary-container": "#733100",
+                    "on-primary-fixed": "#002117",
+                    "on-primary-container": "#80bea6",
+                    "secondary-container": "#d3e3dc",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#bacac3",
+                    "surface-white": "#FFFFFF",
+                    "gold-spiritual": "#D97706",
+                    "primary": "#003527",
+                    "on-background": "#191c1b",
+                    "mint-fresh": "#D1FAE5",
+                    "on-surface-variant": "#404944"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "1.25rem",
+                    "stack-lg": "2rem",
+                    "section-padding": "1.5rem",
+                    "gutter-md": "1rem",
+                    "stack-sm": "0.5rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "prayer-time-display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Libre Caslon Text"],
+                    "headline-lg": ["Libre Caslon Text"],
+                    "display-lg": ["Libre Caslon Text"],
+                    "headline-md": ["Libre Caslon Text"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .request-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .request-card:active {
+            transform: scale(0.98);
+        }
+        .detail-sheet {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .detail-sheet.hidden-y {
+            transform: translateY(100%);
+        }
+        .backdrop {
+            transition: opacity 0.3s ease;
+        }
+        .status-badge-pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+        .status-badge-approved {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        .status-badge-rejected {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface min-h-screen">
+<!-- Top AppBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<button class="p-2 active:scale-95 transition-transform duration-200 hover:bg-mint-fresh/20 text-emerald-deep">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-emerald-deep dark:text-primary-fixed">Masjid Haqqul Yaqin</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border-2 border-emerald-deep/10">
+<img class="w-full h-full object-cover" data-alt="Profile" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png"/>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="pt-20 pb-24 px-container-margin max-w-md mx-auto">
+<!-- Welcome Section -->
+<section class="mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-emerald-deep mb-1">Service Requests</h2>
+<p class="font-body-sm text-on-surface-variant">Review and manage community service applications.</p>
+</section>
+<!-- Search & Filter -->
+<div class="flex gap-2 mb-stack-md">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-emerald-deep/20 text-body-sm" placeholder="Cari permohonan..." type="text"/>
+</div>
+<button class="p-3 bg-surface-container-high rounded-xl text-emerald-deep hover:bg-mint-fresh transition-colors">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+<!-- Request Tabs -->
+<div class="flex overflow-x-auto gap-3 pb-2 mb-stack-md no-scrollbar">
+<button class="px-5 py-2 rounded-full bg-emerald-deep text-on-primary font-label-sm whitespace-nowrap">Semua</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm whitespace-nowrap">Mualaf</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm whitespace-nowrap">Jenazah</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm whitespace-nowrap">Fasilitas</button>
+</div>
+<!-- Service Request List -->
+<div class="space-y-gutter-md">
+<!-- Item 1: Mualaf -->
+<div class="request-card p-4 bg-surface-container-lowest rounded-2xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border border-outline-variant/30 flex items-center gap-4 cursor-pointer" onclick="openDetail('mualaf-001')">
+<div class="w-12 h-12 rounded-xl bg-mint-fresh flex items-center justify-center text-emerald-deep">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-label-lg text-emerald-deep">Registrasi Mualaf</h3>
+<span class="px-2 py-0.5 rounded-md text-[10px] font-bold status-badge-pending uppercase tracking-wider">Pending</span>
+</div>
+<p class="font-body-sm font-semibold text-on-surface">Ahmad Rizky Pratama</p>
+<p class="font-label-sm text-outline">2 jam yang lalu</p>
+</div>
+</div>
+<!-- Item 2: Jenazah -->
+<div class="request-card p-4 bg-surface-container-lowest rounded-2xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border border-outline-variant/30 flex items-center gap-4 cursor-pointer" onclick="openDetail('jenazah-002')">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined">church</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-label-lg text-emerald-deep">Layanan Jenazah</h3>
+<span class="px-2 py-0.5 rounded-md text-[10px] font-bold status-badge-approved uppercase tracking-wider">Approved</span>
+</div>
+<p class="font-body-sm font-semibold text-on-surface">Keluarga Bpk. Herman</p>
+<p class="font-label-sm text-outline">Hari ini, 08:30</p>
+</div>
+</div>
+<!-- Item 3: Facility -->
+<div class="request-card p-4 bg-surface-container-lowest rounded-2xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border border-outline-variant/30 flex items-center gap-4 cursor-pointer" onclick="openDetail('facility-003')">
+<div class="w-12 h-12 rounded-xl bg-amber-soft/30 flex items-center justify-center text-gold-spiritual">
+<span class="material-symbols-outlined">meeting_room</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-label-lg text-emerald-deep">Pinjam Aula</h3>
+<span class="px-2 py-0.5 rounded-md text-[10px] font-bold status-badge-rejected uppercase tracking-wider">Rejected</span>
+</div>
+<p class="font-body-sm font-semibold text-on-surface">Majelis Taklim Al-Huda</p>
+<p class="font-label-sm text-outline">Kemarin, 14:15</p>
+</div>
+</div>
+<!-- Item 4: Facility 2 -->
+<div class="request-card p-4 bg-surface-container-lowest rounded-2xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border border-outline-variant/30 flex items-center gap-4 cursor-pointer" onclick="openDetail('facility-004')">
+<div class="w-12 h-12 rounded-xl bg-amber-soft/30 flex items-center justify-center text-gold-spiritual">
+<span class="material-symbols-outlined">meeting_room</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-label-lg text-emerald-deep">Pinjam Lapangan</h3>
+<span class="px-2 py-0.5 rounded-md text-[10px] font-bold status-badge-pending uppercase tracking-wider">Pending</span>
+</div>
+<p class="font-body-sm font-semibold text-on-surface">Remaja Masjid</p>
+<p class="font-label-sm text-outline">Kemarin, 19:00</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Detail Bottom Sheet (Modal Simulation) -->
+<div class="fixed inset-0 bg-black/40 z-[70] hidden backdrop opacity-0 pointer-events-none" id="backdrop" onclick="closeDetail()"></div>
+<div class="fixed bottom-0 left-0 right-0 max-w-xl mx-auto bg-surface-container-lowest z-[80] rounded-t-3xl shadow-2xl detail-sheet hidden-y p-6" id="detailSheet">
+<div class="w-12 h-1 bg-outline-variant mx-auto rounded-full mb-6"></div>
+<div id="sheetContent">
+<!-- Dynamic Content Injected Here -->
+<div class="flex items-start justify-between mb-stack-md">
+<div>
+<span class="font-label-sm text-emerald-deep bg-mint-fresh px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block" id="detailCategory">Registrasi Mualaf</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface" id="detailName">Ahmad Rizky Pratama</h3>
+<p class="font-label-sm text-outline" id="detailDate">Diajukan pada 12 Oktober 2023, 10:45 WIB</p>
+</div>
+<div class="w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-emerald-deep" id="detailIcon">person_add</span>
+</div>
+</div>
+<div class="space-y-4 mb-stack-lg">
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider mb-1">Informasi Kontak</p>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-xs text-on-surface-variant">Nomor HP</p>
+<p class="font-body-sm font-semibold text-on-surface">0812-3456-7890</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant">Email</p>
+<p class="font-body-sm font-semibold text-on-surface">rizky@example.com</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-[10px] uppercase font-bold text-outline-variant tracking-wider mb-1">Detail Permohonan</p>
+<p class="font-body-sm text-on-surface-variant leading-relaxed">
+                        Mohon bimbingan syahadat untuk saudara Ahmad Rizky yang baru saja memutuskan untuk memeluk agama Islam. Jadwal yang diinginkan adalah hari Jumat Ba'da Ashar.
+                    </p>
+</div>
+<div class="p-4 border border-outline-variant/30 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-deep">description</span>
+<div class="flex-grow">
+<p class="font-label-sm font-bold text-on-surface">KTP_Ahmad_Rizky.pdf</p>
+<p class="text-[10px] text-outline">1.2 MB • Dokumen Identitas</p>
+</div>
+<span class="material-symbols-outlined text-outline">download</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="py-4 border border-error text-error font-label-lg rounded-2xl active:opacity-80 transition-opacity" onclick="closeDetail()">
+                    Reject Request
+                </button>
+<button class="py-4 bg-emerald-deep text-on-primary font-label-lg rounded-2xl shadow-lg active:opacity-80 transition-opacity" onclick="closeDetail()">
+                    Approve Request
+                </button>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md z-50 rounded-t-xl shadow-[0px_-4px_20px_rgba(6,78,59,0.05)] border-t border-outline-variant/30">
+<a href="admin_dashboard.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-mint-fresh/30 active:scale-90 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a href="admin_donations.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-mint-fresh/30 active:scale-90 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">savings</span>
+<span class="font-label-sm text-label-sm">Infaq</span>
+</a>
+<a href="admin_services.html" class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-on-primary-container rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-sm text-label-sm">Layanan</span>
+</a>
+<a href="admin_finance.html" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-mint-fresh/30 active:scale-90 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Dana</span>
+</a>
+<a href="#" class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 hover:bg-mint-fresh/30 active:scale-90 transition-all duration-300 cursor-pointer">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-sm text-label-sm">Staf</span>
+</a>
+</nav>
+<script>
+        const backdrop = document.getElementById('backdrop');
+        const sheet = document.getElementById('detailSheet');
+
+        function openDetail(id) {
+            // In a real app, we would fetch data based on ID here
+            backdrop.classList.remove('hidden');
+            backdrop.classList.remove('pointer-events-none');
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                sheet.classList.remove('hidden-y');
+            }, 10);
+        }
+
+        function closeDetail() {
+            backdrop.classList.add('opacity-0');
+            sheet.classList.add('hidden-y');
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+                backdrop.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        // Handle ESC key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeDetail();
+        });
+    </script>
+</body></html>

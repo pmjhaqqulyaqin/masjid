@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Layanan - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e1e3e0",
+                    "background": "#f8faf6",
+                    "surface-variant": "#e1e3e0",
+                    "inverse-on-surface": "#eff1ee",
+                    "tertiary-fixed-dim": "#ffb68e",
+                    "secondary-container": "#d3e3dc",
+                    "mint-fresh": "#D1FAE5",
+                    "secondary": "#52625c",
+                    "on-surface-variant": "#404944",
+                    "on-surface": "#191c1b",
+                    "on-secondary-fixed": "#101e1a",
+                    "surface-dim": "#d8dbd7",
+                    "secondary-fixed": "#d5e6df",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "text-primary": "#1F2937",
+                    "error": "#ba1a1a",
+                    "tertiary": "#502000",
+                    "tertiary-container": "#733100",
+                    "emerald-deep": "#064E3B",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#002117",
+                    "on-secondary-container": "#566660",
+                    "surface-bright": "#f8faf6",
+                    "tertiary-fixed": "#ffdbca",
+                    "amber-soft": "#FDE68A",
+                    "on-tertiary-fixed": "#331200",
+                    "on-primary-container": "#80bea6",
+                    "secondary-fixed-dim": "#bacac3",
+                    "primary": "#003527",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "gold-spiritual": "#D97706",
+                    "outline": "#707974",
+                    "outline-variant": "#bfc9c3",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e7e9e5",
+                    "surface-container": "#eceeeb",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#0b513d",
+                    "surface": "#f8faf6",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed-variant": "#3b4a44",
+                    "primary-fixed": "#b0f0d6",
+                    "inverse-surface": "#2e312f",
+                    "primary-fixed-dim": "#95d3ba",
+                    "surface-container-low": "#f2f4f1",
+                    "on-tertiary-container": "#ff985a",
+                    "inverse-primary": "#95d3ba",
+                    "surface-tint": "#2b6954",
+                    "surface-white": "#FFFFFF",
+                    "primary-container": "#064e3b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "1rem",
+                    "gutter-md": "1rem",
+                    "stack-lg": "2rem",
+                    "container-margin": "1.25rem",
+                    "stack-sm": "0.5rem",
+                    "section-padding": "1.5rem"
+            },
+            "fontFamily": {
+                    "display-lg": ["Libre Caslon Text"],
+                    "headline-md": ["Libre Caslon Text"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "prayer-time-display": ["Inter"],
+                    "headline-lg": ["Libre Caslon Text"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Libre Caslon Text"]
+            },
+            "fontSize": {
+                    "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8faf6;
+            color: #191c1b;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 15s linear infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-emerald-deep" data-icon="location_on">location_on</span>
+<h1 class="font-display-lg text-headline-lg-mobile text-emerald-deep">Masjid Haqqul Yaqin</h1>
+</div>
+<button class="hover:bg-mint-fresh transition-colors p-2 rounded-full active:scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Marquee Announcement -->
+<div class="mt-16 w-full bg-emerald-deep py-2 overflow-hidden whitespace-nowrap">
+<p class="animate-marquee inline-block font-label-lg text-label-lg text-white">
+            Pendaftaran Mualaf dan Layanan Pengurusan Jenazah tersedia 24 jam. Silakan hubungi kontak darurat untuk kebutuhan mendesak. Marhaban ya Ramadhan!
+        </p>
+</div>
+<main class="px-container-margin pt-stack-md space-y-stack-lg">
+<!-- Service Grid Section -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-headline-md text-headline-md text-primary">Layanan Kami</h2>
+<span class="font-label-sm text-label-sm text-emerald-deep uppercase tracking-wider">Akses Cepat</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Pendaftaran Mualaf -->
+<div class="bg-surface-white rounded-xl p-4 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/30 group active:scale-95 transition-transform">
+<div class="w-12 h-12 bg-mint-fresh rounded-full flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-emerald-deep" data-icon="person_add">person_add</span>
+</div>
+<h3 class="font-label-lg text-label-lg mb-1">Pendaftaran Mualaf</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">Bimbingan syahadat dan pembinaan aqidah.</p>
+</div>
+<!-- Pengurusan Jenazah -->
+<div class="bg-surface-white rounded-xl p-4 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/30 active:scale-95 transition-transform">
+<div class="w-12 h-12 bg-amber-soft/20 rounded-full flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-gold-spiritual" data-icon="church">church</span>
+</div>
+<h3 class="font-label-lg text-label-lg mb-1">Pengurusan Jenazah</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Layanan pemandian hingga pemakaman.</p>
+</div>
+<!-- Pendaftaran Nikah -->
+<div class="bg-surface-white rounded-xl p-4 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/30 active:scale-95 transition-transform">
+<div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-secondary" data-icon="favorite">favorite</span>
+</div>
+<h3 class="font-label-lg text-label-lg mb-1">Pendaftaran Nikah</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Administrasi akad nikah di Masjid.</p>
+</div>
+<!-- Peminjaman Fasilitas -->
+<div class="bg-surface-white rounded-xl p-4 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/30 active:scale-95 transition-transform">
+<div class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="apartment">apartment</span>
+</div>
+<h3 class="font-label-lg text-label-lg mb-1">Pinjam Fasilitas</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Aula, Peralatan, dan Perlengkapan.</p>
+</div>
+</div>
+</section>
+<!-- Feature Spotlight (Bento Style) -->
+<section class="space-y-4">
+<div class="relative w-full h-48 rounded-2xl overflow-hidden shadow-lg border border-mint-fresh">
+<img class="w-full h-full object-cover" data-alt="Mualaf Center" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_muallaf_1_320x240.webp.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 to-transparent flex flex-col justify-end p-5">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-white mb-1">Mualaf Center</h3>
+<p class="font-body-sm text-body-sm text-mint-fresh">Bergabung dengan komunitas mualaf kami untuk pembinaan spiritual berkelanjutan.</p>
+</div>
+</div>
+</section>
+<!-- Digital Directory & Facilities -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-primary">Direktori &amp; Fasilitas</h2>
+</div>
+<div class="bg-surface-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/20">
+<!-- Location Map Placeholder -->
+<div class="relative h-40 w-full bg-surface-variant overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Map" data-location="Jakarta" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAjYB7hyCC_PeEwYj0fdK0BQ0cELZupBoUoaiCvMgt_ZQptYQ5ze5vyFOI4prDOxtu4batQwZRJJ6Al6N5fI4saucWzOuK14zKMpK7l8cjym9o_bm2exWhU9bfigR6pbW5_V61gY8okxxrkIn4GI32VGFLbiyzXiLFhv_dpsIUX4l65cbr1Q1ROQ6pnI2EU0SfuxZZZJ4gtZ_UdOqHS4RV1RCT3VEq3E3Ll1amTeqD6x6JkAo90VnCW1PSWVv2rXdZUtEAxT7kYxg')"></div>
+<div class="absolute bottom-3 right-3 bg-white px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+<span class="material-symbols-outlined text-emerald-deep scale-75" data-icon="open_in_new">open_in_new</span>
+<span class="font-label-sm text-label-sm text-primary">Buka Gmaps</span>
+</div>
+</div>
+<div class="p-5 grid grid-cols-2 gap-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="meeting_room">meeting_room</span>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Aula Utama</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kapasitas 500</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="local_library">local_library</span>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Perpustakaan</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Buku Islami</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="water_drop">water_drop</span>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Tempat Wudhu</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Bersih &amp; Luas</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="directions_car">directions_car</span>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Parkir Luas</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Aman &amp; Nyaman</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Daily Staff Schedule (Horizontal Scroll) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-primary">Petugas Harian</h2>
+<button class="font-label-lg text-label-lg text-emerald-deep">Lihat Semua</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-4 -mx-container-margin px-container-margin no-scrollbar">
+<!-- Subuh Card -->
+<div class="min-w-[240px] bg-mint-fresh/20 rounded-2xl p-5 border-l-4 border-emerald-deep shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-lg text-label-lg text-emerald-deep uppercase tracking-widest">Subuh</span>
+<span class="material-symbols-outlined text-emerald-deep" data-icon="wb_twilight">wb_twilight</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-emerald-deep flex items-center justify-center text-white font-bold text-xs">IS</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Imam</p>
+<p class="font-label-lg text-label-lg text-primary">Imam Samsudin</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white font-bold text-xs">H</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Muadzin</p>
+<p class="font-label-lg text-label-lg text-primary">Hidayat</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Maghrib Card -->
+<div class="min-w-[240px] bg-amber-soft/10 rounded-2xl p-5 border-l-4 border-gold-spiritual shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-lg text-label-lg text-gold-spiritual uppercase tracking-widest">Maghrib</span>
+<span class="material-symbols-outlined text-gold-spiritual" data-icon="wb_sunset">wb_sunny</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-gold-spiritual flex items-center justify-center text-white font-bold text-xs">AS</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Imam</p>
+<p class="font-label-lg text-label-lg text-primary">Ahmad Solihun</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white font-bold text-xs">K</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Muadzin</p>
+<p class="font-label-lg text-label-lg text-primary">Khaerudin</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Form -->
+<section class="bg-emerald-deep rounded-2xl p-6 shadow-xl relative overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-mint-fresh/10 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-white mb-2">Butuh Layanan Cepat?</h3>
+<p class="font-body-sm text-body-sm text-mint-fresh mb-6">Ajukan pendaftaran atau permohonan layanan tanpa harus datang langsung.</p>
+<form class="space-y-4">
+<div class="relative">
+<select class="w-full bg-white/10 border-white/20 rounded-xl px-4 py-3 text-white font-label-lg appearance-none focus:ring-amber-soft focus:border-amber-soft">
+<option class="text-on-surface">Pilih Jenis Layanan</option>
+<option class="text-on-surface">Pendaftaran Mualaf</option>
+<option class="text-on-surface">Peminjaman Fasilitas</option>
+<option class="text-on-surface">Lainnya</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3.5 text-white pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<input class="w-full bg-white/10 border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 font-label-lg focus:ring-amber-soft focus:border-amber-soft" placeholder="Nama Lengkap" type="text"/>
+<button class="w-full bg-amber-soft text-tertiary font-label-lg py-4 rounded-xl shadow-lg active:scale-95 transition-transform font-bold" type="submit">Kirim Permohonan</button>
+</form>
+</div>
+</section>
+<!-- Important Contacts -->
+<section class="space-y-4 pb-12">
+<h2 class="font-headline-md text-headline-md text-primary">Kontak Penting</h2>
+<div class="flex flex-col gap-3">
+<a class="flex items-center justify-between p-4 bg-surface-white rounded-xl shadow-sm border border-mint-fresh/20" href="tel:09878786579">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-error-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-error" data-icon="phone_in_talk">phone_in_talk</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-primary">Darurat / Jenazah</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">0987-8786-579</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-surface-white rounded-xl shadow-sm border border-mint-fresh/20" href="https://wa.me/628479937389" target="_blank">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-mint-fresh rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-deep" data-icon="chat">chat</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-primary">WhatsApp Pengurus</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Klik untuk chat langsung</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface/90 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep transition-colors" href="index.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep transition-colors" href="kajian.html">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-sm text-label-sm">Kajian</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep transition-colors" href="infaq.html">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Infaq</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-emerald-deep transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-sm text-label-sm">Laporan</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 duration-200" href="layanan.html">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+<span class="font-label-sm text-label-sm">Layanan</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for active state on form inputs
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('ring-2', 'ring-amber-soft');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('ring-2', 'ring-amber-soft');
+            });
+        });
+    </script>
+</body></html>

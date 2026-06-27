@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Donation Management - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#0b513d",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "amber-soft": "#FDE68A",
+                    "on-secondary-container": "#566660",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#d5e6df",
+                    "on-tertiary-fixed": "#331200",
+                    "surface-dim": "#d8dbd7",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed": "#101e1a",
+                    "surface-variant": "#e1e3e0",
+                    "error-container": "#ffdad6",
+                    "surface": "#f8faf6",
+                    "tertiary-fixed": "#ffdbca",
+                    "inverse-primary": "#95d3ba",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1b",
+                    "surface-container-highest": "#e1e3e0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8faf6",
+                    "surface-container-low": "#f2f4f1",
+                    "outline-variant": "#bfc9c3",
+                    "tertiary-fixed-dim": "#ffb68e",
+                    "inverse-on-surface": "#eff1ee",
+                    "primary-fixed-dim": "#95d3ba",
+                    "surface-container-high": "#e7e9e5",
+                    "outline": "#707974",
+                    "emerald-deep": "#064E3B",
+                    "on-secondary-fixed-variant": "#3b4a44",
+                    "primary-fixed": "#b0f0d6",
+                    "tertiary": "#502000",
+                    "surface-tint": "#2b6954",
+                    "surface-container": "#eceeeb",
+                    "primary-container": "#064e3b",
+                    "on-tertiary-container": "#ff985a",
+                    "text-primary": "#1F2937",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "inverse-surface": "#2e312f",
+                    "background": "#f8faf6",
+                    "secondary": "#52625c",
+                    "tertiary-container": "#733100",
+                    "on-primary-fixed": "#002117",
+                    "on-primary-container": "#80bea6",
+                    "secondary-container": "#d3e3dc",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#bacac3",
+                    "surface-white": "#FFFFFF",
+                    "gold-spiritual": "#D97706",
+                    "primary": "#003527",
+                    "on-background": "#191c1b",
+                    "mint-fresh": "#D1FAE5",
+                    "on-surface-variant": "#404944"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "1.25rem",
+                    "stack-lg": "2rem",
+                    "section-padding": "1.5rem",
+                    "gutter-md": "1rem",
+                    "stack-sm": "0.5rem",
+                    "stack-md": "1rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "prayer-time-display": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg-mobile": ["Libre Caslon Text"],
+                    "headline-lg": ["Libre Caslon Text"],
+                    "display-lg": ["Libre Caslon Text"],
+                    "headline-md": ["Libre Caslon Text"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-card {
+            background: #ffffff;
+            box-shadow: 0px 4px 20px rgba(6, 78, 59, 0.05);
+            border: 1px solid #D1FAE5;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 30px rgba(6, 78, 59, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc9c3;
+            border-radius: 10px;
+        }
+        .marquee-bar {
+            background: #064E3B;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+        .marquee-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 25s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface custom-scrollbar overflow-x-hidden">
+<!-- Navigation Drawer (Admin Sidebar) -->
+<aside class="fixed inset-y-0 left-0 w-80 z-[60] bg-surface-container-lowest dark:bg-inverse-surface shadow-2xl flex flex-col h-full py-6 hidden lg:flex">
+<div class="px-6 mb-8">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Haqqul Yaqin</h1>
+<p class="text-on-surface-variant text-label-sm mt-1 uppercase tracking-widest">Portal Admin</p>
+</div>
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-mint-fresh flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="Profile" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png"/>
+</div>
+<div>
+<h3 class="font-label-lg text-label-lg text-emerald-deep">Admin Masjid</h3>
+<p class="text-on-surface-variant text-label-sm">Super Admin</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-outline-variant p-4 mx-2 hover:bg-mint-fresh dark:hover:bg-secondary-container/10 active:opacity-80 transition-opacity" href="admin_dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-xl p-4 mx-2 transition-all" href="admin_donations.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+<span class="font-label-lg text-label-lg">Donations</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-outline-variant p-4 mx-2 hover:bg-mint-fresh dark:hover:bg-secondary-container/10 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-lg text-label-lg">Kajian</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-outline-variant p-4 mx-2 hover:bg-mint-fresh dark:hover:bg-secondary-container/10 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-lg text-label-lg">Finance</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant dark:text-outline-variant p-4 mx-2 hover:bg-mint-fresh dark:hover:bg-secondary-container/10 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-lg text-label-lg">Users</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:ml-80 min-h-screen pb-24 lg:pb-12">
+<!-- Top App Bar -->
+<header class="bg-surface shadow-sm sticky top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="lg:hidden p-2 active:scale-95 transition-transform"><span class="material-symbols-outlined">menu</span></button>
+<h2 class="font-headline-md text-headline-md-mobile text-emerald-deep">Donation Management</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 bg-emerald-deep text-on-primary font-label-lg text-label-lg px-4 py-2 rounded-xl shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Manual Entry</span>
+</button>
+</div>
+</header>
+<!-- Marquee Announcement -->
+<div class="marquee-bar py-1 px-4 text-label-sm">
+<div class="marquee-content">
+                Update: Total Infaq Renovasi Masjid minggu ini mencapai 75% dari target • Jazakumullah Khairan Katsiran kepada seluruh donatur • Perhatian: Batas akhir zakat maal periode Syawal tinggal 3 hari lagi.
+            </div>
+</div>
+<div class="p-container-margin lg:p-12 space-y-stack-lg">
+<!-- Statistics Overview (Bento Grid Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
+<div class="bento-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
+<div class="z-10">
+<p class="text-on-surface-variant text-label-sm uppercase tracking-wide">Total Dana Terkumpul</p>
+<h4 class="font-prayer-time-display text-prayer-time-display text-emerald-deep">Rp 142.500.000</h4>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl text-emerald-deep/5 select-none">payments</span>
+</div>
+<div class="bento-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden border-l-4 border-l-gold-spiritual">
+<div class="z-10">
+<p class="text-on-surface-variant text-label-sm uppercase tracking-wide">Menunggu Verifikasi</p>
+<h4 class="font-prayer-time-display text-prayer-time-display text-gold-spiritual">14 Transaksi</h4>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl text-gold-spiritual/5 select-none">pending_actions</span>
+</div>
+<div class="bento-card p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden">
+<div class="z-10">
+<p class="text-on-surface-variant text-label-sm uppercase tracking-wide">Donatur Baru (Bulan Ini)</p>
+<h4 class="font-prayer-time-display text-prayer-time-display text-emerald-deep">128 Orang</h4>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl text-emerald-deep/5 select-none">diversity_1</span>
+</div>
+</section>
+<!-- Filters Section -->
+<section class="flex flex-col md:flex-row gap-gutter-md items-center justify-between">
+<div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 custom-scrollbar">
+<button class="px-5 py-2 rounded-full bg-emerald-deep text-white font-label-sm text-label-sm whitespace-nowrap">All Donations</button>
+<button class="px-5 py-2 rounded-full bg-mint-fresh text-emerald-deep font-label-sm text-label-sm border border-emerald-deep/10 whitespace-nowrap hover:bg-emerald-deep/5 transition-colors">Success</button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm border border-outline-variant/30 whitespace-nowrap hover:bg-emerald-deep/5 transition-colors">Pending</button>
+<button class="px-5 py-2 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm border border-outline-variant/30 whitespace-nowrap hover:bg-emerald-deep/5 transition-colors">Failed</button>
+</div>
+<div class="flex items-center gap-2 w-full md:w-auto">
+<div class="relative flex-1 md:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-xl border border-outline-variant/50 focus:ring-emerald-deep focus:border-emerald-deep font-label-sm text-label-sm" placeholder="Search donor name..." type="text"/>
+</div>
+<select class="bg-surface rounded-xl border border-outline-variant/50 px-4 py-2 font-label-sm text-label-sm focus:ring-emerald-deep focus:border-emerald-deep">
+<option>All Types</option>
+<option>Zakat</option>
+<option>Infaq</option>
+<option>Wakaf</option>
+</select>
+</div>
+</section>
+<!-- Table/List Section -->
+<section class="bento-card rounded-2xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant uppercase tracking-wider font-label-sm text-label-sm">
+<th class="px-6 py-4 font-semibold">Donor Name</th>
+<th class="px-6 py-4 font-semibold">Type</th>
+<th class="px-6 py-4 font-semibold">Amount</th>
+<th class="px-6 py-4 font-semibold">Method</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Row 1 -->
+<tr class="hover:bg-mint-fresh/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center font-bold text-on-secondary-container">RH</div>
+<div>
+<p class="font-label-lg text-label-lg text-emerald-deep">Rahmat Hidayat</p>
+<p class="text-on-surface-variant text-label-sm">12 Oct 2023, 08:45</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant">Infaq Masjid</td>
+<td class="px-6 py-4 font-label-lg text-label-lg">Rp 500.000</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+<span>BSI Transfer</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-emerald-deep/10 text-emerald-deep font-label-sm text-label-sm flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-deep"></span> Success
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-mint-fresh/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-amber-soft flex items-center justify-center font-bold text-gold-spiritual">SF</div>
+<div>
+<p class="font-label-lg text-label-lg text-emerald-deep">Siti Fatimah</p>
+<p class="text-on-surface-variant text-label-sm">12 Oct 2023, 07:12</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant">Zakat Maal</td>
+<td class="px-6 py-4 font-label-lg text-label-lg">Rp 2.500.000</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+<span>QRIS</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-gold-spiritual/10 text-gold-spiritual font-label-sm text-label-sm flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-gold-spiritual"></span> Pending
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-mint-fresh/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-on-surface-variant">AN</div>
+<div>
+<p class="font-label-lg text-label-lg text-emerald-deep">Ahmad Nur</p>
+<p class="text-on-surface-variant text-label-sm">11 Oct 2023, 21:30</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant">Wakaf Al-Qur'an</td>
+<td class="px-6 py-4 font-label-lg text-label-lg">Rp 150.000</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+<span>E-Wallet</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-error/10 text-error font-label-sm text-label-sm flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span> Failed
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-mint-fresh/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-deep/10 flex items-center justify-center font-bold text-emerald-deep">BA</div>
+<div>
+<p class="font-label-lg text-label-lg text-emerald-deep">Budi Aris</p>
+<p class="text-on-surface-variant text-label-sm">11 Oct 2023, 15:20</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-label-sm text-label-sm text-on-surface-variant">Infaq Renovasi</td>
+<td class="px-6 py-4 font-label-lg text-label-lg">Rp 10.000.000</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span>Cash</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-emerald-deep/10 text-emerald-deep font-label-sm text-label-sm flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-deep"></span> Success
+                                    </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-on-surface-variant">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-6 border-t border-outline-variant/20 flex items-center justify-between">
+<p class="text-on-surface-variant text-label-sm">Showing 1-10 of 254 donations</p>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant/50 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-emerald-deep text-white font-label-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container text-on-surface-variant font-label-sm">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container text-on-surface-variant font-label-sm">3</button>
+<button class="p-2 border border-outline-variant/50 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Activity Trends (Visual Filler) -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter-md">
+<div class="bento-card p-8 rounded-2xl">
+<h5 class="font-label-lg text-label-lg text-emerald-deep mb-4 uppercase tracking-wider">Metode Pembayaran Terpopuler</h5>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>BSI Mobile / Transfer</span>
+<span>45%</span>
+</div>
+<div class="h-2 w-full bg-mint-fresh rounded-full overflow-hidden">
+<div class="h-full bg-emerald-deep" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>QRIS GPN</span>
+<span>30%</span>
+</div>
+<div class="h-2 w-full bg-mint-fresh rounded-full overflow-hidden">
+<div class="h-full bg-emerald-deep" style="width: 30%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-sm mb-1">
+<span>Cash / Kotak Amal</span>
+<span>25%</span>
+</div>
+<div class="h-2 w-full bg-mint-fresh rounded-full overflow-hidden">
+<div class="h-full bg-gold-spiritual" style="width: 25%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bento-card rounded-2xl relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('./gambar/pos_tausiyah.webp.png')"></div>
+<div class="absolute inset-0 bg-emerald-deep/60 backdrop-blur-[2px]"></div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-end text-white">
+<p class="font-label-sm text-label-sm uppercase tracking-widest opacity-80">Report Generation</p>
+<h4 class="font-headline-md text-headline-md-mobile mb-4">Export Financial Summary</h4>
+<button class="bg-white text-emerald-deep font-label-lg text-label-lg px-6 py-3 rounded-xl w-fit shadow-lg active:scale-95 transition-transform">Download CSV / PDF</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md z-50 rounded-t-xl shadow-[0px_-4px_20px_rgba(6,78,59,0.05)] border-t border-outline-variant/30">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-on-primary-container rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">savings</span>
+<span class="font-label-sm text-label-sm">Infaq</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-sm text-label-sm">Kajian</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Dana</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-sm text-label-sm">Staf</span>
+</button>
+</nav>
+<script>
+        // Simple micro-interaction for rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', () => {
+                if(row.querySelector('td')) {
+                    row.classList.toggle('bg-mint-fresh/20');
+                }
+            });
+        });
+
+        // Filter button toggles
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-emerald-deep', 'text-white');
+                    b.classList.add('bg-mint-fresh', 'text-emerald-deep');
+                });
+                btn.classList.add('bg-emerald-deep', 'text-white');
+                btn.classList.remove('bg-mint-fresh', 'text-emerald-deep');
+            });
+        });
+    </script>
+</body></html>

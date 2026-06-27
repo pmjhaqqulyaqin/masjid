@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finance Management - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Caslon+Text:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#0b513d",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "amber-soft": "#FDE68A",
+                        "on-secondary-container": "#566660",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#d5e6df",
+                        "on-tertiary-fixed": "#331200",
+                        "surface-dim": "#d8dbd7",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#101e1a",
+                        "surface-variant": "#e1e3e0",
+                        "error-container": "#ffdad6",
+                        "surface": "#f8faf6",
+                        "tertiary-fixed": "#ffdbca",
+                        "inverse-primary": "#95d3ba",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1b",
+                        "surface-container-highest": "#e1e3e0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8faf6",
+                        "surface-container-low": "#f2f4f1",
+                        "outline-variant": "#bfc9c3",
+                        "tertiary-fixed-dim": "#ffb68e",
+                        "inverse-on-surface": "#eff1ee",
+                        "primary-fixed-dim": "#95d3ba",
+                        "surface-container-high": "#e7e9e5",
+                        "outline": "#707974",
+                        "emerald-deep": "#064E3B",
+                        "on-secondary-fixed-variant": "#3b4a44",
+                        "primary-fixed": "#b0f0d6",
+                        "tertiary": "#502000",
+                        "surface-tint": "#2b6954",
+                        "surface-container": "#eceeeb",
+                        "primary-container": "#064e3b",
+                        "on-tertiary-container": "#ff985a",
+                        "text-primary": "#1F2937",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "inverse-surface": "#2e312f",
+                        "background": "#f8faf6",
+                        "secondary": "#52625c",
+                        "tertiary-container": "#733100",
+                        "on-primary-fixed": "#002117",
+                        "on-primary-container": "#80bea6",
+                        "secondary-container": "#d3e3dc",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#bacac3",
+                        "surface-white": "#FFFFFF",
+                        "gold-spiritual": "#D97706",
+                        "primary": "#003527",
+                        "on-background": "#191c1b",
+                        "mint-fresh": "#D1FAE5",
+                        "on-surface-variant": "#404944"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "1.25rem",
+                        "stack-lg": "2rem",
+                        "section-padding": "1.5rem",
+                        "gutter-md": "1rem",
+                        "stack-sm": "0.5rem",
+                        "stack-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "prayer-time-display": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg-mobile": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-sm fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-container-margin h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="p-2 text-primary active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-emerald-deep">Masjid Haqqul Yaqin</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="hidden md:block font-label-lg text-emerald-deep">Admin Profile</span>
+<div class="w-10 h-10 rounded-full bg-mint-fresh flex items-center justify-center overflow-hidden border border-emerald-deep/10">
+<img class="w-full h-full object-cover" data-alt="Profile" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Marquee Announcement -->
+<div class="fixed top-16 w-full bg-emerald-deep text-white py-1.5 z-40 overflow-hidden">
+<div class="animate-marquee font-label-sm">
+            Laporan Keuangan Terupdate: Saldo Kas Masjid Per 24 Mei 2024 • Target Renovasi Tahap II: 75% Tercapai • Jazakumullah Khairan Katsiran kepada seluruh jamaah.
+        </div>
+</div>
+<main class="pt-32 px-container-margin max-w-screen-xl mx-auto pb-8">
+<!-- Summary Dashboard Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter-md mb-stack-lg">
+<!-- Total Balance Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border-l-4 border-gold-spiritual relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 opacity-5 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<p class="font-label-lg text-on-surface-variant mb-2">Total Balance</p>
+<h2 class="font-display-lg text-display-lg text-emerald-deep">Rp 128.450.000</h2>
+<div class="mt-4 flex items-center text-emerald-600 gap-1 font-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+12.5% vs last month</span>
+</div>
+</div>
+<!-- Operational Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border-l-4 border-mint-fresh">
+<p class="font-label-lg text-on-surface-variant mb-2">Operational Fund</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Rp 42.120.000</h3>
+<div class="w-full bg-mint-fresh h-1.5 rounded-full mt-4">
+<div class="bg-emerald-deep h-full rounded-full w-[65%]"></div>
+</div>
+<p class="text-xs mt-2 text-on-surface-variant italic">Allocated for utility &amp; staff</p>
+</div>
+<!-- Construction Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border-l-4 border-amber-soft">
+<p class="font-label-lg text-on-surface-variant mb-2">Construction Fund</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Rp 86.330.000</h3>
+<div class="w-full bg-mint-fresh h-1.5 rounded-full mt-4">
+<div class="bg-gold-spiritual h-full rounded-full w-[88%]"></div>
+</div>
+<p class="text-xs mt-2 text-on-surface-variant italic">Main Prayer Hall Expansion</p>
+</div>
+</section>
+<!-- Actions Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<h2 class="font-headline-md text-emerald-deep">Cash Flow Tracker</h2>
+<div class="flex flex-wrap gap-2">
+<button class="bg-surface-container-lowest text-emerald-deep border border-emerald-deep font-label-lg px-6 py-2.5 rounded-xl flex items-center gap-2 hover:bg-mint-fresh transition-colors active:scale-95" onclick="alert('Exporting PDF...')">
+<span class="material-symbols-outlined text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
+                    Export PDF
+                </button>
+<button class="bg-emerald-deep text-white font-label-lg px-6 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-emerald-900/10 hover:opacity-90 active:scale-95 transition-all" onclick="document.getElementById('modal-transaction').classList.remove('hidden')">
+<span class="material-symbols-outlined text-lg" data-icon="add_circle">add_circle</span>
+                    Record Transaction
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Transactions List (Bento-style Card) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-2xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant/30 flex items-center justify-between">
+<h3 class="font-label-lg text-emerald-deep uppercase tracking-wider">Recent History</h3>
+<div class="relative">
+<input class="pl-10 pr-4 py-2 border border-outline-variant rounded-full text-sm focus:ring-2 focus:ring-emerald-deep outline-none w-48 md:w-64" placeholder="Search transactions..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low font-label-sm text-on-surface-variant">
+<tr>
+<th class="px-6 py-4">DATE</th>
+<th class="px-6 py-4">DESCRIPTION</th>
+<th class="px-6 py-4">CATEGORY</th>
+<th class="px-6 py-4 text-right">AMOUNT</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- Income Row -->
+<tr class="hover:bg-mint-fresh/10 transition-colors group">
+<td class="px-6 py-4 font-body-sm text-on-surface-variant">24 May 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<div>
+<p class="font-label-lg">Jumat Infaq Box</p>
+<p class="text-xs text-on-surface-variant">Regular Friday Collection</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-mint-fresh text-emerald-deep text-[10px] font-bold uppercase">Operational</span>
+</td>
+<td class="px-6 py-4 text-right text-emerald-700 font-bold">+ Rp 12.500.000</td>
+</tr>
+<!-- Expense Row -->
+<tr class="hover:bg-mint-fresh/10 transition-colors group">
+<td class="px-6 py-4 font-body-sm text-on-surface-variant">22 May 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-red-100 text-red-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="electric_bolt">electric_bolt</span>
+</div>
+<div>
+<p class="font-label-lg">PLN Electricity Bill</p>
+<p class="text-xs text-on-surface-variant">Mosque Main Building May</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase">Operational</span>
+</td>
+<td class="px-6 py-4 text-right text-red-600 font-bold">- Rp 3.200.000</td>
+</tr>
+<!-- Construction Row -->
+<tr class="hover:bg-mint-fresh/10 transition-colors group">
+<td class="px-6 py-4 font-body-sm text-on-surface-variant">20 May 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="construction">construction</span>
+</div>
+<div>
+<p class="font-label-lg">Marble Tiles Payment</p>
+<p class="text-xs text-on-surface-variant">Supplier: Marmer Agung</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 rounded-full bg-amber-soft/50 text-gold-spiritual text-[10px] font-bold uppercase">Construction</span>
+</td>
+<td class="px-6 py-4 text-right text-red-600 font-bold">- Rp 25.000.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 bg-surface-container-low text-center">
+<button class="text-emerald-deep font-label-lg hover:underline">View All Transactions</button>
+</div>
+</div>
+<!-- Quick Chart/Illustration Side -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Visual Decoration Card -->
+<div class="relative rounded-2xl overflow-hidden h-48 group shadow-lg">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Visual" src="./gambar/pos_tausiyah.webp.png"/>
+<div class="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 to-transparent flex flex-col justify-end p-6">
+<p class="text-white/80 text-xs font-label-sm uppercase tracking-widest">Financial Health</p>
+<h4 class="text-white font-headline-md">Stable Growth</h4>
+</div>
+</div>
+<!-- Category Breakdown -->
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-[0px_4px_20px_rgba(6,78,59,0.05)]">
+<h3 class="font-label-lg text-emerald-deep mb-4 uppercase tracking-wider">Allocation</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-label-sm">Operational</span>
+<span>35%</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-emerald-deep h-full w-[35%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-label-sm">Construction</span>
+<span>55%</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-gold-spiritual h-full w-[55%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-label-sm">Social/Zakat</span>
+<span>10%</span>
+</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full overflow-hidden">
+<div class="bg-on-tertiary-container h-full w-[10%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Record Transaction Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-emerald-deep/40 backdrop-blur-sm hidden" id="modal-transaction">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="p-6 bg-emerald-deep text-white flex justify-between items-center">
+<div>
+<h3 class="font-headline-md">Record Transaction</h3>
+<p class="text-xs text-white/70">Ensure data accuracy before saving</p>
+</div>
+<button class="p-2 hover:bg-white/10 rounded-full transition-colors" onclick="document.getElementById('modal-transaction').classList.add('hidden')">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<form class="p-8 space-y-6">
+<div>
+<label class="block font-label-lg text-on-surface mb-2">Transaction Type</label>
+<div class="flex gap-4">
+<label class="flex-1 cursor-pointer">
+<input checked="" class="hidden peer" name="type" type="radio"/>
+<div class="p-3 border-2 border-outline-variant rounded-xl text-center peer-checked:border-emerald-deep peer-checked:bg-mint-fresh/20 peer-checked:text-emerald-deep transition-all">
+<span class="material-symbols-outlined block mb-1" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm">Income</span>
+</div>
+</label>
+<label class="flex-1 cursor-pointer">
+<input class="hidden peer" name="type" type="radio"/>
+<div class="p-3 border-2 border-outline-variant rounded-xl text-center peer-checked:border-red-600 peer-checked:bg-red-50 peer-checked:text-red-600 transition-all">
+<span class="material-symbols-outlined block mb-1" data-icon="trending_down">trending_down</span>
+<span class="font-label-sm">Expense</span>
+</div>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Amount (IDR)</label>
+<input class="w-full border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-emerald-deep outline-none font-bold text-lg" placeholder="0" type="number"/>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Category</label>
+<select class="w-full border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-emerald-deep outline-none bg-white">
+<option>Operational</option>
+<option>Construction</option>
+<option>Waqf</option>
+<option>Emergency Fund</option>
+<option>Maintenance</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-1">Description</label>
+<textarea class="w-full border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-emerald-deep outline-none h-24" placeholder="Write detail of the transaction..."></textarea>
+</div>
+<button class="w-full bg-emerald-deep text-white font-label-lg py-4 rounded-xl shadow-lg hover:opacity-90 transition-opacity active:scale-[0.98]" type="button">
+                    Save Transaction
+                </button>
+</form>
+</div>
+</div>
+<!-- NavigationDrawer (Sidebar for Desktop) -->
+<aside class="hidden md:flex flex-col h-full py-6 fixed inset-y-0 left-0 w-80 z-[60] bg-surface-container-lowest shadow-2xl transition-transform duration-300">
+<div class="px-6 mb-10">
+<h2 class="font-headline-lg-mobile text-primary">Masjid Haqqul Yaqin</h2>
+<div class="mt-6 flex items-center gap-4 p-4 bg-surface-container rounded-2xl">
+<div class="w-12 h-12 rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Profile" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png"/>
+</div>
+<div>
+<h4 class="font-label-lg text-emerald-deep">Admin Masjid</h4>
+<p class="text-xs text-on-surface-variant">Super Admin</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-4 text-on-surface-variant p-4 mx-2 hover:bg-mint-fresh transition-colors rounded-xl" href="admin_dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant p-4 mx-2 hover:bg-mint-fresh transition-colors rounded-xl" href="admin_donations.html">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+<span class="font-label-lg">Donations</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant p-4 mx-2 hover:bg-mint-fresh transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-lg">Kajian</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-xl p-4 mx-2" href="admin_finance.html">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-lg">Finance</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant p-4 mx-2 hover:bg-mint-fresh transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-lg">Users</span>
+</a>
+</nav>
+</aside>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full glass-nav bg-surface/80 border-t border-outline-variant/30 flex justify-around items-center px-4 py-3 pb-safe z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="savings">savings</span>
+<span class="font-label-sm">Infaq</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-2xl px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-label-sm">Dana</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm">Kajian</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1.5 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label-sm">Staf</span>
+</button>
+</nav>
+<script>
+        // Simple logic for modal toggle and interactions
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('modal-transaction').classList.add('hidden');
+            }
+        });
+    </script>
+</body></html>

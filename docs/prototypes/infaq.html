@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Infaq &amp; Donasi - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Libre+Caslon+Text:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e1e3e0",
+                    "background": "#f8faf6",
+                    "surface-variant": "#e1e3e0",
+                    "inverse-on-surface": "#eff1ee",
+                    "tertiary-fixed-dim": "#ffb68e",
+                    "secondary-container": "#d3e3dc",
+                    "mint-fresh": "#D1FAE5",
+                    "secondary": "#52625c",
+                    "on-surface-variant": "#404944",
+                    "on-surface": "#191c1b",
+                    "on-secondary-fixed": "#101e1a",
+                    "surface-dim": "#d8dbd7",
+                    "secondary-fixed": "#d5e6df",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "text-primary": "#1F2937",
+                    "error": "#ba1a1a",
+                    "tertiary": "#502000",
+                    "tertiary-container": "#733100",
+                    "emerald-deep": "#064E3B",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#002117",
+                    "on-secondary-container": "#566660",
+                    "surface-bright": "#f8faf6",
+                    "tertiary-fixed": "#ffdbca",
+                    "amber-soft": "#FDE68A",
+                    "on-tertiary-fixed": "#331200",
+                    "on-primary-container": "#80bea6",
+                    "secondary-fixed-dim": "#bacac3",
+                    "primary": "#003527",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "gold-spiritual": "#D97706",
+                    "outline": "#707974",
+                    "outline-variant": "#bfc9c3",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e7e9e5",
+                    "surface-container": "#eceeeb",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#0b513d",
+                    "surface": "#f8faf6",
+                    "on-background": "#191c1b",
+                    "on-secondary-fixed-variant": "#3b4a44",
+                    "primary-fixed": "#b0f0d6",
+                    "inverse-surface": "#2e312f",
+                    "primary-fixed-dim": "#95d3ba",
+                    "surface-container-low": "#f2f4f1",
+                    "on-tertiary-container": "#ff985a",
+                    "inverse-primary": "#95d3ba",
+                    "surface-tint": "#2b6954",
+                    "surface-white": "#FFFFFF",
+                    "primary-container": "#064e3b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "1rem",
+                    "gutter-md": "1rem",
+                    "stack-lg": "2rem",
+                    "container-margin": "1.25rem",
+                    "stack-sm": "0.5rem",
+                    "section-padding": "1.5rem"
+            },
+            "fontFamily": {
+                    "display-lg": ["Libre Caslon Text"],
+                    "headline-md": ["Libre Caslon Text"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "prayer-time-display": ["Inter"],
+                    "headline-lg": ["Libre Caslon Text"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Libre Caslon Text"]
+            },
+            "fontSize": {
+                    "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .active-tab { transform: scale(0.9); transition: transform 0.2s; }
+        .glass-nav { background: rgba(248, 250, 246, 0.9); backdrop-filter: blur(12px); }
+        .premium-shadow { shadow: 0px 4px 20px rgba(6, 78, 59, 0.05); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-emerald-deep">Masjid Haqqul Yaqin</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</div>
+</header>
+<!-- Marquee Announcement -->
+<div class="mt-16 bg-emerald-deep text-white py-2 overflow-hidden sticky top-16 z-40">
+<div class="marquee text-label-lg font-label-lg uppercase">
+            Mari salurkan Infaq &amp; Sedekah terbaik Anda untuk renovasi Masjid At-Taqwa. Semoga menjadi amal jariyah yang tak terputus. Jazakumullah Khairan Katsiran.
+        </div>
+</div>
+<main class="px-container-margin pt-6">
+<!-- Header Text -->
+<div class="mb-stack-lg">
+<h1 class="font-display-lg text-display-lg text-primary">Donasi &amp; Infaq Online</h1>
+<p class="text-on-surface-variant font-body-md mt-2">Pilih kategori kebaikan yang ingin Anda tunaikan hari ini.</p>
+</div>
+<!-- Donation Categories - Bento Grid Style -->
+<section class="grid grid-cols-2 gap-4 mb-stack-lg">
+<button class="flex flex-col items-center justify-center p-6 bg-surface-white rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh hover:bg-mint-fresh transition-colors active:scale-95">
+<span class="material-symbols-outlined text-gold-spiritual text-3xl mb-2">mosque</span>
+<span class="font-label-lg text-label-lg">Infaq Masjid</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-white rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh hover:bg-mint-fresh transition-colors active:scale-95">
+<span class="material-symbols-outlined text-gold-spiritual text-3xl mb-2">payments</span>
+<span class="font-label-lg text-label-lg">Zakat Maal</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-white rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh hover:bg-mint-fresh transition-colors active:scale-95">
+<span class="material-symbols-outlined text-gold-spiritual text-3xl mb-2">volunteer_activism</span>
+<span class="font-label-lg text-label-lg">Wakaf</span>
+</button>
+<button class="flex flex-col items-center justify-center p-6 bg-surface-white rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh hover:bg-mint-fresh transition-colors active:scale-95">
+<span class="material-symbols-outlined text-gold-spiritual text-3xl mb-2">child_care</span>
+<span class="font-label-lg text-label-lg">Anak Yatim</span>
+</button>
+</section>
+<!-- Amount Selection -->
+<section class="mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Pilih Nominal</h2>
+<div class="grid grid-cols-3 gap-3 mb-4">
+<button class="py-3 px-2 border-2 border-mint-fresh rounded-xl font-label-lg text-emerald-deep bg-surface-white active:bg-emerald-deep active:text-white transition-all">50rb</button>
+<button class="py-3 px-2 border-2 border-emerald-deep rounded-xl font-label-lg bg-emerald-deep text-white shadow-lg">100rb</button>
+<button class="py-3 px-2 border-2 border-mint-fresh rounded-xl font-label-lg text-emerald-deep bg-surface-white active:bg-emerald-deep active:text-white transition-all">200rb</button>
+</div>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-label-lg">Rp</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-xl border border-outline-variant focus:border-emerald-deep focus:ring-1 focus:ring-emerald-deep bg-surface-white outline-none font-body-lg text-body-lg" placeholder="Nominal Lainnya" type="number"/>
+</div>
+</section>
+<!-- Recurring Option -->
+<div class="flex items-center justify-between p-4 bg-secondary-fixed rounded-xl mb-stack-lg border border-mint-fresh">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-deep">update</span>
+<div>
+<span class="block font-label-lg text-primary">Jadikan Donasi Rutin</span>
+<span class="block text-label-sm text-on-secondary-fixed-variant">Mingguan atau Bulanan</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-deep"></div>
+</label>
+</div>
+<!-- Payment Methods -->
+<section class="mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Metode Pembayaran</h2>
+<div class="space-y-3">
+<!-- QRIS Special Highlight -->
+<button class="w-full flex items-center justify-between p-4 bg-gradient-to-r from-emerald-deep to-primary text-white rounded-xl shadow-lg group">
+<div class="flex items-center gap-4">
+<div class="bg-white p-2 rounded-lg">
+<span class="material-symbols-outlined text-emerald-deep font-bold">qr_code_scanner</span>
+</div>
+<div class="text-left">
+<span class="block font-label-lg">QRIS Scan Cepat</span>
+<span class="block text-label-sm opacity-80">Support All E-Wallet &amp; Mobile Banking</span>
+</div>
+</div>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<!-- Bank Lists -->
+<div class="bg-surface-white rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-surface-container-highest overflow-hidden">
+<div class="p-4 border-b border-surface-container-highest flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">account_balance</span>
+<span class="font-label-lg">Transfer Bank</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">expand_more</span>
+</div>
+<div class="divide-y divide-surface-container-highest">
+<button class="w-full flex items-center gap-4 p-4 hover:bg-background text-left">
+<div class="w-10 h-6 bg-surface-container-low rounded border border-outline-variant flex items-center justify-center font-bold text-[10px] text-primary">BSI</div>
+<span class="font-body-md">Bank Syariah Indonesia</span>
+</button>
+<button class="w-full flex items-center gap-4 p-4 hover:bg-background text-left">
+<div class="w-10 h-6 bg-surface-container-low rounded border border-outline-variant flex items-center justify-center font-bold text-[10px] text-blue-800">BRI</div>
+<span class="font-body-md">Bank Rakyat Indonesia</span>
+</button>
+</div>
+</div>
+<!-- E-Wallet -->
+<div class="bg-surface-white rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-surface-container-highest overflow-hidden">
+<div class="p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">wallet</span>
+<span class="font-label-lg">E-Wallet</span>
+</div>
+<div class="flex gap-4 p-4 pt-0">
+<button class="flex-1 py-3 px-2 border border-outline-variant rounded-lg flex items-center justify-center hover:bg-background">
+<span class="font-bold text-blue-600">GoPay</span>
+</button>
+<button class="flex-1 py-3 px-2 border border-outline-variant rounded-lg flex items-center justify-center hover:bg-background">
+<span class="font-bold text-purple-700">OVO</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Quran Quote Footer Content -->
+<footer class="mt-stack-lg mb-12 text-center px-4">
+<div class="w-12 h-1 bg-gold-spiritual mx-auto mb-4 rounded-full"></div>
+<p class="font-headline-md text-headline-md text-emerald-deep italic mb-2">"Perumpamaan orang yang menginfakkan hartanya di jalan Allah seperti sebutir biji yang menumbuhkan tujuh tangkai..."</p>
+<p class="font-label-lg text-label-lg text-on-surface-variant">(QS. Al-Baqarah: 261)</p>
+</footer>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 pb-safe bg-surface/90 backdrop-blur-lg border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-colors hover:text-emerald-deep" href="index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-colors hover:text-emerald-deep" href="kajian.html">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-sm text-label-sm">Kajian</span>
+</a>
+<!-- ACTIVE MENU: INFAQ -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active-tab" href="infaq.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Infaq</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-colors hover:text-emerald-deep" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-sm text-label-sm">Laporan</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-colors hover:text-emerald-deep" href="#">
+<span class="material-symbols-outlined">apps</span>
+<span class="font-label-sm text-label-sm">Layanan</span>
+</a>
+</nav>
+<script>
+        // Simple interactive script for preset selection
+        document.querySelectorAll('section button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.parentElement.classList.contains('grid-cols-3')) {
+                    document.querySelectorAll('.grid-cols-3 button').forEach(b => {
+                        b.classList.remove('bg-emerald-deep', 'text-white', 'shadow-lg');
+                        b.classList.add('bg-surface-white', 'text-emerald-deep');
+                    });
+                    this.classList.add('bg-emerald-deep', 'text-white', 'shadow-lg');
+                    this.classList.remove('bg-surface-white', 'text-emerald-deep');
+                }
+            });
+        });
+    </script>
+</body></html>

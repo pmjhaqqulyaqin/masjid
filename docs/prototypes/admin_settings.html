@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masjid Haqqul Yaqin - Admin Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#95d3ba",
+                        "on-tertiary-fixed": "#331200",
+                        "primary-fixed": "#b0f0d6",
+                        "gold-spiritual": "#D97706",
+                        "surface-tint": "#2b6954",
+                        "surface-bright": "#f8faf6",
+                        "on-surface": "#191c1b",
+                        "secondary-fixed-dim": "#bacac3",
+                        "on-tertiary-container": "#ff985a",
+                        "inverse-surface": "#2e312f",
+                        "tertiary": "#502000",
+                        "on-secondary-container": "#566660",
+                        "inverse-on-surface": "#eff1ee",
+                        "emerald-deep": "#064E3B",
+                        "on-primary-fixed-variant": "#0b513d",
+                        "outline": "#707974",
+                        "on-background": "#191c1b",
+                        "tertiary-fixed-dim": "#ffb68e",
+                        "primary": "#003527",
+                        "outline-variant": "#bfc9c3",
+                        "surface-variant": "#e1e3e0",
+                        "surface-container-high": "#e7e9e5",
+                        "on-error-container": "#93000a",
+                        "background": "#f8faf6",
+                        "tertiary-container": "#733100",
+                        "secondary-container": "#d3e3dc",
+                        "error-container": "#ffdad6",
+                        "amber-soft": "#FDE68A",
+                        "surface-container-highest": "#e1e3e0",
+                        "mint-fresh": "#D1FAE5",
+                        "surface": "#f8faf6",
+                        "surface-white": "#FFFFFF",
+                        "on-tertiary-fixed-variant": "#763300",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdbca",
+                        "on-primary-fixed": "#002117",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#101e1a",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dbd7",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#95d3ba",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d5e6df",
+                        "text-primary": "#1F2937",
+                        "on-secondary-fixed-variant": "#3b4a44",
+                        "on-primary-container": "#80bea6",
+                        "primary-container": "#064e3b",
+                        "on-surface-variant": "#404944",
+                        "error": "#ba1a1a",
+                        "secondary": "#52625c",
+                        "surface-container": "#eceeeb",
+                        "surface-container-low": "#f2f4f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "1.25rem",
+                        "stack-lg": "2rem",
+                        "section-padding": "1.5rem",
+                        "stack-md": "1rem",
+                        "gutter-md": "1rem",
+                        "stack-sm": "0.5rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Libre Caslon Text"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Libre Caslon Text"],
+                        "label-sm": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Libre Caslon Text"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "prayer-time-display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                        "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .bento-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #064E3B;
+            border-radius: 10px;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #064E3B;
+            box-shadow: 0 0 0 2px rgba(6, 78, 59, 0.1);
+        }
+        .pattern-overlay {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23064e3b' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface custom-scrollbar pb-24">
+<!-- Top AppBar (JSON Component Mapping) -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-low/80 backdrop-blur-md shadow-sm flex justify-between items-center px-container-margin py-stack-sm w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-mint-fresh flex items-center justify-center overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Logo" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_cropped_mas.png"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-emerald-deep">Masjid Haqqul Yaqin</h1>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-mint-fresh transition-colors active:scale-95">
+<span class="material-symbols-outlined text-emerald-deep" data-icon="account_circle">account_circle</span>
+</button>
+</header>
+<main class="mt-20 px-container-margin space-y-stack-lg max-w-screen-md mx-auto">
+<!-- Header Visual Section -->
+<section class="relative h-48 rounded-xl overflow-hidden shadow-sm group">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Mosque Banner" style="background-image: url('./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<h2 class="font-headline-md text-headline-md">Admin Dashboard</h2>
+<p class="font-body-sm text-body-sm opacity-90">Mosque Info &amp; Facility Settings</p>
+</div>
+<label class="absolute top-4 right-4 bg-white/20 backdrop-blur-md border border-white/30 text-white px-3 py-1.5 rounded-full font-label-sm text-label-sm cursor-pointer hover:bg-white/40 transition-all">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-[16px]" data-icon="upload">upload</span>
+                    Change Banner
+                </span>
+<input class="hidden" type="file"/>
+</label>
+</section>
+<!-- Main Content Bento Layout -->
+<div class="space-y-stack-md">
+<!-- Section 1: Edit Profile (Modern Form) -->
+<section class="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/30">
+<div class="flex items-center justify-between mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-emerald-deep flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="mosque">mosque</span>
+                        Profil Masjid
+                    </h3>
+<button class="bg-emerald-deep text-white px-4 py-2 rounded-lg font-label-lg text-label-lg shadow-md active:scale-95 transition-transform">Save Changes</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant block">Nama Masjid</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md" type="text" value="Masjid Haqqul Yaqin"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant block">Tahun Berdiri</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md" type="text" value="1998"/>
+</div>
+<div class="space-y-1 md:col-span-2">
+<label class="font-label-sm text-on-surface-variant block">Alamat Lengkap</label>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md h-20">Jl. KH. Agus Salim No. 12, Jakarta Pusat, DKI Jakarta</textarea>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant block">Luas Tanah (m²)</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md" type="number" value="1200"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant block">Luas Bangunan (m²)</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-3 font-body-md" type="number" value="850"/>
+</div>
+</div>
+</section>
+<!-- Section 2: Direktori Digital (Bento List) -->
+<section class="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)]">
+<div class="flex items-center justify-between mb-stack-md">
+<h3 class="font-headline-md text-headline-md text-emerald-deep flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+                        Direktori Fasilitas
+                    </h3>
+<button class="text-emerald-deep flex items-center gap-1 font-label-lg hover:underline transition-all">
+<span class="material-symbols-outlined !text-[18px]" data-icon="add_circle">add_circle</span>
+                        Add Facility
+                    </button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Facility Card -->
+<div class="bg-mint-fresh/20 p-4 rounded-xl border border-mint-fresh/50 flex flex-col justify-between hover:bg-mint-fresh/30 transition-colors">
+<div>
+<span class="material-symbols-outlined text-emerald-deep mb-2" data-icon="meeting_room">meeting_room</span>
+<h4 class="font-label-lg text-emerald-deep">Ruang Utama</h4>
+<p class="font-body-sm text-on-surface-variant text-[11px] leading-tight mt-1">Kapasitas 500 Jamaah, AC Central</p>
+</div>
+<div class="flex justify-end gap-2 mt-3">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-on-surface-variant"><span class="material-symbols-outlined !text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-full hover:bg-red-50 text-error"><span class="material-symbols-outlined !text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</div>
+<!-- Facility Card -->
+<div class="bg-mint-fresh/20 p-4 rounded-xl border border-mint-fresh/50 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-emerald-deep mb-2" data-icon="local_library">local_library</span>
+<h4 class="font-label-lg text-emerald-deep">Perpustakaan</h4>
+<p class="font-body-sm text-on-surface-variant text-[11px] leading-tight mt-1">1.200 Koleksi Buku Agama</p>
+</div>
+<div class="flex justify-end gap-2 mt-3">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-on-surface-variant"><span class="material-symbols-outlined !text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-full hover:bg-red-50 text-error"><span class="material-symbols-outlined !text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</div>
+<!-- Facility Card -->
+<div class="bg-mint-fresh/20 p-4 rounded-xl border border-mint-fresh/50 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-emerald-deep mb-2" data-icon="water_drop">water_drop</span>
+<h4 class="font-label-lg text-emerald-deep">Tempat Wudhu</h4>
+<p class="font-body-sm text-on-surface-variant text-[11px] leading-tight mt-1">Laki-laki &amp; Perempuan Pisah</p>
+</div>
+<div class="flex justify-end gap-2 mt-3">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-on-surface-variant"><span class="material-symbols-outlined !text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-full hover:bg-red-50 text-error"><span class="material-symbols-outlined !text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</div>
+<!-- Facility Card -->
+<div class="bg-mint-fresh/20 p-4 rounded-xl border border-mint-fresh/50 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-emerald-deep mb-2" data-icon="local_parking">local_parking</span>
+<h4 class="font-label-lg text-emerald-deep">Area Parkir</h4>
+<p class="font-body-sm text-on-surface-variant text-[11px] leading-tight mt-1">Luas, Keamanan 24 Jam</p>
+</div>
+<div class="flex justify-end gap-2 mt-3">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-on-surface-variant"><span class="material-symbols-outlined !text-[18px]" data-icon="edit">edit</span></button>
+<button class="p-1.5 rounded-full hover:bg-red-50 text-error"><span class="material-symbols-outlined !text-[18px]" data-icon="delete">delete</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Piket Schedule Settings -->
+<section class="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border-l-4 border-gold-spiritual">
+<div class="mb-4">
+<h3 class="font-headline-md text-headline-md text-emerald-deep flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                        Jadwal Piket Harian
+                    </h3>
+<p class="font-body-sm text-on-surface-variant">Manage daily Imam &amp; Muadzin assignments.</p>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-4 custom-scrollbar no-scrollbar">
+<button class="bg-emerald-deep text-white px-4 py-2 rounded-full font-label-sm whitespace-nowrap">Monday</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-sm whitespace-nowrap">Tuesday</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-sm whitespace-nowrap">Wednesday</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-sm whitespace-nowrap">Thursday</button>
+<button class="bg-surface-container-high text-on-surface-variant px-4 py-2 rounded-full font-label-sm whitespace-nowrap">Friday</button>
+</div>
+<div class="space-y-3 mt-2">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-deep/10 flex items-center justify-center text-emerald-deep font-bold">I</div>
+<div>
+<p class="font-label-lg text-emerald-deep">Imam Rawatib</p>
+<p class="font-body-sm text-on-surface-variant">Ust. Ahmad Syarifuddin</p>
+</div>
+</div>
+<button class="text-on-surface-variant"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-deep/10 flex items-center justify-center text-emerald-deep font-bold">M</div>
+<div>
+<p class="font-label-lg text-emerald-deep">Muadzin</p>
+<p class="font-body-sm text-on-surface-variant">Bpk. H. Mansyur</p>
+</div>
+</div>
+<button class="text-on-surface-variant"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+</div>
+</section>
+<!-- Section 4 & 5: Operational & Map (Bento 2-Col) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Operational Hours -->
+<section class="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)]">
+<h3 class="font-headline-md text-headline-md text-emerald-deep flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+                        Operational &amp; Rules
+                    </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-on-surface">Open 24 Hours</span>
+<div class="relative inline-block w-12 h-6 bg-emerald-deep rounded-full transition-colors cursor-pointer" id="toggle-btn">
+<span class="absolute left-7 top-1 w-4 h-4 bg-white rounded-full transition-transform"></span>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant">General Rules</label>
+<div class="p-3 bg-surface-container-low rounded-lg font-body-sm text-on-surface-variant">
+                                1. Dilarang merokok di area masjid<br/>
+                                2. Matikan handphone saat shalat<br/>
+                                3. Menjaga ketenangan dan kebersihan
+                            </div>
+</div>
+</div>
+</section>
+<!-- Map Location -->
+<section class="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)] overflow-hidden flex flex-col">
+<h3 class="font-headline-md text-headline-md text-emerald-deep flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+                        Map Location
+                    </h3>
+<div class="relative flex-grow rounded-lg overflow-hidden border border-mint-fresh/50 min-h-[150px]">
+<img class="w-full h-full object-cover" data-alt="Map" data-location="Jakarta Pusat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV0tAv-NjMOf5iselbOrEOGaJJU6m2oZ_bNO2HfvlNznAMwXfS9nUty3kifG9iw5AgxU8WUR_073MWBFAtj1HsWeiM8qSmotq-JAvFBf9RUFrMFo2Bgvoneg2Wi6c8ergyILmNsrIAHS8G_QjvxPN4p9oM2oVTgYA3utZiuKSKIcv17JXirQ6ranBXCeCefm49LVL6tcDGrY2kxISII3WfKfrHmuhWyUOO8aUqY2sn9FgF3XCTEbzuEeOEzS0rYd0ViGHEMNQpGA"/>
+<div class="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-label-sm border border-outline-variant shadow-sm">
+                            Coordinates: -6.1751, 106.8272
+                        </div>
+</div>
+<button class="mt-4 w-full py-2 bg-surface-container-low text-emerald-deep rounded-lg font-label-lg hover:bg-mint-fresh transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined !text-[18px]" data-icon="map">map</span>
+                        Open Google Maps Settings
+                    </button>
+</section>
+</div>
+<!-- Section 6: Assets Upload Section -->
+<section class="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border-2 border-dashed border-mint-fresh">
+<h3 class="font-headline-md text-headline-md text-emerald-deep flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined" data-icon="cloud_upload">cloud_upload</span>
+                    Branding Assets
+                </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-xl flex items-center gap-4 border border-transparent hover:border-emerald-deep/20 transition-all cursor-pointer">
+<div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-emerald-deep/40 !text-[32px]" data-icon="image">image</span>
+</div>
+<div>
+<p class="font-label-lg text-emerald-deep">Masjid Logo</p>
+<p class="font-body-sm text-[11px] text-on-surface-variant">PNG or SVG, max 2MB</p>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl flex items-center gap-4 border border-transparent hover:border-emerald-deep/20 transition-all cursor-pointer">
+<div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-emerald-deep/40 !text-[32px]" data-icon="video_library">video_library</span>
+</div>
+<div>
+<p class="font-label-lg text-emerald-deep">Slider Banners</p>
+<p class="font-body-sm text-[11px] text-on-surface-variant">1920x1080px recommended</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar (JSON Component Mapping) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(6,78,59,0.05)] flex justify-around items-center px-2 pb-2 pt-2 rounded-t-xl">
+<a href="admin_dashboard.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 p-2 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a href="admin_donations.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 p-2 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+<span class="font-label-sm text-label-sm">Donations</span>
+</a>
+<a href="admin_kajian.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 p-2 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-sm text-label-sm">Kajian</span>
+</a>
+<a href="admin_finance.html" class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 p-2 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm">Finance</span>
+</a>
+<!-- ACTIVE STATE: Staff/Admin Mapping -->
+<a href="admin_settings.html" class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill">group</span>
+<span class="font-label-sm text-label-sm">Staff</span>
+</a>
+</nav>
+<!-- Floating Action Effect Script -->
+<script>
+        document.querySelectorAll('input, textarea').forEach(el => {
+            el.addEventListener('focus', () => {
+                el.parentElement.querySelector('label')?.classList.add('text-emerald-deep');
+            });
+            el.addEventListener('blur', () => {
+                el.parentElement.querySelector('label')?.classList.remove('text-emerald-deep');
+            });
+        });
+
+        // Toggle simulation for Open 24h
+        const toggleBtn = document.getElementById('toggle-btn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                this.classList.toggle('bg-emerald-deep');
+                this.classList.toggle('bg-outline-variant');
+                const dot = this.querySelector('span');
+                dot.classList.toggle('left-7');
+                dot.classList.toggle('left-1');
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Staff &amp; Jamaah Management - Masjid Haqqul Yaqin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#95d3ba",
+                    "on-tertiary-fixed": "#331200",
+                    "primary-fixed": "#b0f0d6",
+                    "gold-spiritual": "#D97706",
+                    "surface-tint": "#2b6954",
+                    "surface-bright": "#f8faf6",
+                    "on-surface": "#191c1b",
+                    "secondary-fixed-dim": "#bacac3",
+                    "on-tertiary-container": "#ff985a",
+                    "inverse-surface": "#2e312f",
+                    "tertiary": "#502000",
+                    "on-secondary-container": "#566660",
+                    "inverse-on-surface": "#eff1ee",
+                    "emerald-deep": "#064E3B",
+                    "on-primary-fixed-variant": "#0b513d",
+                    "outline": "#707974",
+                    "on-background": "#191c1b",
+                    "tertiary-fixed-dim": "#ffb68e",
+                    "primary": "#003527",
+                    "outline-variant": "#bfc9c3",
+                    "surface-variant": "#e1e3e0",
+                    "surface-container-high": "#e7e9e5",
+                    "on-error-container": "#93000a",
+                    "background": "#f8faf6",
+                    "tertiary-container": "#733100",
+                    "secondary-container": "#d3e3dc",
+                    "error-container": "#ffdad6",
+                    "amber-soft": "#FDE68A",
+                    "surface-container-highest": "#e1e3e0",
+                    "mint-fresh": "#D1FAE5",
+                    "surface": "#f8faf6",
+                    "surface-white": "#FFFFFF",
+                    "on-tertiary-fixed-variant": "#763300",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#ffdbca",
+                    "on-primary-fixed": "#002117",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#101e1a",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#d8dbd7",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#95d3ba",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#d5e6df",
+                    "text-primary": "#1F2937",
+                    "on-secondary-fixed-variant": "#3b4a44",
+                    "on-primary-container": "#80bea6",
+                    "primary-container": "#064e3b",
+                    "on-surface-variant": "#404944",
+                    "error": "#ba1a1a",
+                    "secondary": "#52625c",
+                    "surface-container": "#eceeeb",
+                    "surface-container-low": "#f2f4f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "1.25rem",
+                    "stack-lg": "2rem",
+                    "section-padding": "1.5rem",
+                    "stack-md": "1rem",
+                    "gutter-md": "1rem",
+                    "stack-sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Libre Caslon Text"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Libre Caslon Text"],
+                    "label-sm": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Libre Caslon Text"],
+                    "display-lg": ["Libre Caslon Text"],
+                    "prayer-time-display": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["36px", {"lineHeight": "44px", "fontWeight": "700"}],
+                    "prayer-time-display": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8faf6;
+            color: #191c1b;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .spiritual-pattern {
+            background-image: radial-gradient(#064e3b 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.03;
+        }
+        .custom-shadow {
+            box-shadow: 0px 4px 20px rgba(6, 78, 59, 0.05);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .active-tab-indicator {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-24">
+<!-- Background Texture -->
+<div class="fixed inset-0 spiritual-pattern pointer-events-none"></div>
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-low/80 backdrop-blur-md shadow-sm flex justify-between items-center px-container-margin py-stack-sm h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-deep flex items-center justify-center text-white overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Logo" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_cropped_mas.png">
+</div>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-emerald-deep font-bold">Masjid Haqqul Yaqin</h1>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-mint-fresh transition-colors active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</header>
+<main class="pt-20 px-container-margin">
+<!-- Stats Row -->
+<section class="grid grid-cols-3 gap-3 mb-stack-lg">
+<div class="bg-surface-white p-3 rounded-xl custom-shadow flex flex-col gap-1 border border-emerald-deep/5">
+<span class="text-label-sm text-on-surface-variant">Total Users</span>
+<span class="text-headline-md text-emerald-deep font-bold">1,284</span>
+</div>
+<div class="bg-surface-white p-3 rounded-xl custom-shadow flex flex-col gap-1 border border-emerald-deep/5">
+<span class="text-label-sm text-on-surface-variant">Active Staff</span>
+<span class="text-headline-md text-emerald-deep font-bold">24</span>
+</div>
+<div class="bg-surface-white p-3 rounded-xl custom-shadow flex flex-col gap-1 border border-emerald-deep/5">
+<span class="text-label-sm text-on-surface-variant">New (Mo)</span>
+<span class="text-headline-md text-emerald-deep font-bold">+52</span>
+</div>
+</section>
+<!-- Search and Filter -->
+<section class="mb-stack-md">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-white border-none rounded-xl custom-shadow focus:ring-2 focus:ring-emerald-deep transition-all placeholder:text-outline-variant" placeholder="Search users or staff..." type="text">
+</div>
+</section><section class="mb-stack-md flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+  <button class="px-4 py-1.5 rounded-full bg-emerald-deep text-white text-label-sm font-semibold whitespace-nowrap">All</button>
+  <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-sm font-semibold whitespace-nowrap hover:bg-mint-fresh transition-colors">Verified</button>
+  <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-sm font-semibold whitespace-nowrap hover:bg-mint-fresh transition-colors">Pending</button>
+  <button class="px-4 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant text-label-sm font-semibold whitespace-nowrap hover:bg-mint-fresh transition-colors">Banned</button>
+</section>
+<!-- Tab Navigation -->
+<section class="mb-stack-md">
+<div class="flex p-1 bg-surface-container-high rounded-xl relative">
+<button class="flex-1 py-2.5 z-10 text-label-lg transition-colors font-semibold text-emerald-deep" id="staffTab" onclick="switchTab('staff')">Staff</button>
+<button class="flex-1 py-2.5 z-10 text-label-lg transition-colors font-semibold text-on-surface-variant" id="jamaahTab" onclick="switchTab('jamaah')">Jamaah</button>
+<div class="absolute top-1 left-1 w-[calc(50%-4px)] h-[calc(100%-8px)] bg-surface-white rounded-lg shadow-sm active-tab-indicator" id="tabIndicator"></div>
+</div>
+</section>
+<!-- Action Button -->
+<section class="mb-stack-md flex justify-between items-center" id="staffAction">
+<h2 class="font-headline-md-mobile text-on-surface font-semibold">Manajemen Pengguna &amp; Staf</h2>
+<button class="bg-emerald-deep text-white px-4 py-2 rounded-lg text-label-lg flex items-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+                Tambah Staf Baru
+            </button>
+</section>
+<!-- Staff List (Default) -->
+<section class="flex flex-col gap-4" id="staffList">
+<!-- Staff Card 1 -->
+<div class="bg-surface-white p-4 rounded-xl custom-shadow flex items-center justify-between group cursor-pointer hover:border-mint-fresh border border-transparent transition-all" onclick="showDetails('Ustadz Samsul Bajuri', 'Imam Besar')">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png">
+</div>
+<div>
+<h3 class="font-body-md text-emerald-deep font-bold">Ustadz Samsul Bajuri</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-mint-fresh text-on-primary-fixed-variant text-[10px] uppercase tracking-wider font-bold rounded">Imam Besar</span>
+<span class="px-2 py-0.5 bg-emerald-deep text-white text-[10px] uppercase tracking-wider font-bold rounded ml-1">Super Admin</span><span class="flex items-center gap-0.5 px-2 py-0.5 bg-mint-fresh text-on-primary-fixed-variant text-[10px] uppercase tracking-wider font-bold rounded ml-1">
+  <span class="material-symbols-outlined text-[12px]">verified</span>
+  Verified
+</span></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low text-emerald-deep hover:bg-emerald-deep hover:text-white transition-all" href="tel:0812345678">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</a>
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-mint-fresh text-emerald-deep hover:bg-emerald-deep hover:text-white transition-all" href="https://wa.me/62812345678">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+</div>
+</div>
+<!-- Staff Card 2 -->
+<div class="bg-surface-white p-4 rounded-xl custom-shadow flex items-center justify-between group cursor-pointer border border-transparent transition-all" onclick="showDetails('Arifin Zaenal', 'Muadzin')">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_ngaji_1_320x240.webp.png">
+</div>
+<div>
+<h3 class="font-body-md text-on-surface font-bold">Arifin Zaenal</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface-variant text-[10px] uppercase tracking-wider font-bold rounded">Muadzin</span>
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container text-[10px] uppercase tracking-wider font-bold rounded ml-1">Staff</span><span class="flex items-center gap-0.5 px-2 py-0.5 bg-mint-fresh text-on-primary-fixed-variant text-[10px] uppercase tracking-wider font-bold rounded ml-1">
+  <span class="material-symbols-outlined text-[12px]">verified</span>
+  Verified
+</span></div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+</div>
+</div>
+<!-- Staff Card 3 -->
+<div class="bg-surface-white p-4 rounded-xl custom-shadow flex items-center justify-between group cursor-pointer border border-transparent transition-all">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Portrait" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png">
+</div>
+<div>
+<h3 class="font-body-md text-on-surface font-bold">Pak Sony Setiawan</h3>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="px-2 py-0.5 bg-surface-container-high text-on-surface-variant text-[10px] uppercase tracking-wider font-bold rounded">Marbot</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<a class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Jamaah List (Hidden by default) -->
+<section class="hidden flex flex-col gap-4" id="jamaahList"><div class="bg-surface-white p-4 rounded-xl custom-shadow flex items-center justify-between group cursor-pointer border border-transparent transition-all"><div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">RM</div><div><div class="flex items-center gap-2"><h3 class="font-body-md text-on-surface font-semibold">Rizwan Maulana</h3><span class="px-2 py-0.5 bg-mint-fresh text-on-primary-fixed-variant text-[10px] uppercase tracking-wider font-bold rounded">Active</span></div><div class="flex items-center gap-2 mt-1"><span class="text-label-sm text-on-surface-variant">Jamaah</span><span class="w-1 h-1 rounded-full bg-outline-variant"></span><span class="text-label-sm text-on-surface-variant">Joined: 12 May 2024</span></div></div></div><span class="material-symbols-outlined text-outline">more_vert</span></div><div class="bg-surface-white p-4 rounded-xl custom-shadow flex items-center justify-between group cursor-pointer border border-transparent transition-all"><div class="flex items-center gap-4"><div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">SN</div><div><div class="flex items-center gap-2"><h3 class="font-body-md text-on-surface font-semibold">Siti Nurhaliza</h3><span class="px-2 py-0.5 bg-mint-fresh text-on-primary-fixed-variant text-[10px] uppercase tracking-wider font-bold rounded">Verified</span></div><div class="flex items-center gap-2 mt-1"><span class="text-label-sm text-on-surface-variant">Jamaah</span><span class="w-1 h-1 rounded-full bg-outline-variant"></span><span class="text-label-sm text-on-surface-variant">Joined: 08 May 2024</span></div></div></div><span class="material-symbols-outlined text-outline">more_vert</span></div></section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-2 pt-2 bg-surface-container-lowest/90 backdrop-blur-lg shadow-[0_-4px_20px_rgba(6,78,59,0.05)] rounded-t-xl">
+<a href="admin_dashboard.html" class="flex flex-col items-center justify-center text-on-surface-variant p-2 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-sm">Dashboard</span>
+</a>
+<a href="admin_donations.html" class="flex flex-col items-center justify-center text-on-surface-variant p-2 cursor-pointer">
+<span class="material-symbols-outlined">volunteer_activism</span>
+<span class="text-label-sm">Donations</span>
+</a>
+<a href="admin_kajian.html" class="flex flex-col items-center justify-center text-on-surface-variant p-2 cursor-pointer">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-label-sm">Kajian</span>
+</a>
+<a href="admin_finance.html" class="flex flex-col items-center justify-center text-on-surface-variant p-2 cursor-pointer">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-sm">Finance</span>
+</a>
+<a href="admin_users.html" class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 cursor-pointer">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-label-sm font-semibold">Staff</span>
+</a>
+</nav>
+<!-- Detail Modal (Hidden) -->
+<div class="fixed inset-0 z-[60] hidden" id="detailModal">
+<div class="absolute inset-0 bg-primary/40 backdrop-blur-sm" onclick="closeDetails()"></div>
+<div class="absolute bottom-0 left-0 w-full bg-surface rounded-t-[32px] p-container-margin transform translate-y-full transition-transform duration-300 shadow-2xl border-t border-emerald-deep/10">
+<div class="w-12 h-1.5 bg-surface-variant rounded-full mx-auto mb-6"></div>
+<div class="flex items-center gap-6 mb-8">
+<div class="w-20 h-20 rounded-2xl bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait" id="detailImg" src="./gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png">
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-emerald-deep" id="detailName">Ustadz Samsul Bajuri</h2>
+<p class="text-body-md text-on-surface-variant" id="detailRole">Imam Besar</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="bg-surface-white p-4 rounded-2xl border border-emerald-deep/5">
+<span class="text-label-sm text-outline block mb-2">Permissions &amp; Access</span>
+<div class="flex flex-wrap gap-2">
+<span class="bg-mint-fresh text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm">Full Admin</span>
+<span class="bg-mint-fresh text-on-primary-fixed-variant px-3 py-1 rounded-full text-label-sm">Financial Viewer</span>
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full text-label-sm">Content Editor</span>
+</div>
+</div>
+<div class="bg-surface-white p-4 rounded-2xl border border-emerald-deep/5">
+<span class="text-label-sm text-outline block mb-2">Contact Info</span>
+<p class="font-body-md text-on-surface">samsul.bajuri@masjid.id</p>
+<p class="font-body-md text-on-surface">+62 812-3456-7890</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="py-3.5 bg-surface-container-high text-on-surface-variant font-bold rounded-2xl active:scale-95 transition-all">Edit Profile</button>
+<button class="py-3.5 bg-emerald-deep text-white font-bold rounded-2xl active:scale-95 transition-all">Update Access</button>
+</div>
+<div class="pb-10 pt-4">
+<button class="w-full text-error font-bold py-2">Revoke Staff Access</button>
+</div>
+</div>
+</div>
+<script>
+        function switchTab(tab) {
+            const indicator = document.getElementById('tabIndicator');
+            const staffList = document.getElementById('staffList');
+            const jamaahList = document.getElementById('jamaahList');
+            const staffAction = document.getElementById('staffAction');
+            const staffBtn = document.getElementById('staffTab');
+            const jamaahBtn = document.getElementById('jamaahTab');
+
+            if (tab === 'staff') {
+                indicator.style.left = '4px';
+                staffList.classList.remove('hidden');
+                jamaahList.classList.add('hidden');
+                staffAction.classList.remove('opacity-0');
+                staffBtn.classList.add('text-emerald-deep');
+                staffBtn.classList.remove('text-on-surface-variant');
+                jamaahBtn.classList.remove('text-emerald-deep');
+                jamaahBtn.classList.add('text-on-surface-variant');
+            } else {
+                indicator.style.left = 'calc(50%)';
+                staffList.classList.add('hidden');
+                jamaahList.classList.remove('hidden');
+                staffAction.classList.add('opacity-0');
+                jamaahBtn.classList.add('text-emerald-deep');
+                jamaahBtn.classList.remove('text-on-surface-variant');
+                staffBtn.classList.remove('text-emerald-deep');
+                staffBtn.classList.add('text-on-surface-variant');
+            }
+        }
+
+        function showDetails(name, role) {
+            const modal = document.getElementById('detailModal');
+            const modalContent = modal.querySelector('div:last-child');
+            
+            document.getElementById('detailName').innerText = name;
+            document.getElementById('detailRole').innerText = role;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('translate-y-full');
+            }, 10);
+        }
+
+        function closeDetails() {
+            const modal = document.getElementById('detailModal');
+            const modalContent = modal.querySelector('div:last-child');
+            
+            modalContent.classList.add('translate-y-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Search highlight micro-interaction
+        document.querySelector('input').addEventListener('focus', function() {
+            this.parentElement.querySelector('span').style.color = '#064e3b';
+        });
+        document.querySelector('input').addEventListener('blur', function() {
+            this.parentElement.querySelector('span').style.color = '#707974';
+        });
+    </script>
+
+
+</body></html>
