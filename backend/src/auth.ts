@@ -61,14 +61,18 @@ export const auth = betterAuth({
     enabled: true,
   },
   socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-    },
-    facebook: {
-      clientId: process.env.FACEBOOK_CLIENT_ID || "",
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
-    }
+    ...(process.env.GOOGLE_CLIENT_ID ? {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+      }
+    } : {}),
+    ...(process.env.FACEBOOK_CLIENT_ID ? {
+      facebook: {
+        clientId: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
+      }
+    } : {})
   },
   trustedOrigins: [process.env.BETTER_AUTH_URL || '', process.env.FRONTEND_URL || 'http://localhost:5173', 'http://127.0.0.1:5173'].filter(Boolean)
 });
