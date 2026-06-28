@@ -114,7 +114,7 @@ export default function Login() {
     setIsLoading(true);
     await signIn.social({
       provider: 'google',
-      callbackURL: 'http://localhost:5173/admin'
+      callbackURL: `${window.location.origin}/admin`
     });
   };
 
@@ -122,7 +122,7 @@ export default function Login() {
     setIsLoading(true);
     await signIn.social({
       provider: 'facebook',
-      callbackURL: 'http://localhost:5173/admin'
+      callbackURL: `${window.location.origin}/admin`
     });
   };
 
