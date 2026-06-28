@@ -39,7 +39,7 @@ export default function AdminLayout() {
             <p className="text-label-sm text-outline">Super Admin</p>
           </div>
         </div>
-        <nav className="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+        <nav className="flex-1 space-y-1 overflow-y-auto hide-scrollbar">
           <SidebarItem to="/admin" icon="dashboard" label="Dashboard" isActive={location.pathname === '/admin'} />
           <SidebarItem to="/admin/donations" icon="volunteer_activism" label="Donations" isActive={location.pathname === '/admin/donations'} />
           <SidebarItem to="/admin/kajian" icon="menu_book" label="Kajian" isActive={location.pathname === '/admin/kajian'} />
