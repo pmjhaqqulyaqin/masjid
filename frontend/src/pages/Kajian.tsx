@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useKajian } from '../hooks/useKajian';
+import { useSettings } from '../hooks/useSettings';
 
 export default function Kajian() {
   const { kajianQuery } = useKajian();
+  const { settings } = useSettings();
   const [activeDate, setActiveDate] = useState('SAB_27');
   const [activeCategory, setActiveCategory] = useState('Semua');
 
@@ -20,11 +22,13 @@ export default function Kajian() {
   return (
     <>
       {/* Marquee Announcement */}
-      <div className="fixed top-16 left-0 w-full bg-emerald-deep text-surface-white py-2 z-40 marquee-container overflow-hidden">
-        <div className="marquee-content font-label-lg text-label-lg whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite]">
-          Jadwal Kajian Pekan Ini • Tuntunan Lengkap Berpuasa Oleh Ustad Bashir • Pelaksaaan Pengajian Ibu-Ibu Jumat Pagi Dipindah Ke Aula Utama • Mari Ber-Infaq Untuk Kemakmuran Umat
+      {settings?.running_text_kajian && (
+        <div className="fixed top-16 left-0 w-full bg-emerald-deep text-surface-white py-2 z-40 marquee-container overflow-hidden">
+          <div className="marquee-content font-label-lg text-label-lg whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite]">
+            {settings.running_text_kajian}
+          </div>
         </div>
-      </div>
+      )}
 
       <main className="pt-28 pb-24 px-container-margin max-w-lg mx-auto">
         {/* Horizontal Calendar */}

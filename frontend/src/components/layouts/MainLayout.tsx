@@ -1,9 +1,11 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSession } from '../../hooks/useAuth';
 
 export default function MainLayout() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const { data: session } = useSession();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,9 +30,19 @@ export default function MainLayout() {
             <span className="font-label-sm text-label-sm text-on-surface-variant">Jl. Lintas Lampung Barat</span>
           </div>
         </div>
-        <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-mint-fresh transition-colors">
-          <span className="material-symbols-outlined text-primary">notifications</span>
-        </button>
+        <div className="flex items-center gap-1">
+          {session ? (
+            <Link to="/admin" className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-mint-fresh transition-colors" title="Dashboard Admin">
+              <div className="w-8 h-8 rounded-full bg-emerald-deep text-white flex items-center justify-center font-bold">
+                {session.user.name?.[0]?.toUpperCase() || 'A'}
+              </div>
+            </Link>
+          ) : (
+            <Link to="/login" className="px-4 py-1.5 bg-emerald-deep text-white text-label-sm font-label-sm rounded-full hover:bg-emerald-deep/90 transition-colors shadow-sm" title="Login">
+              Login
+            </Link>
+          )}
+        </div>
       </header>
 
       {/* Main Content */}

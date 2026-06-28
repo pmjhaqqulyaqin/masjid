@@ -1,12 +1,17 @@
+import { useSettings } from '../hooks/useSettings';
+
 export default function Laporan() {
+  const { settings } = useSettings();
   return (
     <>
       {/* Marquee Announcement */}
-      <div className="fixed top-16 left-0 w-full bg-emerald-deep text-white py-2 overflow-hidden z-40">
-        <div className="animate-[marquee_20s_linear_infinite] inline-block font-label-lg text-label-lg px-4 whitespace-nowrap">
-          Teks berjalan dikelola melalui Tampilan &gt; Sesuaikan &gt; WP Masjid: Pengaturan &gt; Pengaturan Layout. Mari salurkan infaq terbaik Anda untuk pembangunan Masjid At-Taqwa.
+      {settings?.running_text_laporan && (
+        <div className="fixed top-16 left-0 w-full bg-emerald-deep text-white py-2 overflow-hidden z-40">
+          <div className="animate-[marquee_20s_linear_infinite] inline-block font-label-lg text-label-lg px-4 whitespace-nowrap">
+            {settings.running_text_laporan}
+          </div>
         </div>
-      </div>
+      )}
 
       <main className="px-container-margin pt-28 pb-24 max-w-lg mx-auto">
         {/* Hero Balance Section (Asymmetric) */}

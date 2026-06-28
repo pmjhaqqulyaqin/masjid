@@ -6,8 +6,27 @@ export default function AdminSettings() {
   const { facilities, createFacility, updateFacility, deleteFacility } = useFacilities();
   const { settings, saveSettings, uploadAsset } = useSettings();
 
+  const getImageUrl = (url?: string) => {
+    if (!url) return '';
+    if (url.startsWith('http') || url.startsWith('/gambar')) return url;
+    const baseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:3000';
+    return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+  };
+
+  const renderMap = (embedStr?: string) => {
+    if (!embedStr) return null;
+    if (embedStr.includes('<iframe')) {
+      return <div className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full" dangerouslySetInnerHTML={{ __html: embedStr }} />;
+    }
+    const match = embedStr.match(/(https:\/\/www\.google\.com\/maps\/embed\?[^\s"]+)/);
+    if (match) {
+      return <iframe src={match[1]} className="w-full h-full border-0" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>;
+    }
+    return null;
+  };
+
   const [isOpen24Hours, setIsOpen24Hours] = useState(true);
-  const [profileData, setProfileData] = useState({ name: 'Masjid Haqqul Yaqin', year: '1998', address: 'Jl. KH. Agus Salim No. 12, Jakarta Pusat, DKI Jakarta', landArea: '1200', buildArea: '850' });
+  const [profileData, setProfileData] = useState({ name: 'Masjid Haqqul Yaqin', year: '1998', address: 'Jl. KH. Agus Salim No. 12, Jakarta Pusat, DKI Jakarta', landArea: '1200', buildArea: '850', runningText: '', runningTextKajian: '', runningTextInfaq: '', runningTextLaporan: '', runningTextLayanan: '', statusProperti: 'WAKAF' });
   const [uiModal, setUiModal] = useState<{type: string, title: string, message: string} | null>(null);
 
   const [isFacilityModalOpen, setIsFacilityModalOpen] = useState(false);
@@ -29,6 +48,13 @@ export default function AdminSettings() {
       if (settings.address) setProfileData(prev => ({...prev, address: settings.address}));
       if (settings.land_area) setProfileData(prev => ({...prev, landArea: settings.land_area}));
       if (settings.build_area) setProfileData(prev => ({...prev, buildArea: settings.build_area}));
+      if (settings.build_area) setProfileData(prev => ({...prev, buildArea: settings.build_area}));
+      if (settings.running_text) setProfileData(prev => ({...prev, runningText: settings.running_text}));
+      if (settings.running_text_kajian) setProfileData(prev => ({...prev, runningTextKajian: settings.running_text_kajian}));
+      if (settings.running_text_infaq) setProfileData(prev => ({...prev, runningTextInfaq: settings.running_text_infaq}));
+      if (settings.running_text_laporan) setProfileData(prev => ({...prev, runningTextLaporan: settings.running_text_laporan}));
+      if (settings.running_text_layanan) setProfileData(prev => ({...prev, runningTextLayanan: settings.running_text_layanan}));
+      if (settings.status_properti) setProfileData(prev => ({...prev, statusProperti: settings.status_properti}));
       if (settings.map_coords) setMapCoords(settings.map_coords);
       if (settings.map_embed) setMapEmbed(settings.map_embed);
     }
@@ -68,7 +94,13 @@ export default function AdminSettings() {
       year_established: profileData.year,
       address: profileData.address,
       land_area: profileData.landArea,
-      build_area: profileData.buildArea
+      build_area: profileData.buildArea,
+      running_text: profileData.runningText,
+      running_text_kajian: profileData.runningTextKajian,
+      running_text_infaq: profileData.runningTextInfaq,
+      running_text_laporan: profileData.runningTextLaporan,
+      running_text_layanan: profileData.runningTextLayanan,
+      status_properti: profileData.statusProperti
     }, {
       onSuccess: () => {
         setUiModal({ type: 'success', title: 'Profil Disimpan', message: 'Perubahan profil masjid berhasil disimpan ke dalam database sistem.' });
@@ -100,16 +132,18 @@ export default function AdminSettings() {
     setUiModal({ type: 'upload', title: `Upload ${type}`, message: '' });
   };
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, overrideType?: string) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+      const typeToUse = overrideType || uploadType;
       try {
         const res = await uploadAsset(file);
         // Save the setting URL based on uploadType
-        const key = uploadType === 'Masjid Logo' ? 'logo_url' : 'banner_url';
+        const key = typeToUse === 'Masjid Logo' ? 'logo_url' : 'banner_url';
+        
         saveSettings({ [key]: res.url });
         
-        setUiModal({ type: 'success', title: 'Berhasil Diunggah', message: `File berhasil diunggah dan disimpan ke ${key}.` });
+        setUiModal({ type: 'success', title: 'Berhasil Diunggah', message: `File berhasil diunggah.` });
       } catch (err) {
         setUiModal({ type: 'success', title: 'Gagal', message: 'Terjadi kesalahan saat upload.' }); // Reusing success modal for simple mock alert or you could add error type
       }
@@ -126,7 +160,7 @@ export default function AdminSettings() {
     <main className="pt-20 pb-24 md:pb-12 md:pt-10 px-container-margin space-y-stack-lg max-w-screen-md mx-auto w-full">
       {/* Header Visual Section */}
       <section className="relative h-48 rounded-xl overflow-hidden shadow-sm group">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: settings?.banner_url ? `url(${settings.banner_url})` : "url('/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: settings?.banner_url ? `url(${getImageUrl(settings.banner_url)})` : "url('/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png')" }}></div>
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/80 to-transparent"></div>
         <div className="absolute bottom-4 left-4 text-white">
           <h2 className="font-headline-md">Admin Dashboard</h2>
@@ -137,7 +171,7 @@ export default function AdminSettings() {
             <span className="material-symbols-outlined !text-[16px]">upload</span>
             Change Banner
           </span>
-          <input className="hidden" type="file" />
+          <input className="hidden" type="file" onChange={(e) => handleFileChange(e, 'Banner')} />
         </label>
       </section>
 
@@ -172,6 +206,26 @@ export default function AdminSettings() {
             <div className="space-y-1">
               <label className="font-label-sm text-on-surface-variant block">Luas Bangunan (m²)</label>
               <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="number" value={profileData.buildArea} onChange={e => setProfileData({...profileData, buildArea: e.target.value})} />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-sm text-on-surface-variant block">Status Properti</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="Misal: WAKAF" value={profileData.statusProperti} onChange={e => setProfileData({...profileData, statusProperti: e.target.value})} />
+            </div>
+            <div className="space-y-1 md:col-span-2">
+              <label className="font-label-sm text-on-surface-variant block">Teks Berjalan (Beranda)</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all mb-2" type="text" placeholder="Teks untuk Beranda..." value={profileData.runningText} onChange={e => setProfileData({...profileData, runningText: e.target.value})} />
+              
+              <label className="font-label-sm text-on-surface-variant block">Teks Berjalan (Kajian)</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all mb-2" type="text" placeholder="Teks untuk Kajian..." value={profileData.runningTextKajian} onChange={e => setProfileData({...profileData, runningTextKajian: e.target.value})} />
+
+              <label className="font-label-sm text-on-surface-variant block">Teks Berjalan (Infaq)</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all mb-2" type="text" placeholder="Teks untuk Infaq..." value={profileData.runningTextInfaq} onChange={e => setProfileData({...profileData, runningTextInfaq: e.target.value})} />
+
+              <label className="font-label-sm text-on-surface-variant block">Teks Berjalan (Laporan)</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all mb-2" type="text" placeholder="Teks untuk Laporan..." value={profileData.runningTextLaporan} onChange={e => setProfileData({...profileData, runningTextLaporan: e.target.value})} />
+
+              <label className="font-label-sm text-on-surface-variant block">Teks Berjalan (Layanan)</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="Teks untuk Layanan..." value={profileData.runningTextLayanan} onChange={e => setProfileData({...profileData, runningTextLayanan: e.target.value})} />
             </div>
           </div>
         </section>
@@ -280,8 +334,12 @@ export default function AdminSettings() {
               <span className="material-symbols-outlined">location_on</span>
               Map Location
             </h3>
-            <div className="relative flex-grow rounded-lg overflow-hidden border border-mint-fresh/50 min-h-[150px]">
-              <img className="w-full h-full object-cover" data-alt="Map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV0tAv-NjMOf5iselbOrEOGaJJU6m2oZ_bNO2HfvlNznAMwXfS9nUty3kifG9iw5AgxU8WUR_073MWBFAtj1HsWeiM8qSmotq-JAvFBf9RUFrMFo2Bgvoneg2Wi6c8ergyILmNsrIAHS8G_QjvxPN4p9oM2oVTgYA3utZiuKSKIcv17JXirQ6ranBXCeCefm49LVL6tcDGrY2kxISII3WfKfrHmuhWyUOO8aUqY2sn9FgF3XCTEbzuEeOEzS0rYd0ViGHEMNQpGA" />
+            <div className="relative flex-grow rounded-lg overflow-hidden border border-mint-fresh/50 min-h-[300px]">
+              {settings?.map_embed && renderMap(settings.map_embed) ? (
+                renderMap(settings.map_embed)
+              ) : (
+                <img className="w-full h-full object-cover" data-alt="Map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV0tAv-NjMOf5iselbOrEOGaJJU6m2oZ_bNO2HfvlNznAMwXfS9nUty3kifG9iw5AgxU8WUR_073MWBFAtj1HsWeiM8qSmotq-JAvFBf9RUFrMFo2Bgvoneg2Wi6c8ergyILmNsrIAHS8G_QjvxPN4p9oM2oVTgYA3utZiuKSKIcv17JXirQ6ranBXCeCefm49LVL6tcDGrY2kxISII3WfKfrHmuhWyUOO8aUqY2sn9FgF3XCTEbzuEeOEzS0rYd0ViGHEMNQpGA" />
+              )}
               <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-label-sm border border-outline-variant shadow-sm">
                 Coordinates: {mapCoords}
               </div>
@@ -391,11 +449,22 @@ export default function AdminSettings() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-label-sm text-on-surface-variant mb-1">Koordinat Latitude & Longitude</label>
+                    <p className="text-[11px] text-gray-500 mb-2 leading-relaxed">Klik kanan tepat di pin merah (atau titik lokasi masjid). Akan muncul menu kecil. Angka paling atas (contoh: -8.5923, 116.1132) adalah koordinatnya. Klik angka tersebut (otomatis akan tersalin).</p>
                     <input type="text" value={mapCoords} onChange={e => setMapCoords(e.target.value)} className="w-full border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-emerald-deep outline-none" placeholder="-6.1751, 106.8272" />
                   </div>
                   <div>
                     <label className="block text-label-sm text-on-surface-variant mb-1">Google Maps Embed URL (Iframe)</label>
+                    <p className="text-[11px] text-gray-500 mb-2 leading-relaxed">
+                      💡 <b>Tips agar nama lokasi muncul:</b> Cari nama masjid Anda di kotak pencarian Google Maps, lalu klik nama tempat tersebut (jangan sekadar klik di peta kosong). Setelah profil tempat muncul, klik <b>Share</b> (Bagikan) &gt; <b>Embed a map</b> (Sematkan peta) &gt; <b>COPY HTML</b>. Paste kodenya di bawah.
+                    </p>
                     <textarea value={mapEmbed} onChange={e => setMapEmbed(e.target.value)} className="w-full border border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-emerald-deep outline-none h-24" placeholder="<iframe src='...' ></iframe>"></textarea>
+                    
+                    {/* Live Preview */}
+                    {mapEmbed && renderMap(mapEmbed) && (
+                      <div className="mt-4 rounded-xl overflow-hidden h-32 w-full bg-surface-variant border border-mint-fresh/30 shadow-sm">
+                        {renderMap(mapEmbed)}
+                      </div>
+                    )}
                   </div>
                   <button onClick={handleSaveMaps} className="w-full py-3 bg-emerald-deep text-white rounded-xl font-bold mt-2">Simpan Koordinat</button>
                 </div>

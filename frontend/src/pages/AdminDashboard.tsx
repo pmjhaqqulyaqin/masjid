@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <main className="pt-20 md:pt-10 px-container-margin max-w-7xl mx-auto w-full space-y-stack-lg relative">
+    <main className="pt-20 md:pt-10 pb-24 md:pb-12 px-container-margin max-w-7xl mx-auto w-full space-y-stack-lg relative">
       {/* Welcome Header */}
       <section className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>

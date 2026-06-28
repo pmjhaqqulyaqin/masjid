@@ -18,9 +18,36 @@ export const auth = betterAuth({
   plugins: [
     phoneNumber({
       sendOTP: async ({ phoneNumber, code }) => {
-        // Implementasi pengiriman OTP via WhatsApp Gateway
-        // Contoh: panggil API ke provider WA (misal: Fonnte, WABlas)
-        console.log(`\n=================================\nKODE OTP WHATSAPP UNTUK ${phoneNumber} : ${code}\n=================================\n`);
+        // Implementasi pengiriman OTP via Fonnte
+        const token = process.env.FONNTE_TOKEN;
+        if (!token) {
+          console.warn(`[WARNING] FONNTE_TOKEN is not set in .env. OTP ${code} for ${phoneNumber} was not sent.`);
+          console.log(`\n=================================\nKODE OTP WHATSAPP UNTUK ${phoneNumber} : ${code}\n=================================\n`);
+          return;
+        }
+
+        try {
+          const response = await fetch('https://api.fonnte.com/send', {
+            method: 'POST',
+            headers: {
+              'Authorization': token,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              target: phoneNumber,
+              message: `*SISTEM MASJID HAQQUL YAQIN*\n\nKode OTP Anda adalah: *${code}*\n\nMohon jangan berikan kode ini kepada siapapun.`
+            })
+          });
+
+          const data = await response.json();
+          if (!data.status) {
+            console.error('[FONNTE ERROR]', data);
+          } else {
+            console.log(`[FONNTE SUCCESS] OTP sent to ${phoneNumber}`);
+          }
+        } catch (error) {
+          console.error('[FONNTE EXCEPTION]', error);
+        }
       },
       signUpOnVerification: {
         getTempEmail: (phoneNumber) => `${phoneNumber}@haqqulyaqin.local`,
@@ -41,5 +68,5 @@ export const auth = betterAuth({
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
     }
   },
-  trustedOrigins: [process.env.VITE_API_URL || 'http://localhost:5173']
+  trustedOrigins: [process.env.FRONTEND_URL || 'http://localhost:5173', 'http://127.0.0.1:5173']
 });

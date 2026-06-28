@@ -18,7 +18,7 @@ import path from 'path';
 
 app.use(express.json());
 // Serve static files from public folder
-app.use(express.static(path.join(__dirname, '../../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Auth routes
 app.all('/api/auth/*', toNodeHandler(auth));
@@ -30,6 +30,7 @@ import servicesRoutes from './routes/services.routes';
 import ibadahRoutes from './routes/ibadah.routes';
 import settingsRoutes from './routes/settings.routes';
 import facilitiesRoutes from './routes/facilities.routes';
+import { articlesRouter } from './routes/articles.routes';
 
 // API Routes
 app.use('/api/kajian', kajianRoutes);
@@ -39,6 +40,7 @@ app.use('/api/services', servicesRoutes);
 app.use('/api/ibadah', ibadahRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/facilities', facilitiesRoutes);
+app.use('/api/articles', articlesRouter);
 
 // Health check
 app.get('/api/health', (req, res) => {

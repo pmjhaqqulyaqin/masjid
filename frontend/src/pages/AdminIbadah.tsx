@@ -62,38 +62,49 @@ export default function AdminIbadah() {
 
       {/* Summary & Next Friday Bento Grid */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
-        {/* Next Friday Card */}
-        <div className="md:col-span-2 bg-surface-white rounded-xl p-6 shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-4 opacity-10">
-            <span className="material-symbols-outlined text-[120px]">calendar_month</span>
-          </div>
-          <h3 className="font-headline-md text-emerald-deep mb-4 flex items-center gap-2">
-            <span className="material-symbols-outlined text-gold-spiritual fill-icon">star</span>
-            Petugas Jumat Pekan Ini
-          </h3>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="space-y-1">
-              <p className="text-label-sm text-on-surface-variant">Khatib</p>
-              <p className="font-label-lg text-text-primary">KH. Ahmad Dahlan</p>
+        {(() => {
+          const jumatOfficers = ibadahQuery.data?.find((i: any) => i.prayerType === 'jumat');
+          return (
+            <div className="md:col-span-2 bg-surface-white rounded-xl p-6 shadow-[0px_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-10">
+                <span className="material-symbols-outlined text-[120px]">calendar_month</span>
+              </div>
+              <h3 className="font-headline-md text-emerald-deep mb-4 flex items-center gap-2">
+                <span className="material-symbols-outlined text-gold-spiritual fill-icon">star</span>
+                Petugas Jumat Pekan Ini
+              </h3>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="space-y-1">
+                  <p className="text-label-sm text-on-surface-variant">Khatib</p>
+                  <p className="font-label-lg text-text-primary">{jumatOfficers?.khatibName || '-'}</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-label-sm text-on-surface-variant">Imam</p>
+                  <p className="font-label-lg text-text-primary">{jumatOfficers?.imamName || '-'}</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-label-sm text-on-surface-variant">Muadzin</p>
+                  <p className="font-label-lg text-text-primary">{jumatOfficers?.muadzinName || '-'}</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-label-sm text-on-surface-variant">Bilal</p>
+                  <p className="font-label-lg text-text-primary">{jumatOfficers?.bilalName || '-'}</p>
+                </div>
+              </div>
+              <button onClick={() => {
+                if (jumatOfficers) handleEdit(jumatOfficers);
+                else {
+                  setEditId(null);
+                  setFormData({ prayerType: 'jumat', time: '', imamName: '', muadzinName: '', khatibName: '', bilalName: '' });
+                  setIsModalOpen(true);
+                }
+              }} className="mt-6 flex items-center gap-2 text-emerald-deep font-label-lg hover:underline cursor-pointer">
+                {jumatOfficers ? 'Edit Jadwal Jumat' : 'Tambah Jadwal Jumat'}
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
             </div>
-            <div className="space-y-1">
-              <p className="text-label-sm text-on-surface-variant">Imam</p>
-              <p className="font-label-lg text-text-primary">Ust. Syamsul Arifin</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-label-sm text-on-surface-variant">Muadzin</p>
-              <p className="font-label-lg text-text-primary">Bp. M. Ridwan</p>
-            </div>
-            <div className="space-y-1">
-              <p className="text-label-sm text-on-surface-variant">Bilal</p>
-              <p className="font-label-lg text-text-primary">Sdr. Husein</p>
-            </div>
-          </div>
-          <button className="mt-6 flex items-center gap-2 text-emerald-deep font-label-lg hover:underline">
-            Detail Jadwal Jumat
-            <span className="material-symbols-outlined text-sm">arrow_forward</span>
-          </button>
-        </div>
+          );
+        })()}
 
         {/* Quick Stats Card */}
         <div className="bg-primary-container text-white rounded-xl p-6 shadow-sm flex flex-col justify-between">

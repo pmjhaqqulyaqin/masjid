@@ -1,0 +1,38 @@
+server {
+    listen 443 ssl;
+    server_name masjid.mandualotim.sch.id;
+    client_max_body_size 100M;
+
+    ssl_certificate /www/server/panel/vhost/cert/masjid.mandualotim.sch.id/fullchain.pem;
+    ssl_certificate_key /www/server/panel/vhost/cert/masjid.mandualotim.sch.id/privkey.pem;
+
+    # Serve Static Files (Frontend React/Vite)
+    root /www/wwwroot/masjid.mandualotim.sch.id/frontend/dist;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Reverse Proxy API ke Backend Node.js
+    # Port 3010 digunakan sebagai ganti 3000 untuk menghindari bentrok
+    location /api/ {
+        proxy_pass http://127.0.0.1:3010;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    access_log /www/wwwlogs/masjid.mandualotim.sch.id.log;
+    error_log /www/wwwlogs/masjid.mandualotim.sch.id.error.log;
+}
+
+server {
+    listen 80;
+    server_name masjid.mandualotim.sch.id;
+    return 301 https://$host$request_uri;
+}

@@ -1,7 +1,14 @@
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { signOut } from '../../hooks/useAuth';
 
 export default function AdminLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/login');
+  };
 
   return (
     <div className="bg-background text-on-surface min-h-screen pb-24 md:pb-0 md:pl-80">
@@ -12,9 +19,9 @@ export default function AdminLayout() {
           <span className="material-symbols-outlined text-emerald-deep dark:text-primary-fixed">menu</span>
           <h1 className="font-headline-md text-[24px] font-semibold text-emerald-deep dark:text-primary-fixed">Masjid Haqqul Yaqin</h1>
         </div>
-        <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-mint-fresh">
-          <img className="w-full h-full object-cover" data-alt="Profile" src="/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2026_02_takmir.webp.png" />
-        </div>
+        <button onClick={handleLogout} className="w-8 h-8 rounded-full overflow-hidden border-2 border-error hover:opacity-70 transition-opacity flex items-center justify-center bg-error-container" title="Logout">
+          <span className="material-symbols-outlined text-error text-sm">logout</span>
+        </button>
       </header>
 
       {/* Side Navigation Drawer (Desktop) */}
@@ -37,13 +44,14 @@ export default function AdminLayout() {
           <SidebarItem to="/admin/donations" icon="volunteer_activism" label="Donations" isActive={location.pathname === '/admin/donations'} />
           <SidebarItem to="/admin/kajian" icon="menu_book" label="Kajian" isActive={location.pathname === '/admin/kajian'} />
           <SidebarItem to="/admin/ibadah" icon="event_note" label="Ibadah" isActive={location.pathname === '/admin/ibadah'} />
+          <SidebarItem to="/admin/articles" icon="article" label="Artikel" isActive={location.pathname === '/admin/articles'} />
           <SidebarItem to="/admin/services" icon="assignment" label="Services" isActive={location.pathname === '/admin/services'} />
           <SidebarItem to="/admin/finance" icon="payments" label="Finance" isActive={location.pathname === '/admin/finance'} />
           <SidebarItem to="/admin/users" icon="group" label="Users" isActive={location.pathname === '/admin/users'} />
           <SidebarItem to="/admin/settings" icon="settings" label="Settings" isActive={location.pathname === '/admin/settings'} />
         </nav>
         <div className="px-8 mt-auto">
-          <button className="flex items-center gap-3 text-error font-label-lg hover:opacity-70 transition-opacity">
+          <button onClick={handleLogout} className="flex items-center gap-3 text-error font-label-lg hover:opacity-70 transition-opacity">
             <span className="material-symbols-outlined">logout</span>
             Logout
           </button>

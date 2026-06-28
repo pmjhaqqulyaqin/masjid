@@ -1,12 +1,30 @@
+import { useSettings } from '../hooks/useSettings';
+
 export default function Layanan() {
+  const { settings } = useSettings();
+
+  const renderMap = (embedStr?: string) => {
+    if (!embedStr) return null;
+    if (embedStr.includes('<iframe')) {
+      return <div className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full" dangerouslySetInnerHTML={{ __html: embedStr }} />;
+    }
+    const match = embedStr.match(/(https:\/\/www\.google\.com\/maps\/embed\?[^\s"]+)/);
+    if (match) {
+      return <iframe src={match[1]} className="w-full h-full border-0" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>;
+    }
+    return null;
+  };
+
   return (
     <>
       {/* Marquee Announcement */}
-      <div className="mt-16 w-full bg-emerald-deep py-2 overflow-hidden whitespace-nowrap fixed top-16 z-40">
-        <p className="animate-[marquee_15s_linear_infinite] inline-block font-label-lg text-label-lg text-white">
-          Pendaftaran Mualaf dan Layanan Pengurusan Jenazah tersedia 24 jam. Silakan hubungi kontak darurat untuk kebutuhan mendesak. Marhaban ya Ramadhan!
-        </p>
-      </div>
+      {settings?.running_text_layanan && (
+        <div className="fixed top-16 left-0 w-full bg-emerald-deep py-2 overflow-hidden whitespace-nowrap z-40">
+          <p className="animate-[marquee_20s_linear_infinite] inline-block font-label-lg text-label-lg text-white">
+            {settings.running_text_layanan}
+          </p>
+        </div>
+      )}
       
       <main className="px-container-margin pt-28 pb-24 space-y-stack-lg max-w-lg mx-auto">
         {/* Service Grid Section */}
@@ -68,13 +86,19 @@ export default function Layanan() {
             <h2 className="font-headline-md text-headline-md text-primary">Direktori &amp; Fasilitas</h2>
           </div>
           <div className="bg-surface-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/20">
-            {/* Location Map Placeholder */}
-            <div className="relative h-40 w-full bg-surface-variant overflow-hidden">
-              <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png')" }}></div>
-              <div className="absolute bottom-3 right-3 bg-white px-3 py-1 rounded-full shadow-md flex items-center gap-1">
-                <span className="material-symbols-outlined text-emerald-deep scale-75">open_in_new</span>
-                <span className="font-label-sm text-label-sm text-primary">Buka Gmaps</span>
-              </div>
+            {/* Location Map */}
+            <div className="relative h-64 w-full bg-surface-variant overflow-hidden">
+              {settings?.map_embed && renderMap(settings.map_embed) ? (
+                renderMap(settings.map_embed)
+              ) : (
+                <>
+                  <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png')" }}></div>
+                  <div className="absolute bottom-3 right-3 bg-white px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+                    <span className="material-symbols-outlined text-emerald-deep scale-75">open_in_new</span>
+                    <span className="font-label-sm text-label-sm text-primary">Buka Gmaps</span>
+                  </div>
+                </>
+              )}
             </div>
             <div className="p-5 grid grid-cols-2 gap-y-4">
               <div className="flex items-center gap-3">

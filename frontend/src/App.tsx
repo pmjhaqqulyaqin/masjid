@@ -18,6 +18,7 @@ import AdminFinance from './pages/AdminFinance'
 import AdminIbadah from './pages/AdminIbadah'
 import AdminServices from './pages/AdminServices'
 import AdminSettings from './pages/AdminSettings'
+import AdminArticles from './pages/AdminArticles'
 import AdminUsers from './pages/AdminUsers'
 import Login from './pages/Login'
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="finance" element={<AdminFinance />} />
           <Route path="ibadah" element={<AdminIbadah />} />
           <Route path="services" element={<AdminServices />} />
+          <Route path="articles" element={<AdminArticles />} />
           <Route path="settings" element={<AdminSettings />} />
           <Route path="users" element={<AdminUsers />} />
         </Route>

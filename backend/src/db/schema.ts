@@ -58,6 +58,7 @@ export const donations = pgTable('donations', {
   amount: decimal('amount').notNull(),
   paymentMethod: text('payment_method').notNull(), // 'qris', 'transfer_bank'
   status: text('status').notNull().default('pending'), // 'pending', 'success', 'failed'
+  proofUrl: text('proof_url'), // Untuk bukti transfer manual
   createdAt: timestamp('created_at').defaultNow()
 });
 
@@ -117,4 +118,16 @@ export const facilities = pgTable('facilities', {
   name: text('name').notNull(),
   icon: text('icon').notNull(), // Material symbol name
   description: text('description')
+});
+
+// 9. Articles (Tausiyah & Pengumuman)
+export const articles = pgTable('articles', {
+  id: serial('id').primaryKey(),
+  type: text('type').notNull(), // 'tausiyah', 'pengumuman'
+  title: text('title').notNull(),
+  content: text('content').notNull(),
+  author: text('author'),
+  imageUrl: text('image_url'),
+  publishedAt: timestamp('published_at').defaultNow(),
+  createdAt: timestamp('created_at').defaultNow()
 });

@@ -1,10 +1,87 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { useDonations } from '../hooks/useDonations';
+import { useSettings } from '../hooks/useSettings';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 export default function AdminDonations() {
   const { donationsQuery, summaryQuery, createDonationMutation } = useDonations();
+  const { settings, saveSettings, uploadAsset } = useSettings();
+  const queryClient = useQueryClient();
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ donorName: '', amount: '', donationType: 'infaq', paymentMethod: 'cash' });
+  const [paymentConfig, setPaymentConfig] = useState({ qrisUrl: '', bankBsi: '', bankBri: '', gopay: '', ovo: '' });
+  
+  const getImageUrl = (url?: string) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    if (url.includes('fakepath') || url.startsWith('C:\\')) return '';
+    const baseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:3000';
+    return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+  };
+
+  useEffect(() => {
+    if (settings) {
+      setPaymentConfig({
+        qrisUrl: settings.qris_url || '',
+        bankBsi: settings.bank_bsi || '',
+        bankBri: settings.bank_bri || '',
+        gopay: settings.gopay || '',
+        ovo: settings.ovo || ''
+      });
+    }
+  }, [settings]);
+
+  const handleSavePaymentConfig = () => {
+    saveSettings({
+      qris_url: paymentConfig.qrisUrl,
+      bank_bsi: paymentConfig.bankBsi,
+      bank_bri: paymentConfig.bankBri,
+      gopay: paymentConfig.gopay,
+      ovo: paymentConfig.ovo
+    }, {
+      onSuccess: () => alert("Pengaturan pembayaran berhasil disimpan")
+    });
+  };
+
+  const handleAssetUpload = async (type: string) => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/png, image/jpeg, image/svg+xml';
+    fileInput.onchange = async (e: any) => {
+      const file = e.target.files[0];
+      if (file) {
+        try {
+          const res = await uploadAsset(file);
+          if (type === 'QRIS Image') {
+            setPaymentConfig(prev => ({...prev, qrisUrl: res.url}));
+            saveSettings({ qris_url: res.url });
+            alert("QRIS Image berhasil diupload");
+          }
+        } catch (err) {
+          alert("Gagal mengupload gambar");
+        }
+      }
+    };
+    fileInput.click();
+  };
+
+  const updateStatusMutation = useMutation({
+    mutationFn: async ({ id, status }: { id: number, status: string }) => {
+      const res = await fetch(`${API_URL}/donations/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      if (!res.ok) throw new Error('Failed to update status');
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['donations'] });
+    }
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,6 +94,7 @@ export default function AdminDonations() {
         paymentMethod: formData.paymentMethod,
         status: 'completed'
       });
+      queryClient.invalidateQueries({ queryKey: ['donations'] });
       setIsModalOpen(false);
       setFormData({ donorName: '', amount: '', donationType: 'infaq', paymentMethod: 'cash' });
     } catch (err) {
@@ -43,6 +121,42 @@ export default function AdminDonations() {
       </div>
 
       <div className="p-container-margin space-y-stack-lg mt-6">
+        {/* Payment / Infaq Settings */}
+        <section className="bg-surface-white rounded-xl p-6 shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh/30">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-stack-md">
+            <h3 className="font-headline-md text-emerald-deep flex items-center gap-2">
+              <span className="material-symbols-outlined">payments</span>
+              Pengaturan Pembayaran &amp; Infaq
+            </h3>
+            <button onClick={handleSavePaymentConfig} className="bg-emerald-deep text-white px-4 py-2 rounded-lg font-label-lg shadow-md active:scale-95 transition-transform">Save Changes</button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+            <div className="space-y-1 md:col-span-2">
+              <label className="font-label-sm text-on-surface-variant block">URL Gambar QRIS</label>
+              <div className="flex gap-2">
+                <input className="flex-1 bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="https://... atau upload via Assets lalu copy link" value={paymentConfig.qrisUrl} onChange={e => setPaymentConfig({...paymentConfig, qrisUrl: e.target.value})} />
+                <button onClick={() => handleAssetUpload("QRIS Image")} className="bg-surface-container-low text-emerald-deep px-4 rounded-lg font-label-md hover:bg-mint-fresh transition-colors">Upload</button>
+              </div>
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-sm text-on-surface-variant block">No. Rekening BSI</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="Misal: 7123456789 (Kosongkan jika tak ada)" value={paymentConfig.bankBsi} onChange={e => setPaymentConfig({...paymentConfig, bankBsi: e.target.value})} />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-sm text-on-surface-variant block">No. Rekening BRI</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="Misal: 0123-01-xxxxxx (Kosongkan jika tak ada)" value={paymentConfig.bankBri} onChange={e => setPaymentConfig({...paymentConfig, bankBri: e.target.value})} />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-sm text-on-surface-variant block">No. GoPay</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="Misal: 08123456789 (Kosongkan jika tak ada)" value={paymentConfig.gopay} onChange={e => setPaymentConfig({...paymentConfig, gopay: e.target.value})} />
+            </div>
+            <div className="space-y-1">
+              <label className="font-label-sm text-on-surface-variant block">No. OVO</label>
+              <input className="w-full bg-surface-container-low border border-transparent focus:border-emerald-deep focus:ring-2 focus:ring-emerald-deep/10 rounded-lg p-3 font-body-md outline-none transition-all" type="text" placeholder="Misal: 08123456789 (Kosongkan jika tak ada)" value={paymentConfig.ovo} onChange={e => setPaymentConfig({...paymentConfig, ovo: e.target.value})} />
+            </div>
+          </div>
+        </section>
+
         {/* Statistics Overview (Bento Grid Style) */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-gutter-md">
           <div className="bg-surface-white p-6 rounded-2xl flex flex-col justify-between h-32 relative overflow-hidden shadow-[0_4px_20px_rgba(6,78,59,0.05)] border border-mint-fresh transition-transform hover:-translate-y-1">
@@ -163,8 +277,20 @@ export default function AdminDonations() {
                             </span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-center">
-                          <button className="p-2 hover:bg-surface-container rounded-lg transition-colors"><span className="material-symbols-outlined text-on-surface-variant">more_vert</span></button>
+                        <td className="px-6 py-4 flex items-center gap-2">
+                          {item.proofUrl && (
+                            <a href={getImageUrl(item.proofUrl)} target="_blank" rel="noreferrer" className="text-emerald-deep text-[11px] underline font-bold px-2 py-1 bg-mint-fresh rounded">Bukti</a>
+                          )}
+                          {item.status === 'pending' && (
+                            <>
+                              <button onClick={() => updateStatusMutation.mutate({ id: item.id, status: 'success' })} className="p-1.5 bg-emerald-deep text-white rounded hover:bg-opacity-80 transition-colors" title="Setujui">
+                                <span className="material-symbols-outlined text-[16px]">check</span>
+                              </button>
+                              <button onClick={() => updateStatusMutation.mutate({ id: item.id, status: 'failed' })} className="p-1.5 bg-error text-white rounded hover:bg-opacity-80 transition-colors" title="Tolak">
+                                <span className="material-symbols-outlined text-[16px]">close</span>
+                              </button>
+                            </>
+                          )}
                         </td>
                       </tr>
                     );
