@@ -1,12 +1,12 @@
 {
   "version": "7",
-  "dialect": "postgresql",
+  "dialect": "mysql",
   "entries": [
     {
       "idx": 0,
-      "version": "7",
-      "when": 1782617201287,
-      "tag": "0000_careful_patch",
+      "version": "5",
+      "when": 1782637349472,
+      "tag": "0000_omniscient_jasper_sitwell",
       "breakpoints": true
     }
   ]

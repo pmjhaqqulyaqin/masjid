@@ -1,133 +1,133 @@
-import { pgTable, text, boolean, timestamp, serial, decimal, jsonb } from 'drizzle-orm/pg-core';
+import { mysqlTable, varchar, boolean, timestamp, serial, decimal, json } from 'drizzle-orm/mysql-core';
 
-export const users = pgTable('user', {
-  id: text('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull().unique(),
-  phoneNumber: text('phone_number'),
+export const users = mysqlTable('user', {
+  id: varchar('id', { length: 255 }).primaryKey(),
+  name: varchar('name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  phoneNumber: varchar('phone_number', { length: 50 }),
   phoneNumberVerified: boolean('phoneNumberVerified').notNull().default(false),
   emailVerified: boolean('emailVerified').notNull(),
-  image: text('image'),
-  role: text('role').notNull().default('jamaah'), // 'jamaah', 'admin', 'staff'
+  image: varchar('image', { length: 255 }),
+  role: varchar('role', { length: 50 }).notNull().default('jamaah'), // 'jamaah', 'admin', 'staff'
   createdAt: timestamp('createdAt').notNull(),
   updatedAt: timestamp('updatedAt').notNull()
 });
 
-export const session = pgTable("session", {
-  id: text("id").primaryKey(),
+export const session = mysqlTable("session", {
+  id: varchar("id", { length: 255 }).primaryKey(),
   expiresAt: timestamp("expiresAt").notNull(),
-  token: text("token").notNull().unique(),
+  token: varchar("token", { length: 255 }).notNull().unique(),
   createdAt: timestamp("createdAt").notNull(),
   updatedAt: timestamp("updatedAt").notNull(),
-  ipAddress: text("ipAddress"),
-  userAgent: text("userAgent"),
-  userId: text("userId").notNull().references(() => users.id)
+  ipAddress: varchar("ipAddress", { length: 255 }),
+  userAgent: varchar("userAgent", { length: 255 }),
+  userId: varchar("userId", { length: 255 }).notNull().references(() => users.id)
 });
 
-export const account = pgTable("account", {
-  id: text("id").primaryKey(),
-  accountId: text("accountId").notNull(),
-  providerId: text("providerId").notNull(),
-  userId: text("userId").notNull().references(() => users.id),
-  accessToken: text("accessToken"),
-  refreshToken: text("refreshToken"),
-  idToken: text("idToken"),
+export const account = mysqlTable("account", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  accountId: varchar("accountId", { length: 255 }).notNull(),
+  providerId: varchar("providerId", { length: 255 }).notNull(),
+  userId: varchar("userId", { length: 255 }).notNull().references(() => users.id),
+  accessToken: varchar("accessToken", { length: 255 }),
+  refreshToken: varchar("refreshToken", { length: 255 }),
+  idToken: varchar("idToken", { length: 255 }),
   accessTokenExpiresAt: timestamp("accessTokenExpiresAt"),
   refreshTokenExpiresAt: timestamp("refreshTokenExpiresAt"),
-  scope: text("scope"),
-  password: text("password"),
+  scope: varchar("scope", { length: 255 }),
+  password: varchar("password", { length: 255 }),
   createdAt: timestamp("createdAt").notNull(),
   updatedAt: timestamp("updatedAt").notNull()
 });
 
-export const verification = pgTable("verification", {
-  id: text("id").primaryKey(),
-  identifier: text("identifier").notNull(),
-  value: text("value").notNull(),
+export const verification = mysqlTable("verification", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  identifier: varchar("identifier", { length: 255 }).notNull(),
+  value: varchar("value", { length: 255 }).notNull(),
   expiresAt: timestamp("expiresAt").notNull(),
   createdAt: timestamp("createdAt"),
   updatedAt: timestamp("updatedAt")
 });
 
 // 2. Donations / ZIS
-export const donations = pgTable('donations', {
+export const donations = mysqlTable('donations', {
   id: serial('id').primaryKey(),
-  userId: text('user_id').references(() => users.id), // Bisa null untuk hamba Allah (Anonim)
-  donorName: text('donor_name'), // Untuk manual entry yang tidak punya user id
-  type: text('type').notNull(), // 'infaq', 'zakat', 'wakaf'
-  amount: decimal('amount').notNull(),
-  paymentMethod: text('payment_method').notNull(), // 'qris', 'transfer_bank'
-  status: text('status').notNull().default('pending'), // 'pending', 'success', 'failed'
-  proofUrl: text('proof_url'), // Untuk bukti transfer manual
+  userId: varchar('user_id', { length: 255 }).references(() => users.id), // Bisa null untuk hamba Allah (Anonim)
+  donorName: varchar('donor_name', { length: 255 }), // Untuk manual entry yang tidak punya user id
+  type: varchar('type', { length: 50 }).notNull(), // 'infaq', 'zakat', 'wakaf'
+  amount: decimal('amount', { precision: 15, scale: 2 }).notNull(),
+  paymentMethod: varchar('payment_method', { length: 50 }).notNull(), // 'qris', 'transfer_bank'
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // 'pending', 'success', 'failed'
+  proofUrl: varchar('proof_url', { length: 255 }), // Untuk bukti transfer manual
   createdAt: timestamp('created_at').defaultNow()
 });
 
 // 3. Kajian
-export const kajian = pgTable('kajian', {
+export const kajian = mysqlTable('kajian', {
   id: serial('id').primaryKey(),
-  title: text('title').notNull(),
-  ustadzName: text('ustadz_name').notNull(),
-  description: text('description'),
+  title: varchar('title', { length: 255 }).notNull(),
+  ustadzName: varchar('ustadz_name', { length: 255 }).notNull(),
+  description: varchar('description', { length: 1000 }),
   scheduledAt: timestamp('scheduled_at').notNull(),
-  liveStreamUrl: text('live_stream_url'), // Link YouTube/Zoom
+  liveStreamUrl: varchar('live_stream_url', { length: 255 }), // Link YouTube/Zoom
   createdAt: timestamp('created_at').defaultNow()
 });
 
 // 4. Finances (Keuangan)
-export const finances = pgTable('finances', {
+export const finances = mysqlTable('finances', {
   id: serial('id').primaryKey(),
-  type: text('type').notNull(), // 'income', 'expense'
-  category: text('category').notNull(), // misal: 'operasional', 'pembangunan', 'infaq_jumat'
-  amount: decimal('amount').notNull(),
-  description: text('description'),
+  type: varchar('type', { length: 50 }).notNull(), // 'income', 'expense'
+  category: varchar('category', { length: 100 }).notNull(), // misal: 'operasional', 'pembangunan', 'infaq_jumat'
+  amount: decimal('amount', { precision: 15, scale: 2 }).notNull(),
+  description: varchar('description', { length: 255 }),
   date: timestamp('date').notNull(),
   createdAt: timestamp('created_at').defaultNow()
 });
 
 // 5. Services (Layanan Kepengurusan)
-export const services = pgTable('services', {
+export const services = mysqlTable('services', {
   id: serial('id').primaryKey(),
-  userId: text('user_id').references(() => users.id).notNull(),
-  serviceType: text('service_type').notNull(), // 'mualaf', 'jenazah', 'nikah', 'aula'
-  formData: jsonb('form_data').notNull(), // Data spesifik per layanan disimpan dinamis
-  status: text('status').notNull().default('pending'), // 'pending', 'approved', 'rejected'
+  userId: varchar('user_id', { length: 255 }).references(() => users.id).notNull(),
+  serviceType: varchar('service_type', { length: 100 }).notNull(), // 'mualaf', 'jenazah', 'nikah', 'aula'
+  formData: json('form_data').notNull(), // Data spesifik per layanan disimpan dinamis
+  status: varchar('status', { length: 50 }).notNull().default('pending'), // 'pending', 'approved', 'rejected'
   createdAt: timestamp('created_at').defaultNow()
 });
 
 // 6. Ibadah (Jadwal Shalat & Petugas)
-export const ibadah = pgTable('ibadah', {
+export const ibadah = mysqlTable('ibadah', {
   id: serial('id').primaryKey(),
-  prayerType: text('prayer_type').notNull(), // 'shubuh', 'zhuhur', 'ashar', 'maghrib', 'isya', 'jumat'
+  prayerType: varchar('prayer_type', { length: 50 }).notNull(), // 'shubuh', 'zhuhur', 'ashar', 'maghrib', 'isya', 'jumat'
   time: timestamp('time').notNull(),
-  imamName: text('imam_name'),
-  muadzinName: text('muadzin_name'),
-  khatibName: text('khatib_name'), // Khusus untuk Jumat
-  bilalName: text('bilal_name'), // Khusus untuk Jumat
+  imamName: varchar('imam_name', { length: 255 }),
+  muadzinName: varchar('muadzin_name', { length: 255 }),
+  khatibName: varchar('khatib_name', { length: 255 }), // Khusus untuk Jumat
+  bilalName: varchar('bilal_name', { length: 255 }), // Khusus untuk Jumat
   createdAt: timestamp('created_at').defaultNow()
 });
 
 // 7. Settings (General Key-Value config)
-export const settings = pgTable('settings', {
-  key: text('key').primaryKey(), // misal: 'mosque_name', 'map_coordinates', 'is_open_24h'
-  value: text('value').notNull()
+export const settings = mysqlTable('settings', {
+  key: varchar('key', { length: 255 }).primaryKey(), // misal: 'mosque_name', 'map_coordinates', 'is_open_24h'
+  value: varchar('value', { length: 1000 }).notNull()
 });
 
 // 8. Facilities (Direktori Fasilitas)
-export const facilities = pgTable('facilities', {
+export const facilities = mysqlTable('facilities', {
   id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  icon: text('icon').notNull(), // Material symbol name
-  description: text('description')
+  name: varchar('name', { length: 255 }).notNull(),
+  icon: varchar('icon', { length: 50 }).notNull(), // Material symbol name
+  description: varchar('description', { length: 1000 })
 });
 
 // 9. Articles (Tausiyah & Pengumuman)
-export const articles = pgTable('articles', {
+export const articles = mysqlTable('articles', {
   id: serial('id').primaryKey(),
-  type: text('type').notNull(), // 'tausiyah', 'pengumuman'
-  title: text('title').notNull(),
-  content: text('content').notNull(),
-  author: text('author'),
-  imageUrl: text('image_url'),
+  type: varchar('type', { length: 50 }).notNull(), // 'tausiyah', 'pengumuman'
+  title: varchar('title', { length: 255 }).notNull(),
+  content: varchar('content', { length: 5000 }).notNull(),
+  author: varchar('author', { length: 255 }),
+  imageUrl: varchar('image_url', { length: 255 }),
   publishedAt: timestamp('published_at').defaultNow(),
   createdAt: timestamp('created_at').defaultNow()
 });
