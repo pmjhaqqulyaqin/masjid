@@ -13,6 +13,7 @@ git reset --hard origin/main
 # 2. Build Frontend
 echo "🎨 Membangun ulang Frontend..."
 cd frontend
+echo "VITE_API_URL=https://masjid.mandualotim.sch.id/api" > .env
 npm install
 npm run build
 cd ..
