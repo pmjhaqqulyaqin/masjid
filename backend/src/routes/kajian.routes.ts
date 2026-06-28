@@ -19,14 +19,15 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { title, ustadzName, description, scheduledAt, liveStreamUrl } = req.body;
-    const newKajian = await db.insert(kajian).values({
+    const payload = {
       title,
       ustadzName,
       description,
       scheduledAt: new Date(scheduledAt),
       liveStreamUrl
-    }).returning();
-    res.status(201).json(newKajian[0]);
+    };
+    const [result] = await db.insert(kajian).values(payload);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create kajian' });
   }
@@ -48,17 +49,17 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { title, ustadzName, description, scheduledAt, liveStreamUrl } = req.body;
-    const updated = await db.update(kajian)
-      .set({
+    const payload = {
         title,
         ustadzName,
         description,
         scheduledAt: new Date(scheduledAt),
         liveStreamUrl
-      })
-      .where(eq(kajian.id, Number(id)))
-      .returning();
-    res.status(200).json(updated[0]);
+    };
+    await db.update(kajian)
+      .set(payload)
+      .where(eq(kajian.id, Number(id)));
+    res.status(200).json({ id: Number(id), ...payload });
   } catch (error) {
     res.status(500).json({ error: 'Failed to update kajian' });
   }

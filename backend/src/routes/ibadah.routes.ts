@@ -19,15 +19,16 @@ router.get('/jadwal', async (req, res) => {
 router.post('/jadwal', async (req, res) => {
   try {
     const { prayerType, time, imamName, muadzinName, khatibName, bilalName } = req.body;
-    const newData = await db.insert(ibadah).values({
+    const payload = {
       prayerType,
       time: new Date(time),
       imamName: imamName || null,
       muadzinName: muadzinName || null,
       khatibName: khatibName || null,
       bilalName: bilalName || null,
-    }).returning();
-    res.status(201).json(newData[0]);
+    };
+    const [result] = await db.insert(ibadah).values(payload);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create ibadah jadwal' });
   }
@@ -38,18 +39,18 @@ router.put('/jadwal/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { prayerType, time, imamName, muadzinName, khatibName, bilalName } = req.body;
-    const updated = await db.update(ibadah)
-      .set({
+    const payload = {
         prayerType,
         time: new Date(time),
         imamName: imamName || null,
         muadzinName: muadzinName || null,
         khatibName: khatibName || null,
         bilalName: bilalName || null,
-      })
-      .where(eq(ibadah.id, Number(id)))
-      .returning();
-    res.status(200).json(updated[0]);
+    };
+    await db.update(ibadah)
+      .set(payload)
+      .where(eq(ibadah.id, Number(id)));
+    res.status(200).json({ id: Number(id), ...payload });
   } catch (error) {
     res.status(500).json({ error: 'Failed to update ibadah jadwal' });
   }

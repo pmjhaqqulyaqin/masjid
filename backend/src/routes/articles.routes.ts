@@ -41,16 +41,17 @@ articlesRouter.post('/', upload.single('image'), async (req, res) => {
       imageUrl = '/gambar/' + req.file.filename;
     }
 
-    const [newArticle] = await db.insert(articles).values({
+    const payload = {
       type,
       title,
       content,
       author: author || null,
       imageUrl,
       publishedAt: publishedAt ? new Date(publishedAt) : new Date()
-    }).returning();
+    };
+    const [result] = await db.insert(articles).values(payload);
 
-    res.status(201).json(newArticle);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to create article' });
@@ -75,12 +76,11 @@ articlesRouter.put('/:id', upload.single('image'), async (req, res) => {
       updateData.imageUrl = '/gambar/' + req.file.filename;
     }
 
-    const [updatedArticle] = await db.update(articles)
+    await db.update(articles)
       .set(updateData)
-      .where(eq(articles.id, parseInt(id)))
-      .returning();
+      .where(eq(articles.id, parseInt(id as string)));
 
-    res.json(updatedArticle);
+    res.json({ id: parseInt(id as string), ...updateData });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to update article' });

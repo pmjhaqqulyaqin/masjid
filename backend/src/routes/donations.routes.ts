@@ -32,7 +32,7 @@ router.get('/summary', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { userId, donorName, type, amount, paymentMethod, status, proofUrl } = req.body;
-    const newDonation = await db.insert(donations).values({
+    const payload = {
       userId: userId || null,
       donorName: donorName || null,
       type,
@@ -40,8 +40,9 @@ router.post('/', async (req, res) => {
       paymentMethod,
       status: status || 'pending',
       proofUrl: proofUrl || null
-    }).returning();
-    res.status(201).json(newDonation[0]);
+    };
+    const [result] = await db.insert(donations).values(payload);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create donation' });
   }
@@ -57,16 +58,15 @@ router.put('/:id/status', async (req, res) => {
       return res.status(400).json({ error: 'Invalid status' });
     }
 
-    const updated = await db.update(donations)
+    const [updated] = await db.update(donations)
       .set({ status })
-      .where(eq(donations.id, Number(id)))
-      .returning();
+      .where(eq(donations.id, Number(id)));
 
-    if (updated.length === 0) {
+    if (updated.affectedRows === 0) {
       return res.status(404).json({ error: 'Donation not found' });
     }
     
-    res.json(updated[0]);
+    res.json({ id: Number(id), status });
   } catch (error) {
     res.status(500).json({ error: 'Failed to update donation status' });
   }

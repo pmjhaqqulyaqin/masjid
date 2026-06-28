@@ -19,13 +19,14 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { userId, serviceType, formData } = req.body;
-    const newRequest = await db.insert(services).values({
+    const payload = {
       userId,
       serviceType,
       formData,
       status: 'pending'
-    }).returning();
-    res.status(201).json(newRequest[0]);
+    };
+    const [result] = await db.insert(services).values(payload);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create service request' });
   }
@@ -37,12 +38,11 @@ router.put('/:id/status', async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
     
-    const updated = await db.update(services)
+    await db.update(services)
       .set({ status })
-      .where(eq(services.id, Number(id)))
-      .returning();
+      .where(eq(services.id, Number(id)));
       
-    res.json(updated[0]);
+    res.json({ id: Number(id), status });
   } catch (error) {
     res.status(500).json({ error: 'Failed to update status' });
   }

@@ -46,8 +46,7 @@ router.post('/', async (req, res) => {
     for (const [key, value] of Object.entries(data)) {
       await db.insert(settings)
         .values({ key, value: String(value) })
-        .onConflictDoUpdate({
-          target: settings.key,
+        .onDuplicateKeyUpdate({
           set: { value: String(value) }
         });
     }

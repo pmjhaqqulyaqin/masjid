@@ -20,8 +20,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { name, icon, description } = req.body;
-    const [newFacility] = await db.insert(facilities).values({ name, icon, description }).returning();
-    res.status(201).json(newFacility);
+    const payload = { name, icon, description };
+    const [result] = await db.insert(facilities).values(payload);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     console.error('Error creating facility:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -33,13 +34,13 @@ router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { name, icon, description } = req.body;
+    const payload = { name, icon, description };
     const [updated] = await db.update(facilities)
-      .set({ name, icon, description })
-      .where(eq(facilities.id, Number(id)))
-      .returning();
+      .set(payload)
+      .where(eq(facilities.id, Number(id)));
     
-    if (!updated) return res.status(404).json({ error: 'Facility not found' });
-    res.json(updated);
+    if (updated.affectedRows === 0) return res.status(404).json({ error: 'Facility not found' });
+    res.json({ id: Number(id), ...payload });
   } catch (error) {
     console.error('Error updating facility:', error);
     res.status(500).json({ error: 'Internal server error' });

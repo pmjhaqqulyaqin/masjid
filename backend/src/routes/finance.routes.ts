@@ -38,14 +38,15 @@ router.get('/summary', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { type, category, amount, description, date } = req.body;
-    const newFinance = await db.insert(finances).values({
+    const payload = {
       type,
       category,
       amount,
       description,
       date: new Date(date || Date.now())
-    }).returning();
-    res.status(201).json(newFinance[0]);
+    };
+    const [result] = await db.insert(finances).values(payload);
+    res.status(201).json({ id: result.insertId, ...payload });
   } catch (error) {
     console.error('Create finance error:', error);
     res.status(500).json({ error: 'Failed to create finance record', details: String(error) });
