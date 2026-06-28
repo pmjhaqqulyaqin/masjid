@@ -13,7 +13,7 @@ export default function Infaq() {
   const [proofFile, setProofFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-
+  const [confirmedMethod, setConfirmedMethod] = useState<string | null>(null);
   const getImageUrl = (url?: string) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;

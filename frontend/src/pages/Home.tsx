@@ -32,7 +32,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchPrayerTimes() {
       if (settings?.map_coords) {
-        const [lat, lng] = settings.map_coords.split(',').map(s => s.trim());
+        const [lat, lng] = settings.map_coords.split(',').map((s: string) => s.trim());
         try {
           const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=11`);
           const data = await res.json();

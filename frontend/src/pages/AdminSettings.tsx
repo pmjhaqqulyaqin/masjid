@@ -62,7 +62,7 @@ export default function AdminSettings() {
 
   const handleOpenAddFacility = () => {
     setEditFacilityId(null);
-    setFacilityFormData({ name: '', icon: 'meeting_room', desc: '' });
+    setFacilityFormData({ name: '', icon: 'meeting_room', description: '' });
     setIsFacilityModalOpen(true);
   };
 
@@ -243,7 +243,7 @@ export default function AdminSettings() {
             </button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {facilities.map((f) => (
+            {facilities.map((f: any) => (
               <div key={f.id} className="bg-mint-fresh/20 p-4 rounded-xl border border-mint-fresh/50 flex flex-col justify-between hover:bg-mint-fresh/30 transition-colors">
                 <div>
                   <span className="material-symbols-outlined text-emerald-deep mb-2">{f.icon}</span>
