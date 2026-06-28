@@ -27,7 +27,7 @@ export default function MainLayout() {
           <span className="material-symbols-outlined text-emerald-deep">location_on</span>
           <div className="flex flex-col">
             <h1 className="font-headline-lg-mobile text-headline-lg-mobile text-emerald-deep leading-tight">Masjid Haqqul Yaqin</h1>
-            <span className="font-label-sm text-label-sm text-on-surface-variant">Jl. Lintas Lampung Barat</span>
+            <span className="font-label-sm text-label-sm text-on-surface-variant">Jl. H. Lalu Anang KM 5 Desa Waringin</span>
           </div>
         </div>
         <div className="flex items-center gap-1">

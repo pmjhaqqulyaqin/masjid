@@ -95,7 +95,7 @@ export default function Home() {
         <section className="space-y-4">
           <div className="flex justify-between items-center text-on-surface-variant text-sm font-medium">
             <span>{new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
-            <span>{settings?.masjid_name ? `${settings.masjid_name}` : 'Sumber Jaya - Lampung Barat'}</span>
+            <span>{settings?.masjid_name ? `${settings.masjid_name}` : 'Desa Waringin'}</span>
           </div>
           <div className="flex justify-between gap-1 sm:gap-3 pb-2 w-full">
             {[
