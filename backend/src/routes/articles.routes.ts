@@ -10,8 +10,8 @@ export const articlesRouter = Router();
 // Konfigurasi Multer untuk upload gambar ke frontend/public/gambar
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // Kita simpan di folder frontend/public/gambar
-    cb(null, path.join(__dirname, '../../../frontend/public/gambar'));
+    // Simpan di folder backend/public/uploads
+    cb(null, path.join(__dirname, '../../public/uploads/'));
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -38,7 +38,7 @@ articlesRouter.post('/', upload.single('image'), async (req, res) => {
     let imageUrl = null;
 
     if (req.file) {
-      imageUrl = '/gambar/' + req.file.filename;
+      imageUrl = '/api/uploads/' + req.file.filename;
     }
 
     const payload = {
@@ -73,7 +73,7 @@ articlesRouter.put('/:id', upload.single('image'), async (req, res) => {
     };
 
     if (req.file) {
-      updateData.imageUrl = '/gambar/' + req.file.filename;
+      updateData.imageUrl = '/api/uploads/' + req.file.filename;
     }
 
     await db.update(articles)

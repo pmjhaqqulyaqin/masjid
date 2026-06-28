@@ -18,8 +18,8 @@ app.use(cors({
 import path from 'path';
 
 app.use(express.json());
-// Serve static files from public folder
-app.use(express.static(path.join(__dirname, '../public')));
+// Serve static files from public/uploads directory at /api/uploads
+app.use('/api/uploads', express.static(path.join(__dirname, '../public/uploads')));
 
 // Auth routes
 app.all('/api/auth/*', toNodeHandler(auth));

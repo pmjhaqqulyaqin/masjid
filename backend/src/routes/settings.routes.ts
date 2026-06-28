@@ -10,8 +10,8 @@ const router = Router();
 // Konfigurasi Multer untuk upload file (gambar)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // Simpan di folder frontend/public/gambar
-    cb(null, path.join(__dirname, '../../../frontend/public/gambar'));
+    // Simpan di folder public/uploads
+    cb(null, path.join(__dirname, '../../public/uploads/'));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -65,7 +65,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
     // Return relative URL that can be accessed via static server
-    const fileUrl = `/gambar/${req.file.filename}`;
+    const fileUrl = `/api/uploads/${req.file.filename}`;
     res.json({ url: fileUrl });
   } catch (error) {
     console.error('Error uploading file:', error);
