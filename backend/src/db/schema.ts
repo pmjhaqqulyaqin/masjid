@@ -7,7 +7,7 @@ export const users = mysqlTable('user', {
   phoneNumber: varchar('phone_number', { length: 50 }),
   phoneNumberVerified: boolean('phoneNumberVerified').notNull().default(false),
   emailVerified: boolean('emailVerified').notNull(),
-  image: varchar('image', { length: 255 }),
+  image: text('image'),
   role: varchar('role', { length: 50 }).notNull().default('jamaah'), // 'jamaah', 'admin', 'staff'
   createdAt: timestamp('createdAt').notNull(),
   updatedAt: timestamp('updatedAt').notNull()
