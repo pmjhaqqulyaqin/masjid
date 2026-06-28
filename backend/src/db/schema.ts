@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, boolean, timestamp, int, decimal, json } from 'drizzle-orm/mysql-core';
+import { mysqlTable, varchar, boolean, timestamp, int, decimal, json, text } from 'drizzle-orm/mysql-core';
 
 export const users = mysqlTable('user', {
   id: varchar('id', { length: 255 }).primaryKey(),
@@ -29,13 +29,13 @@ export const account = mysqlTable("account", {
   accountId: varchar("accountId", { length: 255 }).notNull(),
   providerId: varchar("providerId", { length: 255 }).notNull(),
   userId: varchar("userId", { length: 255 }).notNull().references(() => users.id),
-  accessToken: varchar("accessToken", { length: 255 }),
-  refreshToken: varchar("refreshToken", { length: 255 }),
-  idToken: varchar("idToken", { length: 255 }),
+  accessToken: text("accessToken"),
+  refreshToken: text("refreshToken"),
+  idToken: text("idToken"),
   accessTokenExpiresAt: timestamp("accessTokenExpiresAt"),
   refreshTokenExpiresAt: timestamp("refreshTokenExpiresAt"),
-  scope: varchar("scope", { length: 255 }),
-  password: varchar("password", { length: 255 }),
+  scope: text("scope"),
+  password: text("password"),
   createdAt: timestamp("createdAt").notNull(),
   updatedAt: timestamp("updatedAt").notNull()
 });
@@ -43,7 +43,7 @@ export const account = mysqlTable("account", {
 export const verification = mysqlTable("verification", {
   id: varchar("id", { length: 255 }).primaryKey(),
   identifier: varchar("identifier", { length: 255 }).notNull(),
-  value: varchar("value", { length: 255 }).notNull(),
+  value: text("value").notNull(),
   expiresAt: timestamp("expiresAt").notNull(),
   createdAt: timestamp("createdAt"),
   updatedAt: timestamp("updatedAt")
