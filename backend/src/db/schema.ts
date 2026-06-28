@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, boolean, timestamp, serial, decimal, json } from 'drizzle-orm/mysql-core';
+import { mysqlTable, varchar, boolean, timestamp, int, decimal, json } from 'drizzle-orm/mysql-core';
 
 export const users = mysqlTable('user', {
   id: varchar('id', { length: 255 }).primaryKey(),
@@ -51,7 +51,7 @@ export const verification = mysqlTable("verification", {
 
 // 2. Donations / ZIS
 export const donations = mysqlTable('donations', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   userId: varchar('user_id', { length: 255 }).references(() => users.id), // Bisa null untuk hamba Allah (Anonim)
   donorName: varchar('donor_name', { length: 255 }), // Untuk manual entry yang tidak punya user id
   type: varchar('type', { length: 50 }).notNull(), // 'infaq', 'zakat', 'wakaf'
@@ -64,7 +64,7 @@ export const donations = mysqlTable('donations', {
 
 // 3. Kajian
 export const kajian = mysqlTable('kajian', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   title: varchar('title', { length: 255 }).notNull(),
   ustadzName: varchar('ustadz_name', { length: 255 }).notNull(),
   description: varchar('description', { length: 1000 }),
@@ -75,7 +75,7 @@ export const kajian = mysqlTable('kajian', {
 
 // 4. Finances (Keuangan)
 export const finances = mysqlTable('finances', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   type: varchar('type', { length: 50 }).notNull(), // 'income', 'expense'
   category: varchar('category', { length: 100 }).notNull(), // misal: 'operasional', 'pembangunan', 'infaq_jumat'
   amount: decimal('amount', { precision: 15, scale: 2 }).notNull(),
@@ -86,7 +86,7 @@ export const finances = mysqlTable('finances', {
 
 // 5. Services (Layanan Kepengurusan)
 export const services = mysqlTable('services', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   userId: varchar('user_id', { length: 255 }).references(() => users.id).notNull(),
   serviceType: varchar('service_type', { length: 100 }).notNull(), // 'mualaf', 'jenazah', 'nikah', 'aula'
   formData: json('form_data').notNull(), // Data spesifik per layanan disimpan dinamis
@@ -96,7 +96,7 @@ export const services = mysqlTable('services', {
 
 // 6. Ibadah (Jadwal Shalat & Petugas)
 export const ibadah = mysqlTable('ibadah', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   prayerType: varchar('prayer_type', { length: 50 }).notNull(), // 'shubuh', 'zhuhur', 'ashar', 'maghrib', 'isya', 'jumat'
   time: timestamp('time').notNull(),
   imamName: varchar('imam_name', { length: 255 }),
@@ -114,7 +114,7 @@ export const settings = mysqlTable('settings', {
 
 // 8. Facilities (Direktori Fasilitas)
 export const facilities = mysqlTable('facilities', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   name: varchar('name', { length: 255 }).notNull(),
   icon: varchar('icon', { length: 50 }).notNull(), // Material symbol name
   description: varchar('description', { length: 1000 })
@@ -122,7 +122,7 @@ export const facilities = mysqlTable('facilities', {
 
 // 9. Articles (Tausiyah & Pengumuman)
 export const articles = mysqlTable('articles', {
-  id: serial('id').primaryKey(),
+  id: int('id').autoincrement().primaryKey(),
   type: varchar('type', { length: 50 }).notNull(), // 'tausiyah', 'pengumuman'
   title: varchar('title', { length: 255 }).notNull(),
   content: varchar('content', { length: 5000 }).notNull(),
