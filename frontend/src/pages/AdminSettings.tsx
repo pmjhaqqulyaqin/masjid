@@ -359,8 +359,12 @@ export default function AdminSettings() {
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div onClick={() => handleAssetUpload("Masjid Logo")} className="p-4 bg-surface-container-low rounded-xl flex items-center gap-4 border border-transparent hover:border-emerald-deep/20 transition-all cursor-pointer">
-              <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm">
-                <span className="material-symbols-outlined text-emerald-deep/40 !text-[32px]">image</span>
+              <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm overflow-hidden">
+                {settings?.logo_url ? (
+                  <img src={getImageUrl(settings.logo_url)} alt="Logo" className="w-full h-full object-contain" />
+                ) : (
+                  <span className="material-symbols-outlined text-emerald-deep/40 !text-[32px]">image</span>
+                )}
               </div>
               <div>
                 <p className="font-label-lg text-emerald-deep">Masjid Logo</p>
@@ -368,8 +372,12 @@ export default function AdminSettings() {
               </div>
             </div>
             <div onClick={() => handleAssetUpload("Slider Banners")} className="p-4 bg-surface-container-low rounded-xl flex items-center gap-4 border border-transparent hover:border-emerald-deep/20 transition-all cursor-pointer">
-              <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm">
-                <span className="material-symbols-outlined text-emerald-deep/40 !text-[32px]">video_library</span>
+              <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-sm overflow-hidden">
+                {settings?.banner_url ? (
+                  <img src={getImageUrl(settings.banner_url)} alt="Banner" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="material-symbols-outlined text-emerald-deep/40 !text-[32px]">video_library</span>
+                )}
               </div>
               <div>
                 <p className="font-label-lg text-emerald-deep">Slider Banners</p>
