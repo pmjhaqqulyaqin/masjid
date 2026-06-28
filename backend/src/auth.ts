@@ -68,5 +68,5 @@ export const auth = betterAuth({
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
     }
   },
-  trustedOrigins: [process.env.FRONTEND_URL || 'http://localhost:5173', 'http://127.0.0.1:5173']
+  trustedOrigins: [process.env.BETTER_AUTH_URL || '', process.env.FRONTEND_URL || 'http://localhost:5173', 'http://127.0.0.1:5173'].filter(Boolean)
 });
