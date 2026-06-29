@@ -102,18 +102,19 @@ export default function Infaq() {
 
         {/* Ticker / Running Text */}
         {donationsQuery.data && donationsQuery.data.length > 0 && (
-          <div className="mb-stack-lg bg-surface-white border border-mint-fresh rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] overflow-hidden flex items-center relative h-12">
-            <div className="bg-emerald-deep text-white px-4 h-full flex items-center z-10 absolute left-0 font-label-md uppercase tracking-wider whitespace-nowrap shadow-[4px_0_10px_rgba(0,0,0,0.1)]">
-              <span className="material-symbols-outlined mr-2 text-[20px]">campaign</span> Donatur Terbaru
+          <div className="mb-stack-lg bg-surface-white border border-outline-variant/30 rounded-lg shadow-sm overflow-hidden flex items-center relative h-9">
+            <div className="bg-emerald-deep text-white px-2.5 h-full flex items-center z-10 absolute left-0 text-[10px] font-semibold uppercase tracking-wide whitespace-nowrap">
+              <span className="material-symbols-outlined mr-1 text-[14px]">campaign</span>Donatur
             </div>
-            <div className="w-full overflow-hidden flex-1 pl-44">
-              <div className="animate-marquee whitespace-nowrap flex gap-8 items-center h-full text-emerald-deep">
+            <div className="w-full overflow-hidden flex-1 pl-[88px]">
+              <div className="animate-marquee whitespace-nowrap flex gap-6 items-center h-full text-on-surface">
                 {donationsQuery.data.filter((d: any) => d.status === 'success' || d.status === 'completed').slice(0, 10).map((d: any, idx: number) => (
-                  <span key={d.id || idx} className="flex items-center gap-2 font-label-md">
-                    <span className="w-2 h-2 rounded-full bg-gold-spiritual"></span>
-                    <span>{d.donorName || 'Hamba Allah'} berinfaq</span>
-                    <span className="font-bold">Rp {parseInt(d.amount).toLocaleString('id-ID')}</span>
-                    <span className="text-on-surface-variant font-body-sm capitalize">({d.type})</span>
+                  <span key={d.id || idx} className="flex items-center gap-1.5 text-[12px]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-deep flex-shrink-0"></span>
+                    <span className="font-semibold text-emerald-deep">{d.donorName || 'Hamba Allah'}</span>
+                    <span className="text-on-surface-variant">—</span>
+                    <span className="font-bold text-gold-spiritual">Rp {parseInt(d.amount).toLocaleString('id-ID')}</span>
+                    <span className="text-on-surface-variant/60 text-[10px] capitalize">({d.type})</span>
                   </span>
                 ))}
               </div>
