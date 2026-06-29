@@ -6,14 +6,14 @@ export default function Laporan() {
     <>
       {/* Marquee Announcement */}
       {settings?.running_text_laporan && (
-        <div className="fixed top-16 left-0 w-full bg-emerald-deep text-white py-2 overflow-hidden z-40">
-          <div className="animate-[marquee_20s_linear_infinite] inline-block font-label-lg text-label-lg px-4 whitespace-nowrap">
+        <div className="fixed top-14 left-0 w-full bg-emerald-deep text-white py-1 overflow-hidden z-40">
+          <div className="animate-[marquee_20s_linear_infinite] inline-block text-[11px] font-medium px-4 whitespace-nowrap">
             {settings.running_text_laporan}
           </div>
         </div>
       )}
 
-      <main className="px-container-margin pt-28 pb-24 max-w-lg mx-auto">
+      <main className="px-container-margin pt-24 pb-24 max-w-lg mx-auto">
         {/* Hero Balance Section (Asymmetric) */}
         <section className="relative mb-stack-lg">
           <div className="bg-emerald-deep rounded-xl p-6 text-white overflow-hidden relative shadow-lg">

@@ -23,14 +23,14 @@ export default function Kajian() {
     <>
       {/* Marquee Announcement */}
       {settings?.running_text_kajian && (
-        <div className="fixed top-16 left-0 w-full bg-emerald-deep text-surface-white py-2 z-40 marquee-container overflow-hidden">
-          <div className="marquee-content font-label-lg text-label-lg whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite]">
+        <div className="fixed top-14 left-0 w-full bg-emerald-deep text-surface-white py-1 z-40 marquee-container overflow-hidden">
+          <div className="marquee-content text-[11px] font-medium whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite]">
             {settings.running_text_kajian}
           </div>
         </div>
       )}
 
-      <main className="pt-28 pb-24 px-container-margin max-w-lg mx-auto">
+      <main className="pt-24 pb-24 px-container-margin max-w-lg mx-auto">
         {/* Horizontal Calendar */}
         <section className="mb-stack-lg">
           <div className="flex justify-between items-center mb-stack-sm">

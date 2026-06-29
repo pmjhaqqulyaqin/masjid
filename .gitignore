@@ -44,3 +44,11 @@ frontend/build/
 # Docker
 .docker/
 docker-compose.override.yml
+
+# Android / Capacitor
+frontend/android/
+*.apk
+
+# Temp files
+temp.json
+test.jpg

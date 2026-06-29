@@ -19,14 +19,14 @@ export default function Layanan() {
     <>
       {/* Marquee Announcement */}
       {settings?.running_text_layanan && (
-        <div className="fixed top-16 left-0 w-full bg-emerald-deep py-2 overflow-hidden whitespace-nowrap z-40">
-          <p className="animate-[marquee_20s_linear_infinite] inline-block font-label-lg text-label-lg text-white">
+        <div className="fixed top-14 left-0 w-full bg-emerald-deep py-1 overflow-hidden whitespace-nowrap z-40">
+          <p className="animate-[marquee_20s_linear_infinite] inline-block text-[11px] font-medium text-white">
             {settings.running_text_layanan}
           </p>
         </div>
       )}
       
-      <main className="px-container-margin pt-28 pb-24 space-y-stack-lg max-w-lg mx-auto">
+      <main className="px-container-margin pt-24 pb-24 space-y-stack-lg max-w-lg mx-auto">
         {/* Service Grid Section */}
         <section>
           <div className="flex items-center justify-between mb-4">

@@ -78,14 +78,14 @@ export default function Home() {
     <>
       {/* Marquee Announcement */}
       {settings?.running_text && (
-        <div className="mt-16 w-full bg-emerald-deep py-2 marquee-container overflow-hidden">
-          <div className="marquee-content text-white font-label-lg text-label-lg px-4 whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite]">
+        <div className="mt-14 w-full bg-emerald-deep py-1 marquee-container overflow-hidden">
+          <div className="marquee-content text-white text-[11px] font-medium px-4 whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite]">
             {settings.running_text}
           </div>
         </div>
       )}
       
-      <main className={`px-container-margin pt-stack-md pb-24 space-y-stack-lg ${!settings?.running_text ? 'mt-16' : ''}`}>
+      <main className={`px-container-margin pt-stack-md pb-24 space-y-stack-lg ${!settings?.running_text ? 'mt-14' : ''}`}>
         {/* Hero Section */}
         <section className="relative w-full aspect-[2/1] rounded-xl overflow-hidden shadow-lg">
           <img className="w-full h-full object-cover" data-alt="Visual" src={settings?.banner_url ? getImageUrl(settings.banner_url) : "/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png"} />

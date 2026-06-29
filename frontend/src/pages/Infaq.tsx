@@ -83,14 +83,14 @@ export default function Infaq() {
     <>
       {/* Marquee Announcement */}
       {settings?.running_text_infaq && (
-        <div className="fixed top-16 left-0 w-full bg-emerald-deep text-white py-2 overflow-hidden z-40">
-          <div className="whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite] text-label-lg font-label-lg uppercase">
+        <div className="fixed top-14 left-0 w-full bg-emerald-deep text-white py-1 overflow-hidden z-40">
+          <div className="whitespace-nowrap inline-block animate-[marquee_25s_linear_infinite] text-[11px] font-medium uppercase">
             {settings.running_text_infaq}
           </div>
         </div>
       )}
 
-      <main className="px-container-margin pt-28 pb-24 max-w-lg mx-auto">
+      <main className="px-container-margin pt-24 pb-24 max-w-lg mx-auto">
         {/* Page Header */}
         <header className="mb-stack-lg relative overflow-hidden rounded-2xl bg-emerald-deep text-white shadow-xl isolate p-8 sm:p-12 mt-4 text-center">
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[300px] h-[300px] bg-mint-fresh/10 rounded-full blur-3xl pointer-events-none"></div>
