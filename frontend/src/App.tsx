@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 // Layouts
 import MainLayout from './components/layouts/MainLayout'
@@ -22,9 +23,29 @@ import AdminArticles from './pages/AdminArticles'
 import AdminUsers from './pages/AdminUsers'
 import Login from './pages/Login'
 
+// Redirect ke Home setiap kali app pertama kali dibuka (session baru)
+function RedirectOnOpen() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const hasOpened = sessionStorage.getItem('app_opened');
+    if (!hasOpened) {
+      sessionStorage.setItem('app_opened', '1');
+      // Hanya redirect jika bukan halaman admin (agar login callback tetap bekerja)
+      if (!location.pathname.startsWith('/admin') && location.pathname !== '/') {
+        navigate('/', { replace: true });
+      }
+    }
+  }, []);
+
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <RedirectOnOpen />
       <Routes>
         {/* Auth Route */}
         <Route path="/login" element={<Login />} />
