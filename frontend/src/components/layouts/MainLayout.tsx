@@ -162,12 +162,12 @@ export default function MainLayout() {
 
       {/* Login Modal */}
       {showLoginModal && (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* Backdrop */}
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowLoginModal(false)} />
           
           {/* Modal Content */}
-          <div className="relative w-full max-w-sm mx-4 mb-4 sm:mb-0 bg-surface-white rounded-2xl shadow-2xl overflow-hidden animate-[slideUp_0.3s_ease-out]">
+          <div className="relative w-full max-w-sm bg-surface-white rounded-2xl shadow-2xl overflow-hidden animate-[slideUp_0.3s_ease-out]">
             {/* Header */}
             <div className="flex items-center justify-between px-5 pt-4 pb-3 border-b border-outline-variant/20">
               <div className="flex items-center gap-2">
