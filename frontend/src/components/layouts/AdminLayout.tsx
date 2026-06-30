@@ -147,7 +147,7 @@ export default function AdminLayout() {
       <Outlet />
 
       {/* Bottom Navigation Bar (Mobile only) */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-t border-outline-variant/30 z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.08)] z-[55]">
         <MobileNavItem to="/admin" icon="home" label="Home" isActive={location.pathname === '/admin'} />
         <MobileNavItem to="/admin/donations" icon="savings" label="Infaq" isActive={location.pathname === '/admin/donations'} />
         <MobileNavItem to="/admin/kajian" icon="event_note" label="Kajian" isActive={location.pathname === '/admin/kajian'} />
