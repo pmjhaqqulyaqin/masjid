@@ -41,7 +41,7 @@ export default function AdminIbadah() {
   };
   
   return (
-    <main className="pt-20 md:pt-10 pb-24 md:pb-12 px-container-margin max-w-screen-xl mx-auto w-full space-y-stack-lg">
+    <main className="pt-4 md:pt-10 pb-4 md:pb-12 px-container-margin max-w-screen-xl mx-auto w-full space-y-stack-lg">
       {/* Action Header Section */}
       <section className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>

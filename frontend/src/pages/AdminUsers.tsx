@@ -27,7 +27,7 @@ export default function AdminUsers() {
   };
 
   return (
-    <main className="pt-20 pb-24 md:pb-12 md:pt-10 px-container-margin max-w-screen-md mx-auto w-full">
+    <main className="pt-4 pb-4 md:pb-12 md:pt-10 px-container-margin max-w-screen-md mx-auto w-full">
       {/* Stats Row */}
       <section className="grid grid-cols-3 gap-3 mb-stack-lg">
         <div className="bg-surface-white p-3 rounded-xl shadow-[0_4px_20px_rgba(6,78,59,0.05)] flex flex-col gap-1 border border-emerald-deep/5">

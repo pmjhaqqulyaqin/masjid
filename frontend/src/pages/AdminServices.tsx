@@ -19,7 +19,7 @@ export default function AdminServices() {
   };
 
   return (
-    <main className="pt-20 pb-24 md:pb-12 md:pt-10 px-container-margin max-w-screen-md mx-auto w-full">
+    <main className="pt-4 pb-4 md:pb-12 md:pt-10 px-container-margin max-w-screen-md mx-auto w-full">
       {/* Welcome Section */}
       <section className="mb-stack-lg">
         <h2 className="font-headline-lg-mobile text-emerald-deep mb-1">Service Requests</h2>

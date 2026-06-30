@@ -103,7 +103,7 @@ export default function AdminDonations() {
   };
   
   return (
-    <main className="pt-20 md:pt-10 pb-24 md:pb-12 max-w-7xl mx-auto w-full">
+    <main className="pt-4 md:pt-10 pb-4 md:pb-12 max-w-7xl mx-auto w-full">
       {/* Page Header */}
       <section className="px-container-margin flex justify-between items-center mb-6">
         <h2 className="font-headline-md text-headline-md-mobile text-emerald-deep">Donation Management</h2>

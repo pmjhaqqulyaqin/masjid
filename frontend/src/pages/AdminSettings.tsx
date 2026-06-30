@@ -157,7 +157,7 @@ export default function AdminSettings() {
   };
 
   return (
-    <main className="pt-20 pb-24 md:pb-12 md:pt-10 px-container-margin space-y-stack-lg max-w-screen-md mx-auto w-full">
+    <main className="pt-4 pb-4 md:pb-12 md:pt-10 px-container-margin space-y-stack-lg max-w-screen-md mx-auto w-full">
       {/* Header Visual Section */}
       <section className="relative h-48 rounded-xl overflow-hidden shadow-sm group">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: settings?.banner_url ? `url(${getImageUrl(settings.banner_url)})` : "url('/gambar/image_from_https_wpmasjid.com_wp_content_uploads_2023_03_111_1_1200x550.webp.png')" }}></div>

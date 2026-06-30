@@ -28,7 +28,7 @@ export default function AdminFinance() {
   };
 
   return (
-    <main className="pt-20 md:pt-10 pb-24 md:pb-12 max-w-screen-xl mx-auto w-full">
+    <main className="pt-4 md:pt-10 pb-4 md:pb-12 max-w-screen-xl mx-auto w-full">
       {/* Marquee Announcement */}
       <div className="bg-emerald-deep text-white py-1.5 overflow-hidden w-full mb-6 relative">
         <div className="inline-block animate-[marquee_20s_linear_infinite] font-label-sm whitespace-nowrap px-4">

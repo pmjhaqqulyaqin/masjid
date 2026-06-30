@@ -40,7 +40,7 @@ export default function AdminKajian() {
   };
   
   return (
-    <main className="pt-20 md:pt-10 pb-24 md:pb-12 max-w-7xl mx-auto w-full">
+    <main className="pt-4 md:pt-10 pb-4 md:pb-12 max-w-7xl mx-auto w-full">
       <section className="px-container-margin mb-stack-lg">
         <div className="flex items-center justify-between mb-stack-md">
           <h2 className="font-headline-md text-headline-md-mobile text-emerald-deep">Manajemen Kajian</h2>

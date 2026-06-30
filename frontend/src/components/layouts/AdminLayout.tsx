@@ -28,10 +28,10 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="bg-background text-on-surface min-h-screen pb-24 md:pb-0 md:pl-80">
+    <div className="bg-background text-on-surface h-screen flex flex-col md:block md:min-h-screen md:pb-0 md:pl-80">
       
       {/* Top Navigation Bar (Hidden on Desktop Sidebar view) */}
-      <header className="bg-surface dark:bg-surface-dim shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-16 max-w-screen-xl mx-auto md:hidden">
+      <header className="bg-surface dark:bg-surface-dim shadow-sm w-full z-50 flex justify-between items-center px-container-margin h-16 flex-shrink-0 md:fixed md:top-0 md:max-w-screen-xl md:mx-auto md:hidden">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSidebarOpen(true)}
@@ -143,11 +143,13 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      {/* Main Content Canvas */}
-      <Outlet />
+      {/* Main Content Canvas - Scrollable area */}
+      <div className="flex-1 overflow-y-auto md:overflow-visible">
+        <Outlet />
+      </div>
 
-      {/* Bottom Navigation Bar (Mobile only) */}
-      <nav className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.08)] z-[55]">
+      {/* Bottom Navigation Bar (Mobile only) - Always visible at bottom via flexbox */}
+      <nav className="md:hidden w-full flex justify-around items-center px-4 py-3 bg-surface dark:bg-surface-dim border-t border-outline-variant/30 shadow-[0_-4px_20px_rgba(6,78,59,0.08)] flex-shrink-0">
         <MobileNavItem to="/admin" icon="home" label="Home" isActive={location.pathname === '/admin'} />
         <MobileNavItem to="/admin/donations" icon="savings" label="Infaq" isActive={location.pathname === '/admin/donations'} />
         <MobileNavItem to="/admin/kajian" icon="event_note" label="Kajian" isActive={location.pathname === '/admin/kajian'} />
