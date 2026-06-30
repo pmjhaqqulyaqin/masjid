@@ -24,7 +24,7 @@ export default function AdminLayout() {
 
   const handleLogout = async () => {
     await signOut();
-    navigate('/login');
+    navigate('/');
   };
 
   return (
