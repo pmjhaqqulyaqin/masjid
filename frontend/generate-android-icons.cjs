@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
 
-const SOURCE_ICON = path.join(__dirname, 'public', 'gambar', 'Ikon masjid.png');
+const SOURCE_ICON = path.join(__dirname, 'public', 'gambar', 'Ikon masjid2.png');
 const ANDROID_RES = path.join(__dirname, 'android', 'app', 'src', 'main', 'res');
 
 // Android adaptive icon sizes (foreground needs to be 108dp based)
