@@ -25,7 +25,7 @@ npm install
 npm run build
 npm run db:push
 
-# 4. Seed Admin (hanya jika belum ada)
+# 4. Seed Admin (buat akun admin jika belum ada)
 echo "👤 Memastikan akun admin tersedia..."
 npm run db:seed-admin
 cd ..

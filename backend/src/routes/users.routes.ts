@@ -2,41 +2,10 @@ import { Router, Request, Response } from 'express';
 import { db } from '../db';
 import * as schema from '../db/schema';
 import { eq } from 'drizzle-orm';
-import { v4 as uuidv4 } from 'uuid';
-import { randomBytes, scrypt } from 'crypto';
 import { auth } from '../auth';
 import { fromNodeHeaders } from 'better-auth/node';
 
 const router = Router();
-
-// Match better-auth's exact scrypt config
-const SCRYPT_CONFIG = {
-  N: 16384,
-  r: 16,
-  p: 1,
-  dkLen: 64
-};
-
-function hashPassword(password: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const salt = randomBytes(16).toString('hex');
-    scrypt(
-      password.normalize('NFKC'),
-      salt,
-      SCRYPT_CONFIG.dkLen,
-      {
-        N: SCRYPT_CONFIG.N,
-        r: SCRYPT_CONFIG.r,
-        p: SCRYPT_CONFIG.p,
-        maxmem: 128 * SCRYPT_CONFIG.N * SCRYPT_CONFIG.r * 2
-      },
-      (err, key) => {
-        if (err) reject(err);
-        else resolve(`${salt}:${key.toString('hex')}`);
-      }
-    );
-  });
-}
 
 // Middleware to check admin role
 async function requireAdmin(req: Request, res: Response, next: Function) {
@@ -93,38 +62,30 @@ router.post('/create', requireAdmin, async (req: Request, res: Response) => {
       return res.status(409).json({ error: 'Username sudah digunakan' });
     }
 
-    const userId = uuidv4();
-    const accountId = uuidv4();
-    const now = new Date();
-
-    // Create user
-    await db.insert(schema.users).values({
-      id: userId,
-      name: name,
-      email: username,
-      emailVerified: true,
-      role: role || 'staff',
-      createdAt: now,
-      updatedAt: now,
+    // Use better-auth's own API to create user (ensures password hash compatibility)
+    const response = await auth.api.signUpEmail({
+      body: {
+        email: username,
+        password: password,
+        name: name,
+      },
     });
 
-    // Create account with hashed password
-    const hashedPassword = await hashPassword(password);
-    await db.insert(schema.account).values({
-      id: accountId,
-      accountId: userId,
-      providerId: 'credential',
-      userId: userId,
-      password: hashedPassword,
-      createdAt: now,
-      updatedAt: now,
-    });
+    if (!response || !response.user) {
+      return res.status(500).json({ error: 'Gagal membuat user via auth system' });
+    }
+
+    // Update role (signUp defaults to jamaah)
+    const userRole = role || 'staff';
+    await db.update(schema.users)
+      .set({ role: userRole })
+      .where(eq(schema.users.id, response.user.id));
 
     res.status(201).json({
-      id: userId,
+      id: response.user.id,
       name,
       username,
-      role: role || 'staff',
+      role: userRole,
       message: 'User berhasil dibuat'
     });
   } catch (error) {
