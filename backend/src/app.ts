@@ -32,6 +32,7 @@ import ibadahRoutes from './routes/ibadah.routes';
 import settingsRoutes from './routes/settings.routes';
 import facilitiesRoutes from './routes/facilities.routes';
 import { articlesRouter } from './routes/articles.routes';
+import usersRoutes from './routes/users.routes';
 
 // API Routes
 app.use('/api/kajian', kajianRoutes);
@@ -42,6 +43,7 @@ app.use('/api/ibadah', ibadahRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/facilities', facilitiesRoutes);
 app.use('/api/articles', articlesRouter);
+app.use('/api/users', usersRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSession, authClient, signIn, signUp } from '../../hooks/useAuth';
+import { useSession, signIn } from '../../hooks/useAuth';
 
 export default function MainLayout() {
   const location = useLocation();
@@ -10,16 +10,11 @@ export default function MainLayout() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   // Login modal states
-  const [loginMethod, setLoginMethod] = useState<'wa' | 'email'>('email');
-  const [emailMode, setEmailMode] = useState<'login' | 'signup'>('login');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [otpCode, setOtpCode] = useState('');
-  const [otpStep, setOtpStep] = useState<'phone' | 'otp'>('phone');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,76 +35,25 @@ export default function MainLayout() {
 
   const resetModal = () => {
     setError('');
-    setEmail('');
+    setUsername('');
     setPassword('');
-    setName('');
-    setPhoneNumber('');
-    setOtpCode('');
-    setOtpStep('phone');
-    setEmailMode('login');
+    setShowPassword(false);
   };
 
-  const handleEmailAuth = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
     try {
-      if (emailMode === 'signup') {
-        const { error } = await signUp.email({ email, password, name });
-        if (error) throw new Error(error.message || 'Gagal mendaftar akun');
-        navigate('/admin');
-      } else {
-        const { error } = await signIn.email({ email, password });
-        if (error) throw new Error(error.message || 'Email atau password salah');
-        navigate('/admin');
-      }
+      const { error } = await signIn.email({ email: username, password });
+      if (error) throw new Error(error.message || 'Username atau password salah');
+      navigate('/admin');
       setShowLoginModal(false);
     } catch (err: any) {
       setError(err.message || 'Terjadi kesalahan');
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleRequestOTP = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
-    let formattedPhone = phoneNumber;
-    if (formattedPhone.startsWith('0')) formattedPhone = '+62' + formattedPhone.slice(1);
-    else if (!formattedPhone.startsWith('+')) formattedPhone = '+' + formattedPhone;
-    try {
-      const { error } = await authClient.phoneNumber.sendOtp({ phoneNumber: formattedPhone });
-      if (error) setError(error.message || 'Gagal mengirim OTP');
-      else setOtpStep('otp');
-    } catch (err: any) {
-      setError(err.message || 'Terjadi kesalahan saat meminta OTP');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleVerifyOTP = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
-    let formattedPhone = phoneNumber;
-    if (formattedPhone.startsWith('0')) formattedPhone = '+62' + formattedPhone.slice(1);
-    else if (!formattedPhone.startsWith('+')) formattedPhone = '+' + formattedPhone;
-    try {
-      const { error } = await authClient.phoneNumber.verify({ phoneNumber: formattedPhone, code: otpCode });
-      if (error) setError(error.message || 'Kode OTP salah');
-      else { navigate('/admin'); setShowLoginModal(false); }
-    } catch (err: any) {
-      setError(err.message || 'Terjadi kesalahan saat memverifikasi OTP');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setIsLoading(true);
-    await signIn.social({ provider: 'google', callbackURL: `${window.location.origin}/admin` });
   };
 
   return (
@@ -186,131 +130,66 @@ export default function MainLayout() {
 
             <div className="px-5 py-4 space-y-3">
               {error && (
-                <div className="bg-error-container text-on-error-container p-2.5 rounded-lg text-[11px]">
+                <div className="bg-error-container text-on-error-container p-2.5 rounded-lg text-[11px] flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-error text-sm">error</span>
                   {error}
                 </div>
               )}
 
-              {/* Method Switcher */}
-              <div className="flex bg-surface-container-low p-0.5 rounded-lg">
-                <button
-                  onClick={() => setLoginMethod('email')}
-                  className={`flex-1 py-1.5 rounded-md text-[11px] font-semibold transition-colors ${loginMethod === 'email' ? 'bg-emerald-deep text-white shadow-sm' : 'text-on-surface-variant'}`}
-                >
-                  Email
-                </button>
-                <button
-                  onClick={() => setLoginMethod('wa')}
-                  className={`flex-1 py-1.5 rounded-md text-[11px] font-semibold transition-colors ${loginMethod === 'wa' ? 'bg-emerald-deep text-white shadow-sm' : 'text-on-surface-variant'}`}
-                >
-                  WhatsApp
-                </button>
-              </div>
-
-              {loginMethod === 'email' ? (
-                <form onSubmit={handleEmailAuth} className="space-y-3">
-                  {emailMode === 'signup' && (
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder="Nama Lengkap"
-                      className="w-full border border-outline-variant rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
-                      required
-                    />
-                  )}
+              <form onSubmit={handleLogin} className="space-y-3">
+                <div className="relative">
+                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">person</span>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    className="w-full border border-outline-variant rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Username"
+                    className="w-full border border-outline-variant rounded-lg pl-10 pr-3 py-2.5 text-sm focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
                     required
+                    autoComplete="username"
                   />
+                </div>
+                <div className="relative">
+                  <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">lock</span>
                   <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
-                    className="w-full border border-outline-variant rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
+                    className="w-full border border-outline-variant rounded-lg pl-10 pr-10 py-2.5 text-sm focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
                     required
-                    minLength={8}
+                    autoComplete="current-password"
                   />
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full bg-emerald-deep text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50"
-                  >
-                    {isLoading ? 'Memproses...' : emailMode === 'login' ? 'Masuk' : 'Daftar Akun'}
-                  </button>
                   <button
                     type="button"
-                    onClick={() => { setEmailMode(emailMode === 'login' ? 'signup' : 'login'); setError(''); }}
-                    className="w-full text-emerald-deep text-[11px] font-medium py-1 hover:underline"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-emerald-deep transition-colors"
+                    tabIndex={-1}
                   >
-                    {emailMode === 'login' ? 'Belum punya akun? Daftar' : 'Sudah punya akun? Masuk'}
+                    <span className="material-symbols-outlined text-lg">
+                      {showPassword ? 'visibility_off' : 'visibility'}
+                    </span>
                   </button>
-                </form>
-              ) : otpStep === 'phone' ? (
-                <form onSubmit={handleRequestOTP} className="space-y-3">
-                  <input
-                    type="tel"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Nomor WhatsApp: 081234567890"
-                    className="w-full border border-outline-variant rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full bg-emerald-deep text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50"
-                  >
-                    {isLoading ? 'Mengirim...' : 'Kirim Kode OTP'}
-                  </button>
-                </form>
-              ) : (
-                <form onSubmit={handleVerifyOTP} className="space-y-3">
-                  <p className="text-[11px] text-on-surface-variant text-center">
-                    Kode OTP dikirim ke <strong>{phoneNumber}</strong>
-                  </p>
-                  <input
-                    type="text"
-                    value={otpCode}
-                    onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    placeholder="123456"
-                    className="w-full border border-outline-variant rounded-lg px-3 py-2.5 text-center tracking-[0.4em] text-lg font-bold focus:ring-2 focus:ring-emerald-deep outline-none bg-surface-white"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={isLoading || otpCode.length < 6}
-                    className="w-full bg-emerald-deep text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50"
-                  >
-                    {isLoading ? 'Memverifikasi...' : 'Verifikasi & Masuk'}
-                  </button>
-                  <button type="button" onClick={() => { setOtpStep('phone'); setOtpCode(''); setError(''); }} className="w-full text-emerald-deep text-[11px] py-1 hover:underline">
-                    Ganti Nomor
-                  </button>
-                </form>
-              )}
+                </div>
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-emerald-deep text-white text-sm font-semibold py-2.5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50"
+                >
+                  {isLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                      Memproses...
+                    </span>
+                  ) : 'Masuk'}
+                </button>
+              </form>
 
-              {/* Divider */}
-              <div className="flex items-center gap-3">
-                <div className="flex-1 border-t border-outline-variant/50" />
-                <span className="text-[10px] text-outline">atau</span>
-                <div className="flex-1 border-t border-outline-variant/50" />
-              </div>
-
-              {/* Google Login */}
-              <button
-                onClick={handleGoogleLogin}
-                disabled={isLoading}
-                className="w-full bg-surface-white border border-outline-variant text-on-surface text-sm font-medium py-2.5 rounded-lg hover:bg-surface-container active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm"
-              >
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-4 h-4" />
-                Masuk dengan Google
-              </button>
+              {/* Info */}
+              <p className="text-center text-on-surface-variant text-[10px] pt-1">
+                <span className="material-symbols-outlined text-[10px] align-middle mr-0.5">info</span>
+                Akun dibuat oleh admin. Hubungi pengurus untuk akses.
+              </p>
 
               {/* Back to Dashboard */}
               <button
